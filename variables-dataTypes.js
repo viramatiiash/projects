@@ -16,8 +16,11 @@ console.log(add); // "1020" - string
 
 
 
-// const add1 = '20' + number; 
+// const add1 = '20' + number;
 // console.log(add1); // ? "2010" - string
+
+
+
 
 
 
