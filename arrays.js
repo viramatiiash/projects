@@ -14,3 +14,4 @@ const names2 = ['Mike', 'John', 'Sara'];
 const index = names2.indexOf('John');
 console.log(index); // 1
 
+
