@@ -46,4 +46,17 @@ function feast(beast, dish) {
   );
 }
 
+// ! 5. Closest elevator - https://www.codewars.com/kata/5c374b346a5d0f77af500a5a
+function elevator(left, right, call) {
+  if (left > right && left > call) {
+    return 'right';
+  } else if (left === right) {
+    return 'right';
+  } else if (left < right && left < call) {
+    return 'right';
+  } else {
+    return 'left';
+  }
+}
+
 
