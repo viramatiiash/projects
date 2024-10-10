@@ -59,4 +59,14 @@ function elevator(left, right, call) {
   }
 }
 
+// ! 6. Sum of differences in array - https://www.codewars.com/kata/5b73fe9fb3d9776fbf00009e
+function sumOfDifferences(arr) {
+  if (arr.length < 2) return 0;
+  arr.sort((a, b) => b - a);
+  let sum = 0;
+  for (let i = 0; i < arr.length - 1; i++) {
+    sum += arr[i] - arr[i + 1];
+  }
+}
+
 
