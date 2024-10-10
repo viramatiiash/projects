@@ -69,4 +69,29 @@ function sumOfDifferences(arr) {
   }
 }
 
+// ! 7. Array plus array - https://www.codewars.com/kata/5a2be17aee1aaefe2a000151/solutions/javascript
+function arrayPlusArray(arr1, arr2) {
+  const newArr = arr1.concat(arr2);
+  const sum = newArr.reduce((accumulator, current) => accumulator + current, 0);
+  return sum;
+}
+
+// ! 8. Invert values - https://www.codewars.com/kata/5899dc03bc95b1bf1b0000ad
+function invert(array) {
+  return array.map((el) => el * -1);
+}
+
+// ! 9. Quarter of the year - https://www.codewars.com/kata/5ce9c1000bab0b001134f5af
+const quarterOf = (month) => {
+  return month <= 3 ? 1 : month <= 6 ? 2 : month <= 9 ? 3 : 4;
+};
+
+// ! 10. Merge two sorted arrays into one - https://www.codewars.com/kata/5899642f6e1b25935d000161
+function mergeArrays(arr1, arr2) {
+  const arr3 = [...arr1, ...arr2];
+  const uniqueArr = [...new Set(arr3)];
+  uniqueArr.sort((a, b) => a - b);
+  return uniqueArr;
+}
+
 
