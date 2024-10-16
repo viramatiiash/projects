@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+// ! Variables
+$c-bg: rgba(6, 6, 6, 0.7);
+$c-body: rgba(43, 43, 43, 0.7);
+$c-text: rgb(255, 255, 255);
+$c-btn: rgb(231, 107, 24);
+$c-btn-hover: rgb(146, 65, 11);
+$c-danger: rgb(255, 93, 93);
+$c-success: rgb(107, 222, 69);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400px;
+  background-color: $c-body;
+  color: $c-text;
+  display: flex;
+  align-items: center;
+}
+
+div {
+  width: 100%;
+}
+
+.form-container {
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+  padding: 35px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: $c-bg;
+
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  &__label {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__label_password {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input-container {
+    position: relative;
+    padding-bottom: 30px;
+  }
+
+  &__input {
+    width: 100%;
+    border: 2px solid transparent;
+    outline: none;
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
+  &__tooltip {
+    display: none;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    color: $c-success;
+    margin-bottom: 20px;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .char-count {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+  }
+
+  &__error-message {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: $c-danger;
+    margin-bottom: 20px;
+  }
+
+  &__btn {
+    border: none;
+    width: fit-content;
+    padding: 10px 30px;
+    border-radius: 10px;
+    align-self: center;
+    background-color: $c-btn;
+    color: $c-text;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $c-btn-hover;
+    }
+
+    &:disabled {
+      background-color: lightgray;
+      color: darkgray;
+      cursor: not-allowed;
+    }
+  }
+
+  .success {
+    color: $c-success;
+    display: none;
+    text-align: center;
+
+    &.active {
+      display: block;
+    }
+  }
+}
