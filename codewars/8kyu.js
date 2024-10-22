@@ -112,4 +112,162 @@ class Person {
   }
 }
 
+// ! 12. Duck Duck Goose - https://www.codewars.com/kata/582e0e592029ea10530009ce
+const duckDuckGoose = (players, goose) => {
+  const player = (goose - 1) % players.length;
+  return players[player].name;
+};
+
+// ! 13. Beginner - Lost Without a Map - https://www.codewars.com/kata/57f781872e3d8ca2a000007e
+const maps = (x) => {
+  return x.map((item) => item * 2);
+};
+
+// ! 14. Beginner - Reduce but Grow - https://www.codewars.com/kata/57f780909f7e8e3183000078
+const grow = (x) => {
+  return x.reduce((acc, curr) => {
+    return (acc *= curr);
+  }, 1);
+};
+
+// ! 15. To square(root) or not to square(root) - To square(root) or not to square(root)
+const squareOrSquareRoot = (array) => {
+  return array.map((item) => {
+    let sqrt = Math.sqrt(item);
+    if (Number.isInteger(sqrt)) {
+      return sqrt;
+    }
+    return item * item;
+  });
+};
+
+// ! 16. I love you, a little , a lot, passionately ... not at all - https://www.codewars.com/kata/57f24e6a18e9fad8eb000296
+const howMuchILoveYou = (nbPetals) => {
+  let phrases = [
+    'I love you',
+    'a little',
+    'a lot',
+    'passionately',
+    'madly',
+    'not at all',
+  ];
+  const index = (nbPetals - 1) % phrases.length;
+  return phrases[index];
+};
+
+// ! 17. Well of Ideas - Easy Version - https://www.codewars.com/kata/57f222ce69e09c3630000212
+const well = (x) => {
+  let goodIdeas = 0;
+  x.forEach((idea) => {
+    if (idea === 'good') {
+      goodIdeas++;
+    }
+  });
+
+  if (goodIdeas === 0) {
+    return 'Fail!';
+  } else if (goodIdeas > 0 && goodIdeas <= 2) {
+    return 'Publish!';
+  } else if (goodIdeas > 2) {
+    return 'I smell a series!';
+  }
+};
+
+// ! 18. Sum Mixed Array - https://www.codewars.com/kata/57eaeb9578748ff92a000009
+const sumMix = (x) => {
+  let numbers = x.map((item) => Number(item));
+  return numbers.reduce((acc, curr) => acc + curr, 0);
+};
+
+// ! 19. Fake Binary - https://www.codewars.com/kata/57eae65a4321032ce000002d
+const fakeBin = (x) => {
+  const arr = x.split('').map((item) => {
+    if (item < 5) {
+      return (item = '0');
+    }
+    if (item >= 5) {
+      return (item = '1');
+    }
+  });
+  return arr.join('');
+};
+
+// ! 20. Convert a string to an array - https://www.codewars.com/kata/57e76bc428d6fbc2d500036d
+const stringToArray = (string) => string.split(' ');
+
+// ! 21. Is there a vowel in there? - https://www.codewars.com/kata/57cff961eca260b71900008f
+const isVow = (a) => {
+  const vowelCodes = { 97: 'a', 101: 'e', 105: 'i', 111: 'o', 117: 'u' };
+  const newArr = a.map((item) => {
+    if (vowelCodes[item]) {
+      return vowelCodes[item];
+    }
+    return item;
+  });
+
+  return newArr;
+};
+
+// ! 22. Sort and Star - https://www.codewars.com/kata/57cfdf34902f6ba3d300001e
+const twoSort = (s) => s.sort()[0].split('').join('***');
+
+// ! 23. You only need one - Beginner - https://www.codewars.com/kata/57cc975ed542d3148f00015b
+const check = (a, x) => a.includes(x);
+
+// ! 24. No Loops 1 - Small enough? - https://www.codewars.com/kata/no-loops-1-small-enough
+const smallEnough = (a, limit) => a.every((item) => item <= limit);
+
+// ! 25. Remove duplicates from list - https://www.codewars.com/kata/57a5b0dfcf1fa526bb000118
+const distinct = (a) => [...new Set(a)];
+
+// ! 26. Calculate average - https://www.codewars.com/kata/57a2013acf1fa5bfc4000921
+const findAverage = (array) => {
+  let sum = 0;
+  if (array.length === 0) {
+    return 0;
+  }
+  array.forEach((item) => (sum += item));
+  return sum / array.length;
+};
+
+// ! 27. Sum of positive - https://www.codewars.com/kata/5715eaedb436cf5606000381
+const positiveSum = (arr) =>
+  arr.filter((item) => item > 0).reduce((acc, curr) => acc + curr, 0);
+
+// ! 28. Count of positives / sum of negatives - https://www.codewars.com/kata/576bb71bbbcf0951d5000044
+const countPositivesSumNegatives = (input) => {
+  if (!input || input.length === 0) {
+    return [];
+  }
+  const countPositive = input.filter((item) => item > 0).length;
+  const sumNegative = input
+    .filter((item) => item < 0)
+    .reduce((acc, curr) => acc + curr, 0);
+  return [countPositive, sumNegative];
+};
+
+// ! 29. Removing Elements - https://www.codewars.com/kata/5769b3802ae6f8e4890009d2
+const removeEveryOther = (arr) =>
+  arr.filter((item, index) => (index + 1) % 2 !== 0);
+
+// ! 30. Arguments to Binary addition - https://www.codewars.com/kata/57642a90dee2da8dd3000161
+const arr2bin = (arr) =>
+  arr
+    .filter((item) => typeof item === 'number')
+    .reduce((acc, curr) => acc + curr, 0)
+    .toString(2);
+
+// ! 31. UEFA EURO 2016 - https://www.codewars.com/kata/57613fb1033d766171000d60
+const uefaEuro2016 = (teams, scores) =>
+  scores[0] > scores[1]
+    ? `At match ${teams[0]} - ${teams[1]}, ${teams[0]} won!`
+    : scores[0] < scores[1]
+    ? `At match ${teams[0]} - ${teams[1]}, ${teams[1]} won!`
+      : `At match ${teams[0]} - ${teams[1]}, teams played draw.`; 
+    
+// ! 32. Merging sorted integer arrays (without duplicates) - https://www.codewars.com/kata/573f5c61e7752709df0005d2
+const mergeArrays = (a, b) => {
+  const newArr = [...a, ...b].sort((a, b) => a - b);
+  return [...new Set(newArr)];
+};
 
