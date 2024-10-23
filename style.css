@@ -1,5 +1,131 @@
-.main-list {
+@font-face {
+  font-family: "Cascadia Mono";
+  src: url("./fonts/CascadiaMonoPL-Regular.otf") format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Cascadia Mono";
+  src: url("./fonts/CascadiaMono-Bold.otf") format("otf");
+  font-weight: bold;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* Properties */
+body {
+  background-color: #21252b;
+  font-family: "Cascadia Mono", sans-serif;
+  font-size: 16px;
+  color: #ef596f;
+  font-weight: bold;
+}
+
+.prog-technologies, .arrow-func-symb, .square-brackets, .main-page__list-item a, .main-page__list-item {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-page {
+  padding-top: 100px;
+  height: 100vh;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #282c34;
+}
+
+.main-page__container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main-page__title {
+  text-align: center;
+  font-size: 46px;
+  margin-bottom: 30px;
+}
+
+.main-page__list-item {
+  font-size: 24px;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #ef596f;
+}
+.main-page__list-item:hover {
+  background-color: #21252b;
+  color: #eb2a47;
+}
+.main-page__list-item:hover a {
+  color: #1163a6;
+}
+.main-page__list-item:hover .square-brackets {
+  color: #801c88;
+}
+.main-page__list-item:hover .arrow-func-symb {
+  color: #9c622d;
+}
+.main-page__list-item:hover .prog-technologies {
+  color: #529e3e;
+}
+
+.main-page__list-item a {
+  text-decoration: none;
+  color: #61afef;
+}
+
+.square-brackets {
+  color: #d55fde;
+}
+
+.arrow-func-symb {
+  color: #d1955e;
+}
+
+.prog-technologies {
+  color: #89ca78;
+}
+
+.main-page__code-container {
+  width: 100%;
+  height: 100%;
+}
+
+.main-page__code {
+  background-color: #21252b;
+  padding: 20px;
+  color: #e5c07b;
+  font-size: 20px;
+}
+
+.pre {
+  width: 100%;
+  max-width: 100%;
+  white-space: pre-wrap;
 }

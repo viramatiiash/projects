@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7kyu Tasks</title>
+    <link rel="stylesheet" href="./../../../style.css" />
+  </head>
+  <body>
+    <div class="main-page">
+      <div class="main-page__container">
+        <h2 class="main-page__title">7kyu Tasks</h2>
+        <ol class="main-page__code-container">
+          <li class="main-page__code">
+            <pre class="pre"><code>
+// ! 1. Playing with Sets : Sup/Sub - https://www.codewars.com/kata/5885424265fc9c38100017ef
+// 1st variant
+function isSubsetOf(s1, s2) {
+  const hasAllValues = [...s1].every((value) => s2.has(value));
+  if (hasAllValues && s1.size <= s2.size) {
+    return true;
+  } else if (s2.size === 0) {
+    return false;
+  }
+  return false;
+}
+  </code></pre>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <script src="./7kyu.js"></script>
+  </body>
+</html>
