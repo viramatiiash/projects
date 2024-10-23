@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  max-width: 1920px;
+  font-family: $ff-main;
+  font-size: $fs-main;
+  font-weight: $fw-medium;
+  color: $c-white;
+  margin: 0 auto;
+  background-color: $c-bg;
+}
+
+.container {
+  max-width: 1380px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: $c-white;
+  transition: $t-normal;
+  font-weight: $fw-bold;
+  padding: 10px;
+  cursor: pointer;
+}
+
+a:hover {
+  color: $c-link-hover;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+li {
+  list-style-type: none;
+}

@@ -1,0 +1,65 @@
+@include screen {
+  .newsletter {
+    &__content-container {
+      gap: 100px;
+    }
+  }
+}
+
+@include desktopBig {
+  .newsletter {
+    &__title {
+      font-size: $fs-block-title;
+      margin-bottom: 14px;
+    }
+
+    &__text {
+      font-size: $fs-text-mobile;
+    }
+
+    &__input-container {
+      max-width: 400px;
+      height: 50px;
+    }
+
+    &__button {
+      padding: 17px 40px;
+    }
+  }
+}
+
+@include desktop {
+  .newsletter {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+
+@include custom(950px) {
+  .newsletter {
+    &__content-container {
+      flex-direction: column;
+      gap: 40px;
+    }
+  }
+}
+
+@include phone {
+  .newsletter {
+    padding-left: 0;
+    padding-right: 0;
+
+    &__title {
+      font-size: $fs-title-mobile;
+      text-align: center;
+    }
+
+    &__input-container {
+      height: 40px;
+    }
+
+    &__button {
+      padding: 12px 20px;
+    }
+  }
+}

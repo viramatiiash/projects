@@ -1,0 +1,75 @@
+/* Font Families */
+$ff-input: 'Lato', sans-serif;
+$ff-testimonials: 'Roboto', sans-serif;
+$ff-portfolio: 'Montserrat', sans-serif;
+$ff-main: 'Public Sans', sans-serif;
+$ff-title: 'Outfit', sans-serif;
+$ff-logo: 'Poppins', sans-serif;
+
+/* Font Sizes */
+$fs-text-mobile: 14px;
+$fs-main: 16px;
+$fs-newsletter-text: 18px;
+$fs-card-title: 20px;
+$fs-testimonials-title: 24px;
+$fs-title-mobile: 30px;
+$fs-block-title: 36px;
+$fs-newsletter: 55px;
+$fs-title: 64px;
+
+/* Colors */
+$c-link-hover: #fe461c;
+$c-logo: #ffb400;
+$c-program-bg: #0d0d0f;
+$c-banner-dot-big: #171929;
+$c-bg: #1f2235;
+$c-bg-secondary: #24263b;
+$c-banner-dot: rgba(187, 197, 211, 0.08);
+$c-gallery: #d9d9d9;
+$c-line: #e6e7e8;
+$c-input-text: #9da1b4;
+$c-white: #fff;
+
+/* Box Shadows */
+$bs: 0px 0px 24px rgba(15, 16, 24, 0.42);
+$bs-light: 0px 0px 24px rgba(179, 181, 191, 0.42);
+
+/* Font Weights */
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+$fw-black: 900;
+
+/* Line heights */
+$line-height-giant: 72px;
+$line-height-very-big: 48px;
+$line-height-big: 30px;
+$line-height-medium: 26px;
+$line-height-small: 20px;
+$line-height-very-small: 15px;
+$line-height-tiny: 12px;
+
+/* Transition */
+$t-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Media Queries: Breakpoints */
+$small: 320px;
+$phone: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$desktop-big: 1200px;
+$screen: 1400px;
+$screen-big: 1600px;
+$large: 1920px;
+
+/* Letter Spacing */
+$ls: 3px;
+
+/* Border Radius */
+$br: 4px;
+$br-card: 8px;
+$br-circle: 100%;
+$br-circle-small: 50px;
+$br-input: 80px;

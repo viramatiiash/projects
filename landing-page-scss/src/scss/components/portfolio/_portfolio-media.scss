@@ -1,0 +1,53 @@
+@include screenBig {
+  .portfolio {
+    &__gallery {
+      columns: 2;
+      column-gap: 24px;
+    }
+  }
+}
+
+@include desktop {
+  .portfolio {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    &__gallery {
+      columns: 1;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    &__image-container {
+      width: 100%;
+    }
+  }
+}
+
+@include custom(600px) {
+  .portfolio {
+    &__subtitle {
+      font-size: $fs-text-mobile;
+    }
+
+    &__title {
+      font-size: $fs-title-mobile;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    & .tabs {
+      @include flex($justify: center, $gap: 10px, $wrap: wrap);
+      margin-bottom: 20px;
+    }
+
+    .image-container {
+      h4 {
+        font-size: $fs-card-title;
+      }
+      h5 {
+        font-size: $fs-newsletter-text;
+      }
+    }
+  }
+}

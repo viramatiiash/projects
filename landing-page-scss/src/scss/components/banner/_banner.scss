@@ -1,0 +1,120 @@
+.banner {
+  position: relative;
+  padding-top: 142px;
+  padding-bottom: 24px;
+
+  // ! Social Media
+  &__social-container {
+    @include absolute($left: 47px, $top: 50%);
+    transform: translateY(-50%);
+    @include flex($direction: column, $gap: 15px);
+  }
+
+  &__social {
+    @include icon(50px, 50px, $c-bg-secondary, $c-link-hover, $c-white);
+    box-shadow: $bs;
+    padding: 13px;
+    border-radius: $br;
+  }
+
+  // ! Banner Content
+  &__container {
+    @include flex($justify: center, $align: start, $gap: 55px);
+  }
+
+  & .main-section {
+    position: relative;
+    width: 100%;
+    max-width: 654px;
+    padding-top: 93px;
+
+    &__small-dot {
+      @include absolute($top: -2px, $left: -102px);
+      width: 204px;
+      height: 204px;
+      background-color: $c-banner-dot;
+      border-radius: $br-circle;
+    }
+  }
+
+  &__subtitle {
+    font-family: $ff-main;
+    line-height: $line-height-small;
+    font-size: $fs-main;
+    letter-spacing: $ls;
+    font-weight: $fw-black;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    margin-top: 0;
+    font-family: $ff-title;
+    line-height: $line-height-giant;
+    font-size: $fs-title;
+    font-weight: $fw-semi-bold;
+    margin-bottom: 31px;
+
+    span {
+      color: $c-link-hover;
+    }
+  }
+
+  &__paragraph {
+    width: 100%;
+    max-width: 523px;
+    font-weight: $fw-medium;
+    line-height: $line-height-big;
+    margin-bottom: 36px;
+  }
+
+  &__buttons {
+    @include flex($justify: start, $gap: 23px);
+  }
+
+  &__button {
+    @include button($bgc: $c-link-hover, $bgcHover: $c-banner-dot);
+    padding: 17px 47px;
+  }
+
+  &__button_transparent {
+    @include button(
+      $bgc: transparent,
+      $borderColor: $c-white,
+      $bgcHover: $c-link-hover
+    );
+    padding: 17px 26px;
+  }
+
+  &__dot {
+    position: relative;
+    background-color: $c-banner-dot-big;
+    width: 100%;
+    max-width: 634px;
+    height: 634px;
+    border-radius: $br-circle;
+  }
+
+  &__program-container {
+    background-color: $c-program-bg;
+    box-shadow: $bs-light;
+    width: 80px;
+    height: 80px;
+    padding: 17px 15px;
+    border-radius: 8px;
+
+    &:first-of-type {
+      padding: 14px 23px;
+      @include absolute($top: 26px, $left: -34px);
+    }
+  }
+
+  &__program-container_photoshop {
+    @include absolute($top: 26px, $right: -75px);
+  }
+  &__program-container_xd {
+    @include absolute($bottom: 143px, $left: -74px);
+  }
+  &__program-container_sketch {
+    @include absolute($bottom: 143px, $right: -75px);
+  }
+}

@@ -1,0 +1,201 @@
+@include screenBig {
+  .banner {
+    padding-bottom: 74px;
+
+    &__container {
+      @include flex($justify: center, $align: center, $gap: 55px);
+
+      & .main-section {
+        padding-top: 0;
+      }
+    }
+
+    &__title {
+      font-size: $fs-newsletter;
+    }
+
+    &__dot {
+      width: 450px;
+      height: 450px;
+    }
+
+    &__program-container {
+      width: 60px;
+      height: 60px;
+      padding: 14px 12px;
+
+      &:first-of-type {
+        padding: 11px 18px;
+        @include absolute($top: 26px, $left: -15px);
+      }
+    }
+
+    &__program-container_photoshop {
+      @include absolute($top: 26px, $right: -30px);
+    }
+    &__program-container_xd {
+      @include absolute($bottom: 80px, $left: -30px);
+    }
+    &__program-container_sketch {
+      @include absolute($bottom: 100px, $right: -50px);
+    }
+  }
+}
+
+// ! 1400px
+@include screen() {
+  .banner {
+    &__social-container {
+      @include absolute($left: 30px, $top: 50px);
+      @include flex($gap: 15px);
+    }
+
+    &__container {
+      @include flex($justify: center, $align: center, $gap: 20px);
+    }
+
+    .main-section {
+      &__small-dot {
+        @include absolute($top: -40px, $left: -60px);
+        width: 150px;
+        height: 150px;
+        background-color: $c-banner-dot;
+        border-radius: $br-circle;
+      }
+    }
+
+    &__title {
+      font-size: $fs-block-title;
+      line-height: $line-height-very-big;
+
+      margin-bottom: 15px;
+    }
+
+    &__dot {
+      width: 350px;
+      height: 350px;
+    }
+  }
+}
+
+// ! 1200px
+@include desktopBig {
+  .banner {
+    &__container {
+      @include flex($justify: center, $align: center, $gap: 40px);
+    }
+    .main-section {
+      max-width: 500px;
+    }
+  }
+}
+
+// ! 1024px
+@include desktop {
+  .banner {
+    &__container {
+      @include flex($direction: column, $gap: 55px);
+    }
+
+    .main-section {
+      max-width: 750px;
+      @include flex($direction: column, $align: center);
+
+      &__small-dot {
+        @include absolute($top: -40px, $left: 0px);
+        width: 150px;
+        height: 150px;
+        background-color: $c-banner-dot;
+        border-radius: $br-circle;
+      }
+    }
+
+    &__title {
+      text-align: center;
+    }
+
+    &__paragraph {
+      text-align: center;
+    }
+  }
+}
+
+// ! 480px
+@include phone {
+  .banner {
+    &__container {
+      @include flex($direction: column, $gap: 55px);
+    }
+
+    .main-section {
+      max-width: 750px;
+      @include flex($direction: column, $align: center);
+
+      &__small-dot {
+        @include absolute($top: -40px, $left: 0px);
+        width: 150px;
+        height: 150px;
+        background-color: $c-banner-dot;
+        border-radius: $br-circle;
+      }
+    }
+
+    &__title {
+      text-align: center;
+      font-size: $fs-title-mobile;
+    }
+
+    &__paragraph {
+      text-align: center;
+      font-size: $fs-text-mobile;
+    }
+
+    &__dot {
+      width: 250px;
+      height: 250px;
+    }
+
+    &__program-container {
+      width: 50px;
+      height: 50px;
+      padding: 11px 9px;
+
+      &:first-of-type {
+        padding: 8px 14px;
+        @include absolute($top: 26px, $left: -10px);
+      }
+    }
+
+    &__program-container_photoshop {
+      @include absolute($top: 26px, $right: -10px);
+    }
+    &__program-container_xd {
+      @include absolute($bottom: 20px, $left: -15px);
+    }
+    &__program-container_sketch {
+      @include absolute($bottom: 30px, $right: -10px);
+    }
+
+    &__buttons {
+      @include flex($direction: column, $gap: 23px);
+      width: 100%;
+    }
+
+    &__button {
+      @include button($bgc: $c-link-hover, $bgcHover: $c-banner-dot);
+      padding: 17px 47px;
+      width: 100%;
+      text-align: center;
+    }
+
+    &__button_transparent {
+      @include button(
+        $bgc: transparent,
+        $borderColor: $c-white,
+        $bgcHover: $c-link-hover
+      );
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

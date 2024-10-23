@@ -1,0 +1,56 @@
+.about-me {
+  padding-top: 136px;
+  padding-bottom: 33px;
+  background-color: $c-bg-secondary;
+
+  &__content-container {
+    @include flex($justify: center, $align: start, $gap: 59px);
+  }
+  &__image-container {
+    width: 100%;
+    max-width: 600px;
+    flex-shrink: 0;
+  }
+
+  &__subtitle {
+    @include blockSubtitle;
+    margin-bottom: 19px;
+  }
+
+  &__title {
+    @include blockTitle;
+    font-weight: $fw-semi-bold;
+    margin-bottom: 15px;
+  }
+
+  &__description {
+    font-weight: $fw-light;
+    line-height: $line-height-medium;
+    margin-bottom: 20px;
+  }
+
+  &__info {
+    margin-bottom: 38px;
+  }
+
+  &__button {
+    padding: 17px 26px;
+    @include button($bgc: $c-link-hover, $bgcHover: $c-banner-dot);
+  }
+}
+
+.info {
+  &__container {
+    @include flex($gap: 55px);
+  }
+
+  &__text {
+    font-family: $ff-main;
+    margin-bottom: 25px;
+    line-height: $line-height-medium;
+
+    & span {
+      font-weight: $fw-light;
+    }
+  }
+}

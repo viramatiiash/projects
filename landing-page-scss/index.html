@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page SCSS</title>
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <!-- ! Header -->
+    <header class="header">
+      <div class="header__container container">
+        <!-- ! Logo -->
+        <div class="header__logo logo">
+          <div class="logo__icon">
+            <svg>
+              <use xlink:href="./assets/svg/symbol-defs.svg#icon-logo"></use>
+            </svg>
+          </div>
+          <div class="logo__text">Bio</div>
+        </div>
+        <!-- ! Navigation -->
+        <nav class="header__nav nav">
+          <a href="#" class="nav__link">Home</a>
+          <a href="#" class="nav__link">About</a>
+          <a href="#" class="nav__link">Portfolio</a>
+          <a href="#" class="nav__link">Services</a>
+          <a href="#" class="nav__link">Resume</a>
+          <a href="#" class="nav__link">Client</a>
+          <a href="#" class="nav__link">Blog</a>
+          <a href="#" class="nav__link">Contact</a>
+        </nav>
+        <!-- ! Button -->
+        <div class="header__download-btn"><span>Download CV</span></div>
+      </div>
+    </header>
+    <main>
+      <!-- ! Banner -->
+      <div class="banner">
+        <!-- ! Social Media -->
+        <div class="banner__social-container">
+          <div class="banner__social">
+            <svg>
+              <use
+                xlink:href="./assets/svg/symbol-defs.svg#icon-linkedin"
+              ></use>
+            </svg>
+          </div>
+          <div class="banner__social">
+            <svg>
+              <use
+                xlink:href="./assets/svg/symbol-defs.svg#icon-instagram"
+              ></use>
+            </svg>
+          </div>
+          <div class="banner__social">
+            <svg>
+              <use xlink:href="./assets/svg/symbol-defs.svg#icon-behance"></use>
+            </svg>
+          </div>
+        </div>
+        <!-- ! Banner Content -->
+        <div class="banner__container container">
+          <div class="banner__main-section main-section">
+            <div class="main-section__small-dot"></div>
+            <h2 class="banner__subtitle">Welcome My Portfolio</h2>
+            <h1 class="banner__title">
+              Hello, I‘m Johan Deo
+              <span class="banner__span">Professional</span> Designer.
+            </h1>
+            <p class="banner__paragraph">
+              Conveniently customize proactive web services for leveraged
+              without continualliery aggregate fricctionle ou wellies richard.
+            </p>
+            <div class="banner__buttons">
+              <div class="banner__button"><span>Hire Me</span></div>
+              <div class="banner__button banner__button_transparent">
+                <span>Download CV</span>
+              </div>
+            </div>
+          </div>
+          <div class="banner__dot">
+            <div
+              class="banner__program-container banner__program-container_figma"
+            >
+              <img src="./../assets/images/figma.png" alt="Figma" />
+            </div>
+            <div class="banner__program-container banner__program-container_xd">
+              <img src="./../assets/images/xd-program.png" alt="XD" />
+            </div>
+            <div
+              class="banner__program-container banner__program-container_photoshop"
+            >
+              <img
+                src="./../assets/images/photoshop-program.png"
+                alt="Photoshop"
+              />
+            </div>
+            <div
+              class="banner__program-container banner__program-container_sketch"
+            >
+              <img src="./../assets/images/sketch.png" alt="Sketch" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ! About Me -->
+      <section class="about-me">
+        <div class="about-me__content-container container">
+          <div class="about-me__image-container">
+            <img src="./../assets/images/frame.png" alt="Frame" />
+          </div>
+          <div class="about-me__content">
+            <h3 class="about-me__subtitle">About Me</h3>
+            <h2 class="about-me__title">Johan Deo</h2>
+            <div class="about-me__description">
+              I'm Graphic Designer,and I'm very passionate and dedicated to my
+              work With 20 years experience as a professional Photography, I
+              have lot of acquired the skills and knowledge necessary to make
+              your project a success. I enjoy every step the Photography
+              process,from discussion and collaboration.
+            </div>
+            <div class="about-me__info info">
+              <div class="info__container">
+                <div class="info__box">
+                  <pre
+                    class="info__text"
+                  >Birthday  :  <span>15 April 1990</span></pre>
+                  <pre
+                    class="info__text"
+                  >Website   :  <span>www.fgorman.com</span></pre>
+                  <pre
+                    class="info__text"
+                  >Phone       :  <span>+1 650 123 4444 </span></pre>
+                  <pre
+                    class="info__text"
+                  >Study        :  <span>Univercity of Harvard </span></pre>
+                </div>
+                <div class="info__box">
+                  <pre
+                    class="info__text"
+                  >Dgree          :  <span>Master</span></pre>
+                  <pre
+                    class="info__text"
+                  >Mail              :  <span>info@biophoto.com </span></pre>
+                  <pre
+                    class="info__text"
+                  >Linkedin      :  <span>@biophotography </span></pre>
+                  <pre
+                    class="info__text"
+                  >Freelance   :  <span>Available</span></pre>
+                </div>
+              </div>
+            </div>
+            <div class="about-me__button"><span>Download CV</span></div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Portfolio -->
+      <section class="portfolio">
+        <div class="portfolio__content-container container">
+          <h3 class="portfolio__subtitle">Portfolio</h3>
+          <h2 class="portfolio__title">Some Of My Creative Work</h2>
+          <ul class="portfolio__tabs tabs">
+            <li class="tabs__tab">All</li>
+            <li class="tabs__tab">Mobile</li>
+            <li class="tabs__tab">Website</li>
+            <li class="tabs__tab">Animation</li>
+            <li class="tabs__tab">Exclusive</li>
+          </ul>
+          <div class="portfolio__gallery">
+            <div class="portfolio__image-container"></div>
+            <div class="portfolio__image-container"></div>
+            <div class="portfolio__image-container image-container">
+              <div class="image-container__text">
+                <h4>Mobile Mockup Design</h4>
+                <h5 class="image-container__text-small">
+                  existing solutions offer to solve ...
+                </h5>
+              </div>
+            </div>
+            <div class="portfolio__image-container"></div>
+            <div class="portfolio__image-container"></div>
+            <div class="portfolio__image-container"></div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Services -->
+      <section class="services">
+        <div class="services__content-container container">
+          <h3 class="services__subtitle">Why Choose Us</h3>
+          <h2 class="services__title">Out Work Services</h2>
+          <!-- ! Cards -->
+          <div class="services__cards">
+            <div class="services__card">
+              <div class="services__img-container">
+                <img
+                  src="./../assets/images/computer-graphic.png"
+                  alt="Computer Graphic"
+                />
+              </div>
+              <h4 class="services__card-title">Computer Graphic</h4>
+              <p class="services__text">
+                Conveniently and proacvenique and idene solutions easyuse enjoy
+                collaboration...
+              </p>
+              <div class="services__icon-container">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-arrow"
+                  ></use>
+                </svg>
+              </div>
+            </div>
+            <div class="services__card">
+              <div class="services__img-container">
+                <img
+                  src="./../assets/images/web-dev.png"
+                  alt="Web Development"
+                />
+              </div>
+              <h4 class="services__card-title">Web Development</h4>
+              <p class="services__text">
+                Conveniently and proacvenique and idene solutions easyuse enjoy
+                collaboration...
+              </p>
+              <div class="services__icon-container">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-arrow"
+                  ></use>
+                </svg>
+              </div>
+            </div>
+            <div class="services__card">
+              <div class="services__img-container">
+                <img
+                  src="./../assets/images/uiux-design.png"
+                  alt="UI/UX Design"
+                />
+              </div>
+              <h4 class="services__card-title">UI/UX Design</h4>
+              <p class="services__text">
+                Conveniently and proacvenique and idene solutions easyuse enjoy
+                collaboration...
+              </p>
+              <div class="services__icon-container">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-arrow"
+                  ></use>
+                </svg>
+              </div>
+            </div>
+            <div class="services__card">
+              <div class="services__img-container">
+                <img src="./../assets/images/web-design.png" alt="Web Design" />
+              </div>
+              <h4 class="services__card-title">Web Design</h4>
+              <p class="services__text">
+                Conveniently and proacvenique and idene solutions easyuse enjoy
+                collaboration...
+              </p>
+              <div class="services__icon-container">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-arrow"
+                  ></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Resume -->
+      <section class="resume">
+        <div class="resume__block-container container">
+          <div class="resume__content-container">
+            <div class="resume__content">
+              <h3 class="resume__subtitle">Resume</h3>
+              <h2 class="resume__title">Skill & Experience</h2>
+              <ul class="resume__resume-tabs resume-tabs">
+                <li class="resume-tabs__tab"><span>Design</span></li>
+                <li class="resume-tabs__tab"><span>Experience</span></li>
+                <li class="resume-tabs__tab"><span>Education</span></li>
+              </ul>
+              <div class="resume__diagrams-container">
+                <div class="resume__diagram-content">
+                  <div class="resume__diagram-text">
+                    <div>Adobe Aillustrator</div>
+                    <div>90%</div>
+                  </div>
+                  <div class="resume__diagram">
+                    <div class="resume__diagram-level diagram-level_one"></div>
+                  </div>
+                </div>
+                <div class="resume__diagram-content">
+                  <div class="resume__diagram-text">
+                    <div>Adobe Photoshop</div>
+                    <div>80%</div>
+                  </div>
+                  <div class="resume__diagram">
+                    <div class="resume__diagram-level diagram-level_two"></div>
+                  </div>
+                </div>
+                <div class="resume__diagram-content">
+                  <div class="resume__diagram-text">
+                    <div>Adobe After Effect</div>
+                    <div>70%</div>
+                  </div>
+                  <div class="resume__diagram">
+                    <div
+                      class="resume__diagram-level diagram-level_three"
+                    ></div>
+                  </div>
+                </div>
+                <div class="resume__diagram-content">
+                  <div class="resume__diagram-text">
+                    <div>Figma</div>
+                    <div>60%</div>
+                  </div>
+                  <div class="resume__diagram">
+                    <div class="resume__diagram-level diagram-level_four"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="resume__img-container">
+              <img src="./../assets/images/frame.png" alt="Frame" />
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Testimonials -->
+      <section class="testimonials">
+        <div class="testimonials__content-container container">
+          <h3 class="testimonials__subtitle">Testimonial</h3>
+          <h2 class="testimonials__title">What Our Client Say About us.</h2>
+          <!-- ! Cards -->
+          <div class="testimonials__cards">
+            <div class="testimonials__card">
+              <div class="testimonials__img-container"></div>
+              <div class="testimonials__triangle-container">
+                <img src="./../assets/images/triangle.png" alt="Triangle" />
+              </div>
+              <div class="testimonials__icon-container">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-quotes"
+                  ></use>
+                </svg>
+              </div>
+              <h4 class="testimonials__card-title">Dawn johnson</h4>
+              <h5 class="testimonials__occupation">Co Founder</h5>
+              <div class="testimonials__line"></div>
+              <p class="testimonials__text">
+                Conveniently customize proactive web services fofeveraged
+                withoutan continualliery aggregate customize proactive web
+                services.
+              </p>
+            </div>
+            <div class="testimonials__card">
+              <div class="testimonials__img-container"></div>
+              <div class="testimonials__triangle-container">
+                <img src="./../assets/images/triangle.png" alt="Triangle" />
+              </div>
+              <div class="testimonials__icon-container">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-quotes"
+                  ></use>
+                </svg>
+              </div>
+              <h4 class="testimonials__card-title">Dawn johnson</h4>
+              <h5 class="testimonials__occupation">Co Founder</h5>
+              <div class="testimonials__line"></div>
+              <p class="testimonials__text">
+                Conveniently customize proactive web services fofeveraged
+                withoutan continualliery aggregate customize proactive web
+                services.
+              </p>
+            </div>
+            <div class="testimonials__card">
+              <div class="testimonials__img-container"></div>
+              <div class="testimonials__triangle-container">
+                <img src="./../assets/images/triangle.png" alt="Triangle" />
+              </div>
+              <div class="testimonials__icon-container">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-quotes"
+                  ></use>
+                </svg>
+              </div>
+              <h4 class="testimonials__card-title">Dawn johnson</h4>
+              <h5 class="testimonials__occupation">Co Founder</h5>
+              <div class="testimonials__line"></div>
+              <p class="testimonials__text">
+                Conveniently customize proactive web services fofeveraged
+                withoutan continualliery aggregate customize proactive web
+                services.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Blog -->
+      <section class="blog">
+        <div class="blog__content-container container">
+          <h3 class="blog__subtitle">Blog post</h3>
+          <h2 class="blog__title">Our Latest Blog</h2>
+          <!-- ! Cards -->
+          <div class="blog__cards">
+            <div class="blog__card">
+              <div class="blog__img-container"></div>
+              <div class="blog__text-container">
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-admin"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">Admin</p>
+                </div>
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-comments"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">25</p>
+                </div>
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-views"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">23k+ view</p>
+                </div>
+              </div>
+              <h4 class="blog__card-title">Bankruptcy law the federal law</h4>
+              <p class="blog__text">
+                Conveniently innovate web services user-centric before
+                progressive architect distinctively.
+              </p>
+            </div>
+            <div class="blog__card">
+              <div class="blog__img-container"></div>
+              <div class="blog__text-container">
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-admin"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">Admin</p>
+                </div>
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-comments"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">25</p>
+                </div>
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-views"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">23k+ view</p>
+                </div>
+              </div>
+              <h4 class="blog__card-title">Bankruptcy law the federal law</h4>
+              <p class="blog__text">
+                Conveniently innovate web services user-centric before
+                progressive architect distinctively.
+              </p>
+            </div>
+            <div class="blog__card">
+              <div class="blog__img-container"></div>
+              <div class="blog__text-container">
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-admin"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">Admin</p>
+                </div>
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-comments"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">25</p>
+                </div>
+                <div class="blog__subtext-container">
+                  <div class="blog__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-views"
+                      ></use>
+                    </svg>
+                  </div>
+                  <p class="blog__subtext">23k+ view</p>
+                </div>
+              </div>
+              <h4 class="blog__card-title">Bankruptcy law the federal law</h4>
+              <p class="blog__text">
+                Conveniently innovate web services user-centric before
+                progressive architect distinctively.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Newsletter -->
+      <section class="newsletter">
+        <div class="newsletter__content-container container">
+          <div class="newsletter__text-container">
+            <h2 class="newsletter__title">Get My Newsletter</h2>
+            <p class="newsletter__text">
+              Get latest news, updates, tips and trics in your inbox
+            </p>
+          </div>
+          <div class="newsletter__input-container">
+            <button class="newsletter__button"><span>Subscribe</span></button>
+            <input type="text" placeholder="Enter your Email" />
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- ! Footer -->
+    <footer class="footer">
+      <div class="footer__content-container container">
+        <h3 class="footer__subtitle">Contact</h3>
+        <h2 class="footer__title">Get in Touch</h2>
+        <div class="footer__contact-group">
+          <!-- ! Left side -->
+          <div class="footer__contact-info">
+            <div class="footer__info-container">
+              <div class="footer__img-container img-container_phone">
+                <img src="./../assets/images/phone.png" alt="Phone image" />
+              </div>
+              <div class="footer__text-container">
+                <h5 class="footer__text-title">Phone number</h5>
+                <p class="footer__text">+8801284593, 01239-420007 02-9611936</p>
+              </div>
+            </div>
+            <div class="footer__info-container">
+              <div class="footer__img-container img-container_message">
+                <img src="./../assets/images/message.png" alt="Message image" />
+              </div>
+              <div class="footer__text-container">
+                <h5 class="footer__text-title">Email Address</h5>
+                <p class="footer__text">
+                  sahjahansagor2020@.com sahjahansagor3020@.com
+                </p>
+              </div>
+            </div>
+            <div class="footer__info-container">
+              <div class="footer__img-container img-container_marker">
+                <img src="./../assets/images/marker.png" alt="Marker image" />
+              </div>
+              <div class="footer__text-container">
+                <h5 class="footer__text-title">Office address</h5>
+                <p class="footer__text">
+                  Suite 1307, Tropical Center 218 New Elephant Road,
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- ! Right side -->
+          <form class="footer__form form" action="">
+            <h5 class="form__title">Send Message</h5>
+            <div class="form__inputs">
+              <input class="form__input" type="text" placeholder="Your Name" />
+              <input class="form__input" type="text" placeholder="Your Email" />
+            </div>
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              id=""
+            ></textarea>
+            <input
+              class="form__submit"
+              value="Submit Message"
+              type="submit"
+              name=""
+              id=""
+            />
+          </form>
+        </div>
+        <!-- ! Map -->
+        <div class="footer__map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96805.5354282815!2d-74.71528722641007!3d40.69218778146257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c397b403d17b8b%3A0x1f6a4cfea9486e67!2sFar%20Hills%2C%20NJ%2007931%2C%20USA!5e0!3m2!1sen!2sua!4v1727424782238!5m2!1sen!2sua"
+            width="1170"
+            height="550"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+      <!-- ! Last Row -->
+      <div class="footer__last-row">
+        <p>All Right Reserved. Designed and Developed by LabArtisan</p>
+      </div>
+    </footer>
+  </body>
+</html>

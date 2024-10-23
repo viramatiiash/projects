@@ -1,0 +1,89 @@
+.portfolio {
+  padding-top: 120px;
+  padding-bottom: 120px;
+
+  &__content-container {
+    @include flex($direction: column);
+  }
+
+  &__subtitle {
+    @include blockSubtitle;
+    margin-bottom: 17px;
+  }
+
+  &__title {
+    @include blockTitle;
+    margin-bottom: 54px;
+  }
+
+  & .tabs {
+    @include flex($justify: center, $gap: 10px);
+    margin-bottom: 36px;
+
+    &__tab {
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+
+  &__gallery {
+    columns: 3;
+    column-gap: 24px;
+  }
+
+  &__image-container {
+    width: 424px;
+    background-color: $c-gallery;
+    margin-bottom: 24px;
+    border-radius: 8px;
+  }
+
+  &__image-container:nth-of-type(1),
+  &__image-container:nth-of-type(4),
+  &__image-container:nth-of-type(5) {
+    height: 260px;
+  }
+
+  &__image-container:nth-of-type(2),
+  &__image-container:nth-of-type(3),
+  &__image-container:nth-of-type(6) {
+    height: 544px;
+  }
+}
+
+.image-container {
+  position: relative;
+
+  &__text {
+    @include absolute($left: 28px, $bottom: 28px);
+    font-family: $ff-portfolio;
+    font-size: $fs-testimonials-title;
+    line-height: $line-height-big;
+    font-weight: $fw-semi-bold;
+  }
+
+  &__text h4 {
+    margin-bottom: 15px;
+  }
+
+  &__text-small {
+    font-family: $ff-logo;
+    font-weight: $fw-regular;
+    line-height: $line-height-very-small;
+  }
+}
+
+
+.link {
+  text-decoration: none;
+  color: green;
+
+  &:hover {
+    color: red;
+  }
+}
+
+.nav-link {
+  @extend .link;
+  padding: 10px;
+}

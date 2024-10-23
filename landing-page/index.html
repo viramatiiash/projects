@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page (Task 1)</title>
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- ! Header -->
+    <header class="header">
+      <div class="header__container container">
+        <!-- ! Logo -->
+        <div class="header__logo logo">
+          <div class="logo__icon">
+            <svg>
+              <use
+                xlink:href="./assets/svg/symbol-defs.svg#icon-logo-icon"
+              ></use>
+            </svg>
+          </div>
+          <div class="logo__text">ziro</div>
+        </div>
+        <!-- ! Navigation -->
+        <nav class="header__nav nav">
+          <a href="#" class="nav__link">Home</a>
+          <a href="#" class="nav__link">Pricing</a>
+          <a href="#" class="nav__link">Blog</a>
+          <a href="#" class="nav__link">Become a member</a>
+          <a href="#" class="nav__link">About Us</a>
+        </nav>
+        <!-- ! Search Group -->
+        <div class="header__search-group">
+          <div class="header__search-input">
+            <input
+              class="search-input"
+              type="text"
+              placeholder="Search here..."
+            />
+            <div class="header__glas-icon">
+              <svg>
+                <use xlink:href="./assets/svg/symbol-defs.svg#icon-glass"></use>
+              </svg>
+            </div>
+          </div>
+          <div class="header__auth">
+            <a class="auth auth_active" href="#">Login</a> /
+            <a class="auth" href="#">Sign Up</a>
+          </div>
+          <div class="header__menu">
+            <svg>
+                <use xlink:href="./assets/svg/symbol-defs.svg#icon-corolful-dots"></use>
+              </svg>
+          </div>
+        </div>
+      </div>
+      <!-- ! Banner -->
+      <div class="header__banner banner container">
+        <div class="banner__main-section">
+          <h1 class="banner__title">
+            Find out talented <span class="banner__span">freelancer</span> with
+            better review faster.
+          </h1>
+          <p class="banner__paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip.
+          </p>
+          <div class="banner__buttons">
+            <button class="banner__button"><span>Discover Now</span></button>
+            <div class="banner__watch">
+              <div class="banner__watch-icon">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-watch"
+                  ></use>
+                </svg>
+              </div>
+              <div class="banner__watch-text">Watch Demo</div>
+            </div>
+          </div>
+        </div>
+        <div class="banner__img-container">
+          <img
+            src="./assets/img/banner-img.png"
+            alt="Banner image with a red-haired woman holding a laptop"
+          />
+        </div>
+      </div>
+    </header>
+    <!-- ! Main -->
+    <main>
+      <section class="brands container">
+        <div class="brands__img-container">
+          <img src="./assets/img/brand-1.png" alt="Design Studio Brand" />
+        </div>
+        <div class="brands__img-container">
+          <img src="./assets/img/brand-2.png" alt="Design & Branding" />
+        </div>
+        <div class="brands__img-container">
+          <img src="./assets/img/brand-3.png" alt="Greenery" />
+        </div>
+        <div class="brands__img-container">
+          <img src="./assets/img/brand-4.png" alt="Natural Organic Beauty" />
+        </div>
+        <div class="brands__img-container">
+          <img src="./assets/img/brand-5.png" alt="Nature Organic Beauty" />
+        </div>
+        <div class="brands__img-container">
+          <img src="./assets/img/brand-6.png" alt="Your Company" />
+        </div>
+      </section>
+      <!-- ! How It Works -->
+      <section class="how-works container">
+        <div class="how-works__subtitle">How It works</div>
+        <div class="how-works__content-container">
+          <div class="how-works__content">
+            <h2 class="how-works__title">
+              Start find a job you love with us easily
+            </h2>
+            <div class="how-works__accordion accordion">
+              <div class="accordion__card">
+                <div class="accordion__upper-part">
+                  <div
+                    class="accordion__number-container accordion__number-container_pink"
+                  >
+                    <span>1</span>
+                  </div>
+                  <h3 class="accordion__title">Complete Profile</h3>
+                  <div class="accordion__arrow-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-arrow"
+                      ></use>
+                    </svg>
+                  </div>
+                </div>
+                <div class="accordion__lower-part">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation.
+                </div>
+              </div>
+              <div class="accordion__card">
+                <div class="accordion__upper-part">
+                  <div
+                    class="accordion__number-container accordion__number-container_blue"
+                  >
+                    <span>2</span>
+                  </div>
+                  <h3 class="accordion__title">Search Vacancies</h3>
+                  <div class="accordion__arrow-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-arrow"
+                      ></use>
+                    </svg>
+                  </div>
+                </div>
+                <div class="accordion__lower-part">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation.
+                </div>
+              </div>
+              <div class="accordion__card">
+                <div class="accordion__upper-part">
+                  <div
+                    class="accordion__number-container accordion__number-container_orange"
+                  >
+                    <span>3</span>
+                  </div>
+                  <h3 class="accordion__title">Apply Job</h3>
+                  <div class="accordion__arrow-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-arrow"
+                      ></use>
+                    </svg>
+                  </div>
+                </div>
+                <div class="accordion__lower-part">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="how-works__video-container">
+            <img src="./assets/img/video.png" alt="Video Image" />
+            <div class="how-works__icon-container">
+              <svg>
+                <use
+                  xlink:href="./assets/svg/symbol-defs.svg#icon-arrow-video"
+                ></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Why Choose Us -->
+      <section class="why-choose container">
+        <div class="why-choose__text-block text-block container">
+          <h2 class="text-block__title">Why Choose Us</h2>
+          <p class="text-block__subtitle">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+        </div>
+        <div class="why-choose__cards">
+          <div class="why-choose__card">
+            <div
+              class="why-choose__icon-container why-choose__icon-container_violet"
+            >
+              <!-- !!! The dot in the middle is not showing, when using from the sprite -->
+              <svg
+                width="35"
+                height="35"
+                viewBox="0 0 35 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19.8499 17.203C19.8499 18.6646 18.6648 19.8497 17.2033 19.8497C15.7417 19.8497 14.5566 18.6646 14.5566 17.203C14.5566 15.7415 15.7417 14.5564 17.2033 14.5564C18.6648 14.5564 19.8499 15.7415 19.8499 17.203Z"
+                  fill="white"
+                />
+                <path
+                  d="M17.2031 0C7.67524 0 0 7.67524 0 17.2031C0 26.731 7.67524 34.4062 17.2031 34.4062C26.731 34.4062 34.4062 26.731 34.4062 17.2031C34.4062 7.67524 26.731 0 17.2031 0ZM7.9399 9.26322C7.9399 8.46923 8.46923 7.9399 9.26322 7.9399C10.0572 7.9399 10.5865 8.46923 10.5865 9.26322C10.5865 10.0572 10.0572 10.5865 9.26322 10.5865C8.46923 10.5865 7.9399 10.0572 7.9399 9.26322ZM17.3355 23.952L10.0572 25.937C9.13089 26.2017 8.20457 25.2754 8.46923 24.349L10.4542 17.0708C11.3805 13.8948 13.7625 11.3805 16.9385 10.5865L24.2167 8.60156C25.143 8.3369 26.0693 9.26322 25.8047 10.1895L23.8197 17.4678C23.0257 20.5114 20.5114 23.0257 17.3355 23.952ZM25.143 26.4663C24.349 26.4663 23.8197 25.937 23.8197 25.143C23.8197 24.349 24.349 23.8197 25.143 23.8197C25.937 23.8197 26.4663 24.349 26.4663 25.143C26.4663 25.937 25.937 26.4663 25.143 26.4663Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+            <h3 class="why-choose__title">Trusted</h3>
+            <p class="why-choose__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna.
+            </p>
+          </div>
+          <div class="why-choose__card">
+            <div
+              class="why-choose__icon-container why-choose__icon-container_orange"
+            >
+              <!-- !!! The dot in the middle is not showing, when using from the sprite -->
+              <svg
+                width="35"
+                height="35"
+                viewBox="0 0 35 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19.8499 17.203C19.8499 18.6646 18.6648 19.8497 17.2033 19.8497C15.7417 19.8497 14.5566 18.6646 14.5566 17.203C14.5566 15.7415 15.7417 14.5564 17.2033 14.5564C18.6648 14.5564 19.8499 15.7415 19.8499 17.203Z"
+                  fill="white"
+                />
+                <path
+                  d="M17.2031 0C7.67524 0 0 7.67524 0 17.2031C0 26.731 7.67524 34.4062 17.2031 34.4062C26.731 34.4062 34.4062 26.731 34.4062 17.2031C34.4062 7.67524 26.731 0 17.2031 0ZM7.9399 9.26322C7.9399 8.46923 8.46923 7.9399 9.26322 7.9399C10.0572 7.9399 10.5865 8.46923 10.5865 9.26322C10.5865 10.0572 10.0572 10.5865 9.26322 10.5865C8.46923 10.5865 7.9399 10.0572 7.9399 9.26322ZM17.3355 23.952L10.0572 25.937C9.13089 26.2017 8.20457 25.2754 8.46923 24.349L10.4542 17.0708C11.3805 13.8948 13.7625 11.3805 16.9385 10.5865L24.2167 8.60156C25.143 8.3369 26.0693 9.26322 25.8047 10.1895L23.8197 17.4678C23.0257 20.5114 20.5114 23.0257 17.3355 23.952ZM25.143 26.4663C24.349 26.4663 23.8197 25.937 23.8197 25.143C23.8197 24.349 24.349 23.8197 25.143 23.8197C25.937 23.8197 26.4663 24.349 26.4663 25.143C26.4663 25.937 25.937 26.4663 25.143 26.4663Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+            <h3 class="why-choose__title">Easy to Use</h3>
+            <p class="why-choose__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna.
+            </p>
+          </div>
+          <div class="why-choose__card">
+            <div
+              class="why-choose__icon-container why-choose__icon-container_pink"
+            >
+              <!-- !!! The dot in the middle is not showing, when using from the sprite -->
+              <svg
+                width="35"
+                height="35"
+                viewBox="0 0 35 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19.8499 17.203C19.8499 18.6646 18.6648 19.8497 17.2033 19.8497C15.7417 19.8497 14.5566 18.6646 14.5566 17.203C14.5566 15.7415 15.7417 14.5564 17.2033 14.5564C18.6648 14.5564 19.8499 15.7415 19.8499 17.203Z"
+                  fill="white"
+                />
+                <path
+                  d="M17.2031 0C7.67524 0 0 7.67524 0 17.2031C0 26.731 7.67524 34.4062 17.2031 34.4062C26.731 34.4062 34.4062 26.731 34.4062 17.2031C34.4062 7.67524 26.731 0 17.2031 0ZM7.9399 9.26322C7.9399 8.46923 8.46923 7.9399 9.26322 7.9399C10.0572 7.9399 10.5865 8.46923 10.5865 9.26322C10.5865 10.0572 10.0572 10.5865 9.26322 10.5865C8.46923 10.5865 7.9399 10.0572 7.9399 9.26322ZM17.3355 23.952L10.0572 25.937C9.13089 26.2017 8.20457 25.2754 8.46923 24.349L10.4542 17.0708C11.3805 13.8948 13.7625 11.3805 16.9385 10.5865L24.2167 8.60156C25.143 8.3369 26.0693 9.26322 25.8047 10.1895L23.8197 17.4678C23.0257 20.5114 20.5114 23.0257 17.3355 23.952ZM25.143 26.4663C24.349 26.4663 23.8197 25.937 23.8197 25.143C23.8197 24.349 24.349 23.8197 25.143 23.8197C25.937 23.8197 26.4663 24.349 26.4663 25.143C26.4663 25.937 25.937 26.4663 25.143 26.4663Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+            <h3 class="why-choose__title">Faster</h3>
+            <p class="why-choose__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- ! Featured Jobs -->
+      <section class="jobs">
+        <div class="jobs__text-block text-block container">
+          <h2 class="text-block__title">Featured Jobs</h2>
+          <p class="text-block__subtitle">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+        </div>
+        <!-- ! Slider -->
+        <div class="jobs__slider slider">
+          <div class="slider__navigation">
+            <div class="slider__btn slider__btn_prev">
+              <svg>
+                <use
+                  xlink:href="./assets/svg/symbol-defs.svg#icon-arrow-slider"
+                ></use>
+              </svg>
+            </div>
+            <div class="slider__btn slider__btn_next">
+              <svg>
+                <use
+                  xlink:href="./assets/svg/symbol-defs.svg#icon-arrow-slider"
+                ></use>
+              </svg>
+            </div>
+          </div>
+          <div class="slider__cards">
+            <div class="slider__card card card_active">
+              <div class="card__dots">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-dots"
+                  ></use>
+                </svg>
+              </div>
+              <div class="card__image-container">
+                <img src="./assets/img/programmer.png" alt="Programmer" />
+              </div>
+              <h4 class="card__title">Database Programmer</h4>
+              <h5 class="card__subtitle">Marraz Team</h5>
+              <div class="card__items">
+                <div class="card__item">
+                  <div class="card__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-money-bag"
+                      ></use>
+                    </svg>
+                  </div>
+                  <div class="card__item-text">
+                    $14,000 - $25,000 <span> /monthly</span>
+                  </div>
+                </div>
+                <div class="card__item">
+                  <div class="card__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-marker"
+                      ></use>
+                    </svg>
+                  </div>
+                  <div class="card__item-text">
+                    London, England <span>View map</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card__buttons">
+                <div class="card__button-like card__button-like_active">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-heart"
+                    ></use>
+                  </svg>
+                </div>
+                <div class="card__button-apply card__button-apply_active">
+                  <span>Apply Now</span>
+                </div>
+              </div>
+            </div>
+            <div class="slider__card card card_inactive">
+              <div class="card__dots">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-dots"
+                  ></use>
+                </svg>
+              </div>
+              <div class="card__image-container">
+                <img src="./assets/img/programmer-2.png" alt="Programmer" />
+              </div>
+              <h4 class="card__title">Database Programmer</h4>
+              <h5 class="card__subtitle">Marraz Team</h5>
+              <div class="card__items">
+                <div class="card__item">
+                  <div class="card__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-money-bag"
+                      ></use>
+                    </svg>
+                  </div>
+                  <div class="card__item-text">
+                    $14,000 - $25,000 <span> /monthly</span>
+                  </div>
+                </div>
+                <div class="card__item">
+                  <div class="card__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-marker"
+                      ></use>
+                    </svg>
+                  </div>
+                  <div class="card__item-text">
+                    London, England <span> View map</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card__buttons">
+                <div class="card__button-like card__button-like_inactive">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-heart"
+                    ></use>
+                  </svg>
+                </div>
+                <div class="card__button-apply card__button-apply_inactive">
+                  <span>Apply Now</span>
+                </div>
+              </div>
+            </div>
+            <div class="slider__card card card_inactive">
+              <div class="card__dots">
+                <svg>
+                  <use
+                    xlink:href="./assets/svg/symbol-defs.svg#icon-dots"
+                  ></use>
+                </svg>
+              </div>
+              <div class="card__image-container">
+                <img src="./assets/img/programmer.png" alt="Programmer" />
+              </div>
+              <h4 class="card__title">Database Programmer</h4>
+              <h5 class="card__subtitle">Marraz Team</h5>
+              <div class="card__items">
+                <div class="card__item">
+                  <div class="card__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-money-bag"
+                      ></use>
+                    </svg>
+                  </div>
+                  <div class="card__item-text">
+                    $14,000 - $25,000 <span> /monthly</span>
+                  </div>
+                </div>
+                <div class="card__item">
+                  <div class="card__icon-container">
+                    <svg>
+                      <use
+                        xlink:href="./assets/svg/symbol-defs.svg#icon-marker"
+                      ></use>
+                    </svg>
+                  </div>
+                  <div class="card__item-text">
+                    London, England <span> View map</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card__buttons">
+                <div class="card__button-like card__button-like_inactive">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-heart"
+                    ></use>
+                  </svg>
+                </div>
+                <div class="card__button-apply card__button-apply_inactive">
+                  <span>Apply Now</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="jobs__btn-container">
+          <button class="jobs__btn">View More</button>
+        </div>
+      </section>
+      <!-- ! Review -->
+      <section class="review container">
+        <div class="review__text-block text-block container">
+          <h2 class="text-block__title">What Our Customer Says</h2>
+          <p class="text-block__subtitle">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+        </div>
+        <div class="review__content-container">
+          <div class="review__img-container">
+            <div class="review__icon-one">
+              <svg>
+                <use xlink:href="./assets/svg/symbol-defs.svg#icon-e"></use>
+              </svg>
+            </div>
+            <div class="review__icon-two">
+              <svg>
+                <use
+                  xlink:href="./assets/svg/symbol-defs.svg#icon-corolful-dots"
+                ></use>
+              </svg>
+            </div>
+            <img
+              src="./assets/img/william-smith.png"
+              alt="Our Customer William Smith"
+            />
+          </div>
+          <div class="review__content">
+            <h4 class="review__title">William Smith</h4>
+            <h5 class="review__subtitle">CEO OF THE LOVE STUDENTS</h5>
+            <div class="review__rating-container">
+              <div class="review__stars stars">
+                <div class="stars__star-container">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-star-filled"
+                    ></use>
+                  </svg>
+                </div>
+                <div class="stars__star-container">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-star-filled"
+                    ></use>
+                  </svg>
+                </div>
+                <div class="stars__star-container">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-star-filled"
+                    ></use>
+                  </svg>
+                </div>
+                <div class="stars__star-container">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-star-filled"
+                    ></use>
+                  </svg>
+                </div>
+                <div class="stars__star-container">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-star-filled"
+                    ></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="review__note">4.8</div>
+            </div>
+            <p class="review__text">
+              “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam,quis nostrud exercitation ullamco laboris
+              nisi ut aliquip.Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+              aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco
+              laboris nisi ut aliquip.”
+            </p>
+            <div class="review__lower-part">
+              <div class="review__buttons">
+                <div class="review__button review__button_prev">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-arrow-slider"
+                    ></use>
+                  </svg>
+                </div>
+                <div class="review__button review__button_next">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-arrow-slider"
+                    ></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="review__avatars">
+                <div
+                  class="review__image-container review__image-container_first"
+                >
+                  <img src="./assets/img/programmer-1.png" alt="Programmer" />
+                </div>
+                <div
+                  class="review__image-container review__image-container_second"
+                >
+                  <img src="./assets/img/programmer.png" alt="Programmer" />
+                </div>
+                <div
+                  class="review__image-container review__image-container_third"
+                >
+                  <img src="./assets/img/programmer-3.png" alt="Programmer" />
+                </div>
+                <div class="review__circle">
+                  <span>21k+</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Numbers -->
+      <section class="numbers container">
+        <div class="numbers__card">
+          <div class="numbers__number-group number-group">
+            <div class="number-group__number">36,789</div>
+            <div class="number-group__text">Talented Freelancer</div>
+          </div>
+          <div class="numbers__number-group number-group">
+            <div class="number-group__number">45,973</div>
+            <div class="number-group__text">Visitors</div>
+          </div>
+          <div class="numbers__number-group number-group">
+            <div class="number-group__number">56,461</div>
+            <div class="number-group__text">Contract Made</div>
+          </div>
+          <div class="numbers__number-group number-group">
+            <div class="number-group__number">852k</div>
+            <div class="number-group__text">Companies</div>
+          </div>
+        </div>
+      </section>
+      <!-- ! Pricing Plan -->
+      <section class="pricing-plan container">
+        <div class="pricing-plan__text-block text-block container">
+          <h2 class="text-block__title">Pricing Plan</h2>
+          <p class="text-block__subtitle">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+        </div>
+        <div class="pricing-plan__cards">
+          <div class="pricing-plan__card">
+            <h5 class="pricing-plan__title">FREE</h5>
+            <h6 class="pricing-plan__price">$0</h6>
+            <div class="pricing-plan__term">Per month</div>
+            <div class="pricing-plan__list">
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">
+                  Lorem ipsum dolor sit amet.
+                </p>
+              </div>
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">
+                  Lorem ipsum dolor sit amet.
+                </p>
+              </div>
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">Sed do eiusmod tempor.</p>
+              </div>
+            </div>
+            <button class="pricing-plan__btn"><span>Purchase Now</span></button>
+          </div>
+          <div class="pricing-plan__card">
+            <h5 class="pricing-plan__title">PREMIUM</h5>
+            <h6 class="pricing-plan__price">$175</h6>
+            <div class="pricing-plan__term">Per month</div>
+            <div class="pricing-plan__list">
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">
+                  Lorem ipsum dolor sit amet.
+                </p>
+              </div>
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">Ut enim ad minim veniam.</p>
+              </div>
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">
+                  Lorem ipsum dolor sit amet.
+                </p>
+              </div>
+            </div>
+            <button class="pricing-plan__btn"><span>Purchase Now</span></button>
+          </div>
+          <div class="pricing-plan__card">
+            <h5 class="pricing-plan__title">PLATINUM</h5>
+            <h6 class="pricing-plan__price">$500</h6>
+            <div class="pricing-plan__term">Per month</div>
+            <div class="pricing-plan__list">
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">
+                  Lorem ipsum dolor sit amet.
+                </p>
+              </div>
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">Ut enim ad minim veniam.</p>
+              </div>
+              <div class="pricing-plan__list-item">
+                <div class="pricing-plan__icon">
+                  <svg>
+                    <use
+                      xlink:href="./assets/svg/symbol-defs.svg#icon-tick"
+                    ></use>
+                  </svg>
+                </div>
+                <p class="pricing-plan__list-text">Sed do eiusmod tempor.</p>
+              </div>
+            </div>
+            <button class="pricing-plan__btn"><span>Purchase Now</span></button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ! Footer -->
+    <footer class="footer">
+      <!-- ! Footer Navigation -->
+      <section class="footer__nav container">
+        <div class="footer__nav-block">
+          <h4 class="footer__title">Olearn</h4>
+          <ul class="footer__list">
+            <li class="footer__list-item"><a href="#">About</a></li>
+            <li class="footer__list-item"><a href="#">What we offer</a></li>
+            <li class="footer__list-item"><a href="#">Leadership</a></li>
+            <li class="footer__list-item"><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer__nav-block">
+          <h4 class="footer__title">Courses</h4>
+          <ul class="footer__list">
+            <li class="footer__list-item"><a href="#">Classroom Courses</a></li>
+            <li class="footer__list-item"><a href="#">Virtual Courses</a></li>
+            <li class="footer__list-item"><a href="#">E-Learning Courses</a></li>
+            <li class="footer__list-item"><a href="#">Off Line Courses</a></li>
+          </ul>
+        </div>
+        <div class="footer__nav-block">
+          <h4 class="footer__title">Community</h4>
+          <ul class="footer__list">
+            <li class="footer__list-item"><a href="#">Learner</a></li>
+            <li class="footer__list-item"><a href="#">Partners</a></li>
+            <li class="footer__list-item"><a href="#">Developers</a></li>
+            <li class="footer__list-item"><a href="#">Teaching Centre</a></li>
+          </ul>
+        </div>
+        <div class="footer__nav-block">
+          <h4 class="footer__title">Quick Links</h4>
+          <ul class="footer__list">
+            <li class="footer__list-item"><a href="#">Home</a></li>
+            <li class="footer__list-item"><a href="#">Professional Edu</a></li>
+            <li class="footer__list-item"><a href="#">Courses</a></li>
+            <li class="footer__list-item"><a href="#">Admissions</a></li>
+          </ul>
+        </div>
+        <div class="footer__nav-block">
+          <h4 class="footer__title">More</h4>
+          <ul class="footer__list">
+            <li class="footer__list-item"><a href="">Press</a></li>
+            <li class="footer__list-item"><a href="">Inventors</a></li>
+            <li class="footer__list-item"><a href="">Helps</a></li>
+            <li class="footer__list-item"><a href="">Terms</a></li>
+          </ul>
+        </div>
+      </section>
+      <!-- ! Footer Last Row -->
+      <section class="footer__last-row last-row container">
+        <div class="last-row__line"></div>
+        <div class="last-row__nav-container">
+        <div class="last-row__logo">
+          <div class="last-row__logo-icon">
+            <svg>
+              <use
+                xlink:href="./assets/svg/symbol-defs.svg#icon-logo-icon"
+              ></use>
+            </svg>
+          </div>
+          <div class="last-row__logo-text">ziro</div>
+        </div>
+        <ul class="last-row__nav">
+          <li class="last-row__item"><a href="#">Terms Of Use</a></li>
+          <li class="last-row__item"><a href="#">Portfolio</a></li>
+          <li class="last-row__item"><a href="#">Privacy policy</a></li>
+          <li class="last-row__item"><a href="#">Contact us</a></li>
+          <li class="last-row__item"><a href="#">FAQ</a></li>
+        </ul>
+        <div class="last-row__social-container">
+          <div class="last-row__social-icon">
+            <svg>
+              <use
+                xlink:href="./assets/svg/symbol-defs.svg#icon-facebook"
+              ></use>
+            </svg>
+          </div><div class="last-row__social-icon">
+            <svg>
+              <use
+                xlink:href="./assets/svg/symbol-defs.svg#icon-instagram"
+              ></use>
+            </svg>
+          </div><div class="last-row__social-icon">
+            <svg>
+              <use
+                xlink:href="./assets/svg/symbol-defs.svg#icon-twitter"
+              ></use>
+            </svg>
+          </div><div class="last-row__social-icon">
+            <svg>
+              <use
+                xlink:href="./assets/svg/symbol-defs.svg#icon-youtube"
+              ></use>
+            </svg>
+          </div>
+        </div>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>

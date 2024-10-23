@@ -1,0 +1,69 @@
+.newsletter {
+  @include blockProps($bgc: $c-bg-secondary);
+  padding-left: 15px;
+  padding-right: 15px;
+
+  &__content-container {
+    width: 100%;
+    height: 390px;
+    background-color: $c-bg;
+    border-radius: $br-card;
+    @include flex($justify: center, $gap: 160px);
+  }
+
+  &__title {
+    font-family: $ff-title;
+    font-weight: $fw-bold;
+    line-height: $line-height-very-big;
+    font-size: $fs-newsletter;
+    margin-bottom: 14px;
+  }
+
+  &__text {
+    font-weight: $fw-regular;
+    font-size: $fs-newsletter-text;
+    line-height: $fs-card-title;
+  }
+
+  &__input-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 60px;
+    background-color: $c-white;
+    border-radius: $br-input;
+  }
+
+  &__input-container input {
+    border: none;
+    outline: none;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: $br-input;
+  }
+
+  &__input-container input::placeholder {
+    opacity: 1; // Firebox adds a lower opacity to the placeholder
+    color: $c-input-text;
+  }
+
+  &__button {
+    @include absolute($top: 0, $bottom: 0, $right: -2px);
+    @include button(
+      $bgc: $c-link-hover,
+      $borderColor: $c-link-hover,
+      $bgcHover: $c-bg-secondary,
+      $br: $br-input
+    );
+    border: none;
+    padding: 23px 53px;
+
+    span {
+      font-family: $ff-title;
+      font-weight: $fw-bold;
+      line-height: $line-height-very-small;
+    }
+  }
+}

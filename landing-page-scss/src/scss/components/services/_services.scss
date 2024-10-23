@@ -1,0 +1,59 @@
+.services {
+  padding-top: 120px;
+  padding-bottom: 120px;
+  background-color: $c-bg-secondary;
+
+  &__content-container {
+    @include flex($direction: column);
+  }
+
+  &__subtitle {
+    @include blockSubtitle;
+    margin-bottom: 17px;
+  }
+
+  &__title {
+    @include blockTitle;
+    margin-bottom: 54px;
+  }
+
+  &__cards {
+    @include flex($justify: center, $gap: 31px, $wrap: wrap);
+  }
+
+  &__card {
+    width: 100%;
+    max-width: 305px;
+    border-radius: 8px;
+    background-color: $c-bg;
+    padding: 41px 32px;
+  }
+
+  &__img-container {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 26px;
+  }
+
+  &__card-title {
+    font-family: $ff-title;
+    font-weight: $fw-semi-bold;
+    font-size: $fs-card-title;
+    line-height: $line-height-medium;
+    margin-bottom: 27px;
+  }
+
+  &__text {
+    font-weight: $fw-light;
+    line-height: $line-height-medium;
+    margin-bottom: 37px;
+  }
+
+  &__icon-container {
+    @include icon(45px, 45px, $c-bg-secondary, $c-link-hover, $c-white);
+    box-shadow: $bs;
+    padding: 13px;
+    border-radius: $br-circle-small;
+    padding: 15px;
+  }
+}

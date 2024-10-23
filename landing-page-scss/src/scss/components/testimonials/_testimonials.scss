@@ -1,0 +1,77 @@
+.testimonials {
+  padding-top: 120px;
+  padding-bottom: 232px;
+  background-color: $c-bg-secondary;
+
+  &__content-container {
+    @include flex($direction: column);
+  }
+
+  &__subtitle {
+    @include blockSubtitle;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    @include blockTitle;
+    margin-bottom: 49px;
+  }
+
+  &__cards {
+    @include flex($gap: 24px);
+  }
+
+  &__card {
+    position: relative;
+    background-color: $c-bg;
+    padding: 41px 45px 29px 42px;
+  }
+
+  &__img-container {
+    width: 70px;
+    height: 70px;
+    background-color: $c-gallery;
+    border: 2px solid $c-link-hover;
+    border-radius: $br-circle-small;
+    @include absolute($bottom: -120px, $left: 0);
+  }
+
+  &__triangle-container {
+    @include absolute($bottom: -50px, $left: 0);
+    width: 100px;
+    height: 100px;
+  }
+
+  &__icon-container {
+    @include icon(40px, 38px, transparent, transparent, $c-link-hover);
+    @include absolute($top: 37px, $right: 97px);
+  }
+
+  &__card-title {
+    font-family: $ff-title;
+    font-size: $fs-testimonials-title;
+    line-height: $line-height-small;
+    font-weight: $fw-semi-bold;
+    margin-bottom: 15px;
+  }
+
+  &__occupation {
+    font-weight: $fw-light;
+    line-height: $line-height-small;
+    margin-bottom: 14px;
+  }
+
+  &__line {
+    width: 100%;
+    max-width: 290px;
+    height: 1px;
+    background-color: $c-line;
+    margin-bottom: 15px;
+  }
+
+  &__text {
+    font-family: $ff-testimonials;
+    font-weight: $fw-regular;
+    line-height: $line-height-medium;
+  }
+}

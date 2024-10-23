@@ -1,0 +1,97 @@
+@include desktopBig {
+  .footer {
+    &__contact-group {
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+      margin-bottom: 120px;
+    }
+
+    &__contact-info {
+      flex-direction: row;
+      max-width: 100%;
+    }
+
+    &__info-container {
+      padding: 14px 22px;
+    }
+
+    &__img-container {
+      width: 50px;
+      height: 50px;
+      padding: 12px;
+    }
+
+    .img-container_message {
+      padding: 13px 10px;
+    }
+
+    .img-container_marker {
+      padding: 10px 13px;
+    }
+
+    &__text-title {
+      font-size: $fs-card-title;
+      margin-bottom: 5px;
+    }
+
+    &__text {
+      font-size: $fs-text-mobile;
+    }
+  }
+}
+
+@include desktop {
+  .footer {
+    padding-top: 70px;
+  }
+}
+
+@include custom(975px) {
+  .footer {
+    &__contact-info {
+      flex-direction: column;
+    }
+
+    &__info-container {
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+}
+
+@include custom(600px) {
+  .footer {
+    .form__inputs {
+      flex-wrap: wrap;
+    }
+
+    .form__input {
+      max-width: 100%;
+    }
+
+    &__subtitle {
+      font-size: $fs-text-mobile;
+    }
+
+    &__title {
+      font-size: $fs-title-mobile;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@include phone {
+  .footer {
+    &__last-row p {
+      font-size: $fs-text-mobile;
+    }
+  }
+}
+
+
+
+
+
+

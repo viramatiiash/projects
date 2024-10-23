@@ -1,0 +1,131 @@
+@include screen {
+  .services {
+    &__cards {
+      @include flex($justify: center, $gap: 14px, $wrap: wrap);
+    }
+    &__card {
+      max-width: 270px;
+    }
+  }
+}
+
+@include desktopBig {
+  .services {
+    &__cards {
+      @include flex($justify: center, $gap: 14px, $wrap: wrap);
+    }
+    &__card {
+      max-width: 220px;
+      padding: 30px 20px;
+    }
+
+    &__img-container {
+      margin-bottom: 13px;
+    }
+
+    &__card-title {
+      font-size: $fs-newsletter-text;
+      margin-bottom: 15px;
+    }
+
+    &__text {
+      font-size: $fs-text-mobile;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@include desktop {
+  .services {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    &__cards {
+      @include flex($justify: center, $gap: 31px, $wrap: wrap);
+    }
+
+    &__card {
+      width: 100%;
+      max-width: 305px;
+      padding: 41px 32px;
+    }
+
+    &__img-container {
+      margin-bottom: 26px;
+    }
+
+    &__card-title {
+      font-size: $fs-card-title;
+      margin-bottom: 27px;
+    }
+
+    &__text {
+      font-size: $fs-main;
+      margin-bottom: 37px;
+    }
+  }
+}
+
+@include tablet {
+  .services {
+    &__cards {
+      @include flex($justify: center, $gap: 14px, $wrap: wrap);
+    }
+    &__card {
+      max-width: 220px;
+      padding: 30px 20px;
+    }
+
+    &__img-container {
+      margin-bottom: 13px;
+    }
+
+    &__card-title {
+      font-size: $fs-newsletter-text;
+      margin-bottom: 15px;
+    }
+
+    &__text {
+      font-size: $fs-text-mobile;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@include custom(600px) {
+  .services {
+    &__subtitle {
+      font-size: $fs-text-mobile;
+    }
+
+    &__title {
+      font-size: $fs-title-mobile;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    &__cards {
+      @include flex($justify: center, $gap: 15px, $wrap: wrap);
+    }
+
+    &__card {
+      width: 100%;
+      max-width: 305px;
+      padding: 41px 32px;
+    }
+
+    &__img-container {
+      margin-bottom: 26px;
+    }
+
+    &__card-title {
+      font-size: $fs-card-title;
+      margin-bottom: 27px;
+    }
+
+    &__text {
+      font-size: $fs-main;
+      margin-bottom: 37px;
+    }
+  }
+}

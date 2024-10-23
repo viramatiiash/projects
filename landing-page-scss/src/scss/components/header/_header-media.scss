@@ -1,0 +1,30 @@
+// ! 1200px
+@include desktopBig {
+  .header {
+    &__download-btn {
+      padding: 12px 22px;
+    }
+  }
+}
+
+// ! 1024px
+@include desktop {
+  .header {
+    &__nav {
+      display: none;
+    }
+  }
+}
+
+// ! 480px
+@include phone {
+  .header {
+    &__download-btn {
+      padding: 10px 8px;
+
+      & span {
+        font-size: $fs-text-mobile;
+      }
+    }
+  }
+}

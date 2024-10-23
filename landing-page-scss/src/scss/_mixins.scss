@@ -1,0 +1,91 @@
+// ! Flex
+@mixin flex(
+  $justify: space-between,
+  $align: center,
+  $direction: row,
+  $gap: 0,
+  $wrap: nowrap
+) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  gap: $gap;
+  flex-wrap: $wrap;
+}
+
+// ! Position Absolute
+// todo - доробити вирівнювання вертикально і горизонтально
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// ! Button
+@mixin button($bgc, $borderColor: none, $bgcHover, $br: 4px) {
+  background-color: $bgc;
+  border: 2px solid $borderColor;
+  border-radius: $br;
+  width: fit-content;
+  cursor: pointer;
+  transition: $t-normal;
+
+  &:hover {
+    background-color: $bgcHover;
+  }
+
+  span {
+    font-family: $ff-title;
+    color: $c-white;
+    font-size: $fs-main;
+    line-height: $line-height-very-small;
+  }
+}
+
+// ! Icon
+@mixin icon($width, $height, $bgc: transparent, $bgcHover: transparent, $fill) {
+  width: $width;
+  height: $height;
+  background-color: $bgc;
+  cursor: pointer;
+  transition: $t-normal;
+
+  &:hover {
+    background-color: $bgcHover;
+  }
+
+  svg {
+    fill: $fill;
+  }
+}
+
+// ! Block Subtitle
+@mixin blockSubtitle {
+  font-family: $ff-title;
+  font-weight: $fw-semi-bold;
+  font-size: $fs-main;
+  line-height: $line-height-tiny;
+  background-color: $c-bg-secondary;
+  letter-spacing: $ls;
+  box-shadow: $bs;
+  width: fit-content;
+  padding: 12px 17px;
+}
+
+// ! Block Title
+@mixin blockTitle {
+  font-family: $ff-title;
+  font-weight: $fw-bold;
+  font-size: $fs-block-title;
+  line-height: $line-height-very-big;
+}
+
+// ! Block Padding & Background
+@mixin blockProps($padTop: 120px, $padBot: 120px, $bgc: $c-bg) {
+  padding-top: $padTop;
+  padding-bottom: $padBot;
+  background-color: $bgc;
+}

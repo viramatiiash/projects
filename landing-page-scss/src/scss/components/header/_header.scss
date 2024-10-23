@@ -1,0 +1,35 @@
+.header {
+  width: 100%;
+  padding-top: 22px;
+
+  // ! Logo
+  &__container {
+    width: 100%;
+    max-width: 1285px;
+    @include flex($justify: flex-end, $align: center, $gap: 51px);
+  }
+
+  .logo {
+    cursor: pointer;
+    @include flex($gap: 7px);
+    margin-right: auto;
+
+    &__icon {
+      @include icon(28px, 28px, $fill: $c-logo);
+    }
+
+    &__text {
+      font-family: $ff-logo;
+      font-size: $fs-block-title;
+      line-height: $line-height-big;
+    }
+  }
+
+  // ! Button
+  &__download-btn {
+    padding: 17px 26px;
+    @include button($bgc: $c-link-hover, $bgcHover: $c-banner-dot);
+  }
+}
+
+

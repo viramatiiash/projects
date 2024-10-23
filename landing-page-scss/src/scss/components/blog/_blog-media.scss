@@ -1,0 +1,58 @@
+@include desktopBig {
+  .blog {
+    &__card-title {
+      font-size: $fs-card-title;
+      margin-bottom: 15px;
+    }
+
+    &__text {
+      font-size: $fs-text-mobile;
+    }
+  }
+}
+
+@include desktop {
+  .blog {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    &__img-container {
+      height: 200px;
+    }
+  }
+}
+
+@include tablet {
+  .blog {
+    &__content-container {
+      @include flex($direction: column);
+    }
+
+    &__cards {
+      @include flex($justify: center, $wrap: wrap, $gap: 40px);
+    }
+
+    &__card {
+      max-width: 400px;
+      text-align: center;
+    }
+
+    &__img-container {
+      height: 300px;
+    }
+  }
+}
+
+@include custom(600px) {
+  .blog {
+    &__subtitle {
+      font-size: $fs-text-mobile;
+    }
+
+    &__title {
+      font-size: $fs-title-mobile;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }
+}

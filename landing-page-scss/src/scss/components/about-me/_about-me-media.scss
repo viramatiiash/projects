@@ -1,0 +1,84 @@
+// ! 1400px
+@include screen {
+  .about-me {
+    &__image-container {
+      flex-shrink: 1;
+    }
+
+    &__content {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    &__info {
+      margin-bottom: 15px;
+    }
+
+    .info {
+      &__container {
+        @include flex($direction: column, $align: start);
+      }
+
+      &__text {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+// ! 1024px
+@include desktop {
+  .about-me {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    &__content-container {
+      @include flex($direction: column, $gap: 30px);
+    }
+
+    &__content {
+      width: 100%;
+      max-width: 800px;
+      @include flex($direction: column);
+    }
+
+    &__info {
+      margin-bottom: 30px;
+    }
+
+    &__description {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .info {
+      &__container {
+        @include flex($justify: space-evenly, $gap: 55px);
+      }
+
+      &__text {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
+
+// ! 600px
+@include custom(600px) {
+  .about-me {
+
+    &__subtitle {
+      font-size: $fs-text-mobile;
+    }
+
+    &__title {
+      font-size: $fs-title-mobile;
+    }
+
+    .info {
+      &__container {
+        @include flex($direction: column, $justify: center);
+      }
+    }
+  }
+}
