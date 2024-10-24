@@ -49,8 +49,11 @@ const openModal = (date) => {
   const eventForDay = events.find((e) => e.date === clicked);
 
   if (eventForDay) {
-    document.getElementById('eventText').innerText = eventForDay.title;
-    deleteEventModal.style.display = 'block';
+    // const eventText = document.createElement('p');
+    //  document.getElementById('eventTextContainer').appendChild(eventText);
+    // eventText.innerText = eventForDay.title;
+    // deleteEventModal.style.display = 'block';
+    newEventModal.style.display = 'block';
   } else {
     newEventModal.style.display = 'block';
   }
@@ -133,7 +136,9 @@ const closeModal = () => {
   load();
 };
 
-const saveEvent = () => {
+const saveEvent = (date) => {
+    clicked = date;
+
   if (eventTitleInput.value) {
     eventTitleInput.classList.remove('error');
 
@@ -141,9 +146,13 @@ const saveEvent = () => {
       date: clicked,
       title: eventTitleInput.value,
     });
-
+    const eventForDay = events.find((e) => e.date === clicked);
     localStorage.setItem('events', JSON.stringify(events));
-    closeModal();
+    const eventText = document.createElement('p');
+    document.getElementById('eventTextContainer').appendChild(eventText);
+    eventText.innerText = eventForDay.title;
+
+    // closeModal();
   } else {
     eventTitleInput.classList.add('error');
   }

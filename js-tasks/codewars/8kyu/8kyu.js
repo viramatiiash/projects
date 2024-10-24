@@ -266,7 +266,7 @@ const uefaEuro2016 = (teams, scores) =>
       : `At match ${teams[0]} - ${teams[1]}, teams played draw.`; 
     
 // ! 32. Merging sorted integer arrays (without duplicates) - https://www.codewars.com/kata/573f5c61e7752709df0005d2
-const mergeArrays = (a, b) => {
+const mergeArrays1 = (a, b) => {
   const newArr = [...a, ...b].sort((a, b) => a - b);
   return [...new Set(newArr)];
 };
@@ -324,6 +324,45 @@ const remove = (string) =>
 // ! 41. Simple Comparison? - https://www.codewars.com/kata/57f6ecdfcca6e045d2001207
 const add = (a, b) => a == b;
 
+// ! 42. Remove String Spaces - https://www.codewars.com/kata/57eae20f5500ad98e50002c5
+const noSpace = (x) => x.trim().split(' ').join('');
+
+// ! 43. Abbreviate a Two Word Name - https://www.codewars.com/kata/57eadb7ecd143f4c9c0000a3
+const abbrevName = (name) =>
+  name
+    .toUpperCase()
+    .split(' ')
+    .map((word) => word.charAt(0))
+    .join('.');
+
+// ! 44. Polish alphabet - https://www.codewars.com/kata/57ab2d6072292dbf7c000039
+const correctPolishLetters = (string) => {
+  const lettersObj = {
+    ą: 'a',
+    ć: 'c',
+    ę: 'e',
+    ł: 'l',
+    ń: 'n',
+    ó: 'o',
+    ś: 's',
+    ź: 'z',
+    ż: 'z',
+  };
+
+  const strArr = Array.from(string);
+  return strArr.map((char) => lettersObj[char] || char).join('');
+};
+
+// ! 45. Reversing Words in a String - https://www.codewars.com/kata/57a55c8b72292d057b000594
+const reverse = (string) => string.split(' ').reverse().join(' ');
+
+// ! 46. Remove exclamation marks - https://www.codewars.com/kata/57a0885cbb9944e24c00008e
+const removeExclamationMarks = (s) => s.replaceAll('!', '');
+
+// ! 47. MakeUpperCase - https://www.codewars.com/kata/57a0556c7cb1f31ab3000ad7
+const makeUpperCase = (str) => str.toUpperCase();
+
+// ! 48. 
 
 
 
