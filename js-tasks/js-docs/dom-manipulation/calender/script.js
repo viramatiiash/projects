@@ -3,16 +3,16 @@
 
 Реалізуйте інтерфейс календаря з можливістю:
 
-[] Вибору дати.
-[] Перегляду подій на вибрану дату.
-[] Додавання нових подій до вибраної дати.
+[+] Вибору дати.
+[+] Перегляду подій на вибрану дату.
+[+] Додавання нових подій до вибраної дати.
 [] Видалення подій з вибраної дати.
 
 Вимоги:
 
-[] Використовуйте методи document.createElement, appendChild, addEventListener для створення елементів календаря та подій.
-[] Забезпечте динамічне оновлення списку подій при виборі дати.
-[] Зберігайте події в LocalStorage, щоб вони зберігались між перезавантаженнями сторінки.
+[+] Використовуйте методи document.createElement, appendChild, addEventListener для створення елементів календаря та подій.
+[+] Забезпечте динамічне оновлення списку подій при виборі дати.
+[+] Зберігайте події в LocalStorage, щоб вони зберігались між перезавантаженнями сторінки.
 
 Підказка:
 
@@ -29,7 +29,6 @@ let events = localStorage.getItem('events')
 // ! Constants
 const calender = document.getElementById('calender');
 const newEventModal = document.getElementById('newEventModal');
-const deleteEventModal = document.getElementById('deleteEventModal');
 const eventContainer = document.getElementById('eventContainer');
 const backDrop = document.getElementById('modalBackDrop');
 const eventTitleInput = document.getElementById('eventTitleInput');
@@ -43,20 +42,41 @@ const weekdays = [
   'Saturday',
 ];
 
+backDrop.addEventListener('click', (e) => {
+  e.stopPropagation();
+  closeModal();
+})
+
 // ! Open Modal Function
 const openModal = (date) => {
   clicked = date;
+  events = JSON.parse(localStorage.getItem('events')) || [];
+  console.log('Events on modal open:', events);
   const eventForDay = events.find((e) => e.date === clicked);
+  // console.log(eventForDay);
 
-  if (eventForDay) {
-    // const eventText = document.createElement('p');
-    //  document.getElementById('eventTextContainer').appendChild(eventText);
-    // eventText.innerText = eventForDay.title;
-    // deleteEventModal.style.display = 'block';
-    newEventModal.style.display = 'block';
+  const eventTextContainer = document.getElementById('eventTextContainer');
+  eventTextContainer.innerHTML = '';
+
+  if (eventForDay && eventForDay.titles.length > 0) {
+    eventTextContainer.style.display = 'block';
+    eventForDay.titles.forEach((title, index) => {
+      const eventText = document.createElement('li');
+      eventText.innerText = title;
+      eventTextContainer.appendChild(eventText);
+
+      const deleteButton = document.createElement('button');
+      deleteButton.innerText = 'Delete';
+      deleteButton.classList.add('deleteButton');
+      deleteButton.addEventListener('click', () => deleteSingleEvent(index));
+      eventText.appendChild(deleteButton);
+    });
   } else {
-    newEventModal.style.display = 'block';
+    eventTextContainer.style.display = 'none';
   }
+
+
+  newEventModal.style.display = 'block';
 
   backDrop.style.display = 'block';
 };
@@ -64,6 +84,8 @@ const openModal = (date) => {
 // ! When the document loads - only one time
 const load = () => {
   const dt = new Date();
+    events = JSON.parse(localStorage.getItem('events')) || [];
+  console.log('Events on calendar load:', events);
 
   if (nav !== 0) {
     dt.setMonth(new Date().getMonth() + nav);
@@ -105,6 +127,7 @@ const load = () => {
     if (i > paddingDays) {
       daySquare.innerText = i - paddingDays;
       const eventForDay = events.find((e) => e.date === dayString);
+      console.log(eventForDay);
 
       if (i - paddingDays === day && nav === 0) {
         daySquare.id = 'currentDay';
@@ -114,8 +137,14 @@ const load = () => {
         eventContainer.innerText = '';
         const eventDiv = document.createElement('div');
         eventDiv.classList.add('event');
-        eventDiv.innerText = eventForDay.title;
+        eventDiv.innerText = `${eventForDay.titles.length} events`;
         daySquare.appendChild(eventDiv);
+
+        const eventText = document.createElement('p');
+        document.getElementById('eventTextContainer').appendChild(eventText);
+
+        eventText.innerText = eventForDay.title;
+        eventTextContainer.innerText = '';
       }
 
       daySquare.addEventListener('click', () => openModal(dayString));
@@ -129,41 +158,70 @@ const load = () => {
 const closeModal = () => {
   eventTitleInput.classList.remove('error');
   newEventModal.style.display = 'none';
-  deleteEventModal.style.display = 'none';
   backDrop.style.display = 'none';
   eventTitleInput.value = '';
   clicked = null;
-  load();
+  // load();
 };
 
-const saveEvent = (date) => {
-    clicked = date;
-
-  if (eventTitleInput.value) {
+const saveEvent = () => {
+  const eventTitle = eventTitleInput.value.trim(); // Очищуємо зайві пробіли
+  if (eventTitle) {
     eventTitleInput.classList.remove('error');
 
-    events.push({
-      date: clicked,
-      title: eventTitleInput.value,
-    });
+    // Перевіряємо, чи вже є подія для цієї дати
     const eventForDay = events.find((e) => e.date === clicked);
-    localStorage.setItem('events', JSON.stringify(events));
-    const eventText = document.createElement('p');
-    document.getElementById('eventTextContainer').appendChild(eventText);
-    eventText.innerText = eventForDay.title;
 
-    // closeModal();
+    if (eventForDay) {
+      // Оновлюємо існуючу подію
+      eventForDay.titles.push(eventTitle);
+    } else {
+      // Додаємо нову подію
+      events.push({
+        date: clicked,
+        titles: [eventTitle],
+      });
+    }
+
+    localStorage.setItem('events', JSON.stringify(events)); // Зберігаємо подію в LocalStorage
+    load(); // Перезавантажуємо календар
+    openModal(clicked); 
+    eventTitleInput.value = '';
   } else {
-    eventTitleInput.classList.add('error');
+    eventTitleInput.classList.add('error'); // Додаємо клас помилки, якщо поле пусте
   }
 };
 
-// ! Delete Button Event
-const deleteEvent = () => {
-  events = events.filter(e => e.date !== clicked);
-  localStorage.setItem('events', JSON.stringify(events)); // reset
-  closeModal();
-}
+const deleteSingleEvent = (eventIndex) => {
+  const eventForDay = events.find((e) => e.date === clicked);
+
+  if (eventForDay) {
+    // Видаляємо івент за індексом
+    eventForDay.titles.splice(eventIndex, 1);
+
+    // Якщо більше немає подій для цієї дати, видаляємо об'єкт дати
+    if (eventForDay.titles.length === 0) {
+      events = events.filter((e) => e.date !== clicked);
+      
+    }
+
+    console.log('Updated events after deletion:', events); // Перевіряємо оновлені події після видалення
+
+    // Оновлюємо localStorage
+    localStorage.setItem('events', JSON.stringify(events));
+
+    // Оновлюємо контейнер подій без повторного відкликання openModal
+    openModal(clicked); // Знову відкриваємо модальне вікно з актуальними даними
+  }
+};
+
+// ! delete All Events
+const deleteAllEvents = () => {
+  events = []; // Очищаємо масив подій
+  localStorage.setItem('events', JSON.stringify(events)); // Оновлюємо localStorage
+  load(); // Оновлюємо календар
+openModal(clicked);
+};
 
 // ! Buttons functionality
 const initButtons = () => {
@@ -178,12 +236,11 @@ const initButtons = () => {
   });
 
   document.getElementById('saveButton').addEventListener('click', saveEvent);
-  document.getElementById('cancelButton').addEventListener('click', closeModal);
-
-  document
-    .getElementById('deleteButton')
-    .addEventListener('click', deleteEvent);
   document.getElementById('closeButton').addEventListener('click', closeModal);
+  
+  document
+    .getElementById('deleteAllButton')
+    .addEventListener('click', deleteAllEvents);
 };
 
 initButtons();
