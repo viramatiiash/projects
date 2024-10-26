@@ -400,6 +400,9 @@ button {
       -ms-flex-pack: center;
           justify-content: center;
 }
+#weekdays li.short {
+  display: none;
+}
 
 #calender {
   width: 100%;
@@ -592,4 +595,140 @@ button {
   height: 100vh;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (max-width: 900px) {
+  #header {
+    font-size: 18px;
+  }
+  #header button {
+    font-size: 16px;
+    padding: 5px;
+  }
+  #weekdays li.full {
+    display: none;
+  }
+  #weekdays li.short {
+    display: inline-block;
+  }
+  #container {
+    width: 480px;
+  }
+  #container .day {
+    width: 50px;
+    height: 50px;
+  }
+}
+@media screen and (max-width: 500px) {
+  #header {
+    font-size: 18px;
+  }
+  #header button {
+    font-size: 16px;
+    padding: 5px;
+  }
+  #weekdays li.full {
+    display: none;
+  }
+  #weekdays li.short {
+    display: inline-block;
+  }
+  #container {
+    width: 325px;
+    padding: 5px;
+  }
+  #container .day {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  #newEventModal {
+    max-width: 310px;
+    padding: 15px;
+  }
+  #newEventModal h2 {
+    margin-bottom: 10px;
+  }
+  #eventTitleInput {
+    padding: 10px;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin-bottom: 15px;
+    outline: none;
+    border: none;
+    -webkit-box-shadow: 0px 0px 3px rgba(92, 92, 92, 0.9019607843);
+            box-shadow: 0px 0px 3px rgba(92, 92, 92, 0.9019607843);
+  }
+  .buttons {
+    gap: 5px;
+  }
+  #saveButton {
+    background-color: rgb(107, 222, 69);
+    -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  #saveButton:hover {
+    background-color: #4ecc24;
+  }
+  #closeButton {
+    background-color: rgb(231, 107, 24);
+    -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  #closeButton:hover {
+    background-color: #b95613;
+  }
+  #deleteAllButton,
+  .deleteButton {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(255, 93, 93);
+    -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  #deleteAllButton:hover,
+  .deleteButton:hover {
+    background-color: #ff2a2a;
+  }
+  #eventTextContainer {
+    list-style-type: none;
+    margin-bottom: 30px;
+  }
+  #eventTextContainer li {
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 6px;
+    background-color: rgba(19, 19, 19, 0.7);
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
 }

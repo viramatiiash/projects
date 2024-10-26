@@ -20,11 +20,11 @@
 */
 
 // ! States
-let nav = 0; // month 0 - current
-let clicked = null; // clicked month
+let nav = 0;
+let clicked = null;
 let events = localStorage.getItem('events')
   ? JSON.parse(localStorage.getItem('events'))
-  : []; // array of event objects pulled from local storage. JSON.parse(localStorage.getItem('events')) - array of event objects
+  : [];
 
 // ! Constants
 const calender = document.getElementById('calender');
@@ -42,18 +42,17 @@ const weekdays = [
   'Saturday',
 ];
 
+// ! Backdrop Event
 backDrop.addEventListener('click', (e) => {
   e.stopPropagation();
   closeModal();
-})
+});
 
 // ! Open Modal Function
 const openModal = (date) => {
   clicked = date;
   events = JSON.parse(localStorage.getItem('events')) || [];
-  console.log('Events on modal open:', events);
   const eventForDay = events.find((e) => e.date === clicked);
-  // console.log(eventForDay);
 
   const eventTextContainer = document.getElementById('eventTextContainer');
   eventTextContainer.innerHTML = '';
@@ -75,17 +74,14 @@ const openModal = (date) => {
     eventTextContainer.style.display = 'none';
   }
 
-
   newEventModal.style.display = 'block';
-
   backDrop.style.display = 'block';
 };
 
 // ! When the document loads - only one time
 const load = () => {
   const dt = new Date();
-    events = JSON.parse(localStorage.getItem('events')) || [];
-  console.log('Events on calendar load:', events);
+  events = JSON.parse(localStorage.getItem('events')) || [];
 
   if (nav !== 0) {
     dt.setMonth(new Date().getMonth() + nav);
@@ -94,11 +90,9 @@ const load = () => {
   const day = dt.getDate();
   const month = dt.getMonth();
   const year = dt.getFullYear();
-  // console.log(day, month, year);
 
-  const firstDayOfMonth = new Date(year, month, 1); // we get the previous month with the first day of the next month. It returns number.
-  const daysInMonth = new Date(year, month + 1, 0).getDate(); // 0 - the last day in the previous month
-  // console.log(daysInMonth); // october - 31
+  const firstDayOfMonth = new Date(year, month, 1);
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
     weekday: 'long',
@@ -106,10 +100,8 @@ const load = () => {
     month: 'numeric',
     day: 'numeric',
   });
-  // console.log(dateString);
 
   const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
-  // console.log(paddingDays);
 
   document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString(
     'en-us',
@@ -127,7 +119,6 @@ const load = () => {
     if (i > paddingDays) {
       daySquare.innerText = i - paddingDays;
       const eventForDay = events.find((e) => e.date === dayString);
-      console.log(eventForDay);
 
       if (i - paddingDays === day && nav === 0) {
         daySquare.id = 'currentDay';
@@ -161,34 +152,29 @@ const closeModal = () => {
   backDrop.style.display = 'none';
   eventTitleInput.value = '';
   clicked = null;
-  // load();
 };
 
 const saveEvent = () => {
-  const eventTitle = eventTitleInput.value.trim(); // Очищуємо зайві пробіли
+  const eventTitle = eventTitleInput.value.trim();
   if (eventTitle) {
     eventTitleInput.classList.remove('error');
 
-    // Перевіряємо, чи вже є подія для цієї дати
     const eventForDay = events.find((e) => e.date === clicked);
 
     if (eventForDay) {
-      // Оновлюємо існуючу подію
       eventForDay.titles.push(eventTitle);
     } else {
-      // Додаємо нову подію
       events.push({
         date: clicked,
         titles: [eventTitle],
       });
     }
 
-    localStorage.setItem('events', JSON.stringify(events)); // Зберігаємо подію в LocalStorage
-    load(); // Перезавантажуємо календар
-    openModal(clicked); 
+    localStorage.setItem('events', JSON.stringify(events));
+    openModal(clicked);
     eventTitleInput.value = '';
   } else {
-    eventTitleInput.classList.add('error'); // Додаємо клас помилки, якщо поле пусте
+    eventTitleInput.classList.add('error');
   }
 };
 
@@ -196,31 +182,23 @@ const deleteSingleEvent = (eventIndex) => {
   const eventForDay = events.find((e) => e.date === clicked);
 
   if (eventForDay) {
-    // Видаляємо івент за індексом
     eventForDay.titles.splice(eventIndex, 1);
 
-    // Якщо більше немає подій для цієї дати, видаляємо об'єкт дати
     if (eventForDay.titles.length === 0) {
       events = events.filter((e) => e.date !== clicked);
-      
     }
 
-    console.log('Updated events after deletion:', events); // Перевіряємо оновлені події після видалення
-
-    // Оновлюємо localStorage
     localStorage.setItem('events', JSON.stringify(events));
-
-    // Оновлюємо контейнер подій без повторного відкликання openModal
-    openModal(clicked); // Знову відкриваємо модальне вікно з актуальними даними
+    openModal(clicked);
   }
 };
 
-// ! delete All Events
+// ! Delete All Events
 const deleteAllEvents = () => {
-  events = []; // Очищаємо масив подій
-  localStorage.setItem('events', JSON.stringify(events)); // Оновлюємо localStorage
-  load(); // Оновлюємо календар
-openModal(clicked);
+  events = [];
+  localStorage.setItem('events', JSON.stringify(events));
+  load();
+  openModal(clicked);
 };
 
 // ! Buttons functionality
@@ -237,7 +215,7 @@ const initButtons = () => {
 
   document.getElementById('saveButton').addEventListener('click', saveEvent);
   document.getElementById('closeButton').addEventListener('click', closeModal);
-  
+
   document
     .getElementById('deleteAllButton')
     .addEventListener('click', deleteAllEvents);

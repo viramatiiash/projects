@@ -1,0 +1,138 @@
+@media screen and (max-width: 900px) {
+  #header {
+    font-size: 18px;
+
+    & button {
+      font-size: 16px;
+      padding: 5px;
+    }
+  }
+
+  #weekdays li.full {
+    display: none;
+  }
+
+  #weekdays li.short {
+    display: inline-block;
+  }
+
+  #container {
+    width: 480px;
+
+    & .day {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #header {
+    font-size: 18px;
+
+    & button {
+      font-size: 16px;
+      padding: 5px;
+    }
+  }
+
+  #weekdays li.full {
+    display: none;
+  }
+
+  #weekdays li.short {
+    display: inline-block;
+  }
+
+  #container {
+    width: 325px;
+    padding: 5px;
+
+    & .day {
+      width: 35px;
+      height: 35px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  #newEventModal {
+    max-width: 310px;
+    padding: 15px;
+
+    & h2 {
+      margin-bottom: 10px;
+    }
+  }
+
+  #eventTitleInput {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 3px $c-bg-container;
+  }
+
+  .buttons {
+    gap: 5px;
+  }
+
+  #saveButton {
+    background-color: $c-success;
+    transition: $t-normal;
+    font-size: 14px;
+    font-weight: $fw-bold;
+
+    &:hover {
+      background-color: darken($c-success, 10%);
+    }
+  }
+
+  #closeButton {
+    background-color: $c-btn;
+    transition: $t-normal;
+    font-size: 14px;
+    font-weight: $fw-bold;
+
+    &:hover {
+      background-color: darken($c-btn, 10%);
+    }
+  }
+
+  #deleteAllButton,
+  .deleteButton {
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: $c-danger;
+    transition: $t-normal;
+    font-size: 14px;
+    font-weight: $fw-bold;
+
+    &:hover {
+      background-color: darken($c-danger, 10%);
+    }
+  }
+
+  #eventTextContainer {
+    list-style-type: none;
+    margin-bottom: 30px;
+
+    & li {
+      width: 100%;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 6px;
+      background-color: $c-bg;
+      color: $c-text;
+      font-weight: $fw-bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
