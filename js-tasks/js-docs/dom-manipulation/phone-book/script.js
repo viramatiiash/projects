@@ -32,6 +32,7 @@ const backDrop = document.getElementById('backDrop');
 let contacts = localStorage.getItem('contacts')
   ? JSON.parse(localStorage.getItem('contacts'))
   : [];
+let filteredContacts = [...contacts];
 
 const load = (contacts) => {
   list.innerHTML = '';
@@ -78,7 +79,7 @@ const load = (contacts) => {
 
 const handleSearch = () => {
   const searchContact = searchInput.value.toLowerCase();
-  const filteredContacts = contacts.filter((contact) => {
+  filteredContacts = contacts.filter((contact) => {
     return (
       contact.name.toLowerCase().includes(searchContact) ||
       contact.phone.toLowerCase().includes(searchContact)
@@ -124,7 +125,7 @@ const saveContact = () => {
 };
 
 const deleteContact = (index) => {
-  contacts.splice(index, 1);
+  contacts.splice(contacts.indexOf(filteredContacts[index]), 1);
   localStorageUpdate();
   load(contacts);
 };
