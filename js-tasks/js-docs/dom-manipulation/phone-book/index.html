@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone Book</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="listContainer" class="listContainer">
+      <h2>Phone Book</h2>
+      <form action="" id="form">
+        <input
+          type="search"
+          placeholder="Type a name or a number..."
+          id="searchInput"
+        />
+        <button id="searchBtn">Search</button>
+      </form>
+
+      <ul id="list"></ul>
+      <button type="submit" id="newContactBtn">New Contact</button>
+    </div>
+
+    <div id="newContactModal">
+      <h2>New Contact</h2>
+      <input
+        type="text"
+        id="nameInput"
+        class="contactInput"
+        placeholder="Type in a name..."
+      />
+      <input
+        type="text"
+        id="phoneInput"
+        class="contactInput"
+        placeholder="Type in a phone number..."
+      />
+      <div id="eventContainer"></div>
+      <div class="buttons">
+        <button id="saveBtn">Save</button><button id="closeBtn">Close</button>
+      </div>
+    </div>
+    <div id="backDrop"></div>
+    <script src="./script.js"></script>
+  </body>
+</html>

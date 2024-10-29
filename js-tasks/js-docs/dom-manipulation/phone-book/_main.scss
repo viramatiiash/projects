@@ -1,0 +1,180 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $ff;
+  display: flex;
+  margin-top: 50px;
+  justify-content: center;
+  background-color: $c-body;
+}
+
+button {
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 8px;
+  color: $c-text;
+}
+
+.gap {
+  width: 35px;
+  height: 35px;
+  background-color: $c-bg-container;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & svg {
+    fill: $c-success;
+  }
+}
+
+.listContainer {
+  width: 100%;
+  max-width: 500px;
+  background-color: $c-bg;
+  padding: 30px;
+
+  & h2 {
+    color: $c-text;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+}
+
+#form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+}
+
+#list {
+  margin-bottom: 20px;
+
+  .contactContainer {
+    display: flex;
+    align-items: center;   
+    gap: 10px;
+
+    & span:first-child {
+      color: $c-btn;
+      padding: 5px;
+    }
+
+    & span:last-child {
+      padding: 5px;
+    }
+  }
+
+  & li {
+    background-color: darken($c-bg, 3%);
+    display: flex;
+    padding-left: 15px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    color: $c-text;
+  }
+
+  & .actionsContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  & .deleteBtn {
+    background-color: $c-danger;
+    font-weight: $fw-bold;
+  }
+}
+
+#newContactModal {
+  display: none;
+  z-index: 20;
+  padding: 30px;
+  background-color: $c-bg-container;
+  width: 100%;
+  max-width: 450px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+
+  & h2 {
+    color: $c-text;
+    font-weight: $fw-bold;
+    margin-bottom: 30px;
+  }
+}
+
+.contactInput {
+  padding: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 35px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px $c-bg-container;
+}
+#contactInput.error {
+  border: 2px solid red;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#saveBtn, #newContactBtn, .saveEditBtn{
+  background-color: $c-success;
+  transition: $t-normal;
+  font-size: 18px;
+  font-weight: $fw-bold;
+
+  &:hover {
+    background-color: darken($c-success, 10%);
+  }
+}
+
+.saveEditBtn {
+  display: none;
+  font-size: 16px;
+}
+
+#closeBtn, #searchBtn {
+  background-color: $c-btn;
+  transition: $t-normal;
+  font-size: 18px;
+  font-weight: $fw-bold;
+
+  &:hover {
+    background-color: darken($c-btn, 10%);
+  }
+}
+
+#backDrop {
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+}
