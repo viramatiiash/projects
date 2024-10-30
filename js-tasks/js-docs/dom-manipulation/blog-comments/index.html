@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Comments</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="listContainer" class="listContainer">
+      <h2>Blog Comments</h2>
+      <form action="" id="form">
+        <input type="text" name="comment" placeholder="Type your comment..." id="input" />
+        <button type="submit" id="addBtn">Add Comment</button>
+      </form>
+      <ul id="list"></ul>
+    </div>
+
+    <div id="modal">
+      <form id="replyForm" action="">
+        <input id="replyInput" type="text" placeholder="Write your reply here...">
+        <button id="submitButton" type="submit">Add Reply</button>
+      </form>
+    </div>
+    <div id="backDrop"></div>
+    <script src="./script.js"></script>
+  </body>
+</html>

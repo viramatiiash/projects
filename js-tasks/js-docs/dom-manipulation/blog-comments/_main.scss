@@ -1,0 +1,175 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $ff;
+  display: flex;
+  margin-top: 50px;
+  justify-content: center;
+  background-color: $c-body;
+}
+
+button {
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 8px;
+  color: $c-text;
+}
+
+.gap {
+  width: 35px;
+  height: 35px;
+  background-color: $c-bg-container;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & svg {
+    fill: $c-success;
+  }
+}
+
+.listContainer {
+  width: 100%;
+  max-width: 700px;
+  background-color: $c-bg;
+  padding: 30px;
+
+  & h2 {
+    color: $c-text;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+}
+
+#form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+}
+
+#list {
+  margin-bottom: 20px;
+
+  & li {
+    position: relative;
+    background-color: darken($c-bg, 3%);
+    display: flex;
+    padding-left: 15px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    color: $c-text;
+
+    & .dateSpan {
+      color: $c-btn;
+    }
+
+    & .textSpan {
+      word-wrap: break-word;
+      font-size: 18px;
+    }
+
+    & .actionsContainer {
+    }
+
+    & .replyButton {
+      background-color: $c-success;
+    }
+
+    & .deleteButton {
+      background-color: $c-danger;
+    }
+
+    & .commentsButton {
+      background-color: $c-btn;
+    }
+  }
+
+  ul {
+    padding-left: 40px;
+    height: 0;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+  }
+
+  .active {
+    opacity: 1;
+    height: 100%;
+  }
+
+  & .actionsContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  & .deleteBtn {
+    background-color: $c-danger;
+    font-weight: $fw-bold;
+  }
+}
+
+#addBtn {
+  background-color: darken($c-success, 10%);
+  font-weight: $fw-bold;
+}
+
+#modal {
+  display: none;
+  z-index: 20;
+  padding: 30px;
+  background-color: $c-bg-container;
+  width: 100%;
+  max-width: 450px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+
+  & h2 {
+    color: $c-text;
+    font-weight: $fw-bold;
+    margin-bottom: 30px;
+  }
+}
+
+#modal input {
+  padding: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 35px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px $c-bg-container;
+}
+
+#backDrop {
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#submitButton {
+  background-color: $c-success;
+}
