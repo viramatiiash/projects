@@ -67,3 +67,29 @@ const removeVowels = (str) => {
     .filter((letter) => !vowels.includes(letter))
     .join('');
 };
+
+// ! 8. All unique - https://www.codewars.com/kata/553e8b195b853c6db4000048
+const hasUniqueChars = (str) => {
+  const strArr = str.split('');
+  const strSet = new Set(strArr);
+  return strArr.length === strSet.size;
+};
+
+// ! 9. Unlucky Days - https://www.codewars.com/kata/56eb0be52caf798c630013c0
+const unluckyDays = (year) => {
+  let count = 0;
+
+  for (let month = 0; month < 12; month++) {
+    const date = new Date(year, month, 13);
+
+    if (date.getDay() === 5) {
+      count++;
+    }
+  }
+  return count;
+};
+
+// ! 10. Leap Years - https://www.codewars.com/kata/526c7363236867513f0005ca
+const isLeapYear = (year) =>
+  (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+

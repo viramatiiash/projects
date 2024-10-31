@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.light {
+  background-color: antiquewhite;
+
+  button {
+    background-color: aquamarine;
+  }
+
+  select {
+    background-color: aqua;
+  }
+}
+
+.dark {
+  background-color: gray;
+
+  button {
+    background-color: orange;
+
+  }
+
+  select {
+    background-color: orange;
+  }
+}
