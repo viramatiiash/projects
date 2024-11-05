@@ -362,7 +362,33 @@ const removeExclamationMarks = (s) => s.replaceAll('!', '');
 // ! 47. MakeUpperCase - https://www.codewars.com/kata/57a0556c7cb1f31ab3000ad7
 const makeUpperCase = (str) => str.toUpperCase();
 
-// ! 48. 
+// ! 48. Find the Difference in Age between Oldest and Youngest Family Members - https://www.codewars.com/kata/5720a1cb65a504fdff0003e2
+const differenceInAges = (ages) => {
+  const sorted = ages.sort((a, b) => a - b);
+  return [
+    sorted[0],
+    sorted[sorted.length - 1],
+    sorted[sorted.length - 1] - sorted[0],
+  ];
+};
+
+// ! 49. How many stairs will Suzuki climb in 20 years? - https://www.codewars.com/kata/56fc55cd1f5a93d68a001d4e
+const stairsIn20 = (s) => {
+  let sum = 0;
+  sum = s
+    .map((day) => day.reduce((acc, curr) => acc + curr, 0))
+    .reduce((acc, curr) => acc + curr, 0);
+  return sum * 20;
+};
+
+// ! 50. Count the Monkeys! - https://www.codewars.com/kata/56f69d9f9400f508fb000ba7
+const monkeyCount = (n) => {
+  let arr = [];
+  for (let i = 1; i <= n; i++) {
+    arr.push(i);
+  }
+  return arr;
+};
 
 
 
