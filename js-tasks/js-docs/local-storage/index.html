@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Local/Session Storage</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <button id="theme-toggle">Toggle Theme</button>
-  <select name="" id="language-select">
-    <option value="uk">UK</option>
-    <option value="en">EN</option>
-  </select>
-  <script src="./script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local/Session Storage</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="content" class="content">
+      <div class="toggleContainer">
+      <button id="theme-toggle">Toggle Theme</button>
+      <select name="" id="language-select">
+        <option value="uk">UK</option>
+        <option value="en">EN</option>
+      </select>
+      </div>
+      <div id="langContainer"></div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+      integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./script.js"></script>
+  </body>
 </html>

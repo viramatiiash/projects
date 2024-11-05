@@ -1,0 +1,22 @@
+// Font Family
+$ff: "Play", sans-serif;
+// Font weights
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+
+// ? Colors
+$c-black: #000;
+$c-bg: rgba(19, 19, 19, 0.7);
+$c-body: rgba(5, 5, 5, 0.9);
+$c-bg-container: #5c5c5ce6;
+$c-text: rgb(255, 255, 255);
+$c-btn: rgb(231, 107, 24);
+$c-btn-hover: rgb(146, 65, 11);
+$c-danger: rgb(255, 93, 93);
+$c-success: #6bde45;
+
+// ? Transition
+$t-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
