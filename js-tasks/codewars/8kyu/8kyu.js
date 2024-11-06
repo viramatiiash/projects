@@ -263,8 +263,8 @@ const uefaEuro2016 = (teams, scores) =>
     ? `At match ${teams[0]} - ${teams[1]}, ${teams[0]} won!`
     : scores[0] < scores[1]
     ? `At match ${teams[0]} - ${teams[1]}, ${teams[1]} won!`
-      : `At match ${teams[0]} - ${teams[1]}, teams played draw.`; 
-    
+    : `At match ${teams[0]} - ${teams[1]}, teams played draw.`;
+
 // ! 32. Merging sorted integer arrays (without duplicates) - https://www.codewars.com/kata/573f5c61e7752709df0005d2
 const mergeArrays1 = (a, b) => {
   const newArr = [...a, ...b].sort((a, b) => a - b);
@@ -279,8 +279,8 @@ const defineSuit = (card) =>
     ? card.replace(card, 'diamonds')
     : card.includes('♥')
     ? card.replace(card, 'hearts')
-        : card.replace(card, 'spades');
-    
+    : card.replace(card, 'spades');
+
 // ! 34. Multiplication table for number - https://www.codewars.com/kata/5a2fd38b55519ed98f0000ce
 const multiTable = (number) => {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -390,6 +390,41 @@ const monkeyCount = (n) => {
   return arr;
 };
 
+// ! 51. My head is at the wrong end! - https://www.codewars.com/kata/56f699cd9400f5b7d8000b55
+const fixTheMeerkat = (arr) => arr.reverse();
 
+// ! 52. Printing Array elements with Comma delimiters - https://www.codewars.com/kata/56e2f59fb2ed128081001328
+const printArray = (array) => array.join(',');
 
+// ! 53. A Needle in the Haystack - https://www.codewars.com/kata/56676e8fabd2d1ff3000000c
+const findNeedle = (haystack) =>
+  `found the needle at position ${haystack.indexOf('needle')}`;
 
+// ! 54. Get the mean of an array - https://www.codewars.com/kata/563e320cee5dddcf77000158
+const getAverage = (marks) => {
+  let sum = 0;
+  sum = marks.reduce((acc, curr) => acc + curr, 0);
+  return Math.floor(sum / marks.length);
+};
+
+// ! 55. Find numbers which are divisible by given number - https://www.codewars.com/kata/55edaba99da3a9c84000003b
+const divisibleBy = (numbers, divisor) =>
+  numbers.filter((number) => number % divisor === 0);
+
+// ! 56. Grasshopper - Array Mean - https://www.codewars.com/kata/55d277882e139d0b6000005d
+const findAverage1 = (nums) =>
+  nums.reduce((sum, curr) => sum + curr, 0) / nums.length;
+
+// ! 57. Add Length - https://www.codewars.com/kata/559d2284b5bb6799e9000047
+const addLength = (str) =>
+  str.split(' ').map((word) => `${word} ${word.length}`);
+
+// ! 58. Count by X - https://www.codewars.com/kata/5513795bd3fafb56c200049e
+const countBy = (x, n) => {
+  let z = [];
+  for (let i = 1; i <= n; i++) {
+    z.push(i * x);
+  }
+
+  return z;
+};
