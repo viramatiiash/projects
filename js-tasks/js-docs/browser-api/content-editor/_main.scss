@@ -1,0 +1,175 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $ff;
+  margin-top: 50px;
+  background-color: $c-body;
+  color: $c-black;
+}
+
+button {
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 8px;
+  color: $c-bg;
+}
+
+.page-container {
+  margin: 0 auto;
+  background-color: $c-bg;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  margin-bottom: 30px;
+
+  & h2 {
+    color: $c-blue;
+    margin-bottom: 20px;
+  }
+
+  #form {
+    display: flex;
+    flex-direction: column;
+    display: none;
+  }
+
+  .buttons,
+  .actions {
+    display: flex;
+    gap: 5px;
+  }
+
+  .buttons {
+    margin-bottom: 50px;
+  }
+
+  .actions {
+    margin-bottom: 10px;
+  }
+
+  #addTitle,
+  #addSubtitle,
+  #addText,
+  #addBtn {
+    background-color: $c-blue;
+    font-weight: $fw-bold;
+    transition: $t-normal;
+
+    &:hover {
+      color: $c-black;
+      background-color: darken($c-blue, 15%);
+    }
+
+    &:active {
+      background-color: darken($c-blue, 30%);
+    }
+  }
+
+  #boldBtn,
+  #italicBtn,
+  #underlineBtn,
+  #crossedBtn,
+  #colorInput,
+  #fontSizeInput {
+    color: $c-black;
+    background-color: $c-text;
+    width: 40px;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $t-normal;
+    padding: 3px;
+
+    &:hover {
+      background-color: lighten($c-blue, 20%);
+    }
+  }
+
+  #boldBtn {
+    font-weight: $fw-bold;
+  }
+  #italicBtn {
+    font-style: italic;
+  }
+
+  #underlineBtn {
+    text-decoration: underline;
+  }
+
+  #crossedBtn {
+    text-decoration: line-through;
+  }
+
+  #colorInput {
+    cursor: pointer;
+  }
+
+  #fontSizeInput {
+    text-align: center;
+  }
+
+  #textarea {
+    width: 100%;
+    max-width: 470px;
+    height: 100px;
+    padding: 10px;
+    border: none;
+    outline: none;
+
+    &:focus {
+      background-color: lighten($c-blue, 20%);
+    }
+  }
+}
+
+.text-container {
+  background-color: $c-bg;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+
+  & .elementContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .editBtn,
+  .deleteBtn {
+    background-color: $c-blue;
+    font-weight: $fw-bold;
+    transition: $t-normal;
+
+    &:hover {
+      color: $c-black;
+      background-color: darken($c-blue, 15%);
+    }
+
+    &:active {
+      background-color: darken($c-blue, 30%);
+    }
+  }
+}
+
+.active {
+  background-color: lighten($c-btn, 10%) !important;
+}
+
+.empty {
+  background-color: transparent;
+}
