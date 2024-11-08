@@ -1,0 +1,7 @@
+    @media screen and (max-width: 480px) {
+      .page-container {
+        & h2 {
+          font-size: 18px;
+        }
+      }
+    }

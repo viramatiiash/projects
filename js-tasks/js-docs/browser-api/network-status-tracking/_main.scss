@@ -1,0 +1,54 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $ff;
+  margin-top: 50px;
+  background-color: $c-body;
+  color: $c-black;
+}
+
+button {
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 8px;
+  color: $c-bg;
+}
+
+.page-container {
+  margin: 0 auto;
+  background-color: $c-bg;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  margin-bottom: 30px;
+
+  & h2 {
+    color: $c-blue;
+    margin-bottom: 20px;
+  }
+
+  #sendData {
+    background-color: $c-blue;
+    font-weight: $fw-bold;
+    transition: $t-normal;
+
+    &:hover {
+      color: $c-black;
+      background-color: darken($c-blue, 15%);
+    }
+
+    &:active {
+      background-color: darken($c-blue, 30%);
+    }
+  }
+}
