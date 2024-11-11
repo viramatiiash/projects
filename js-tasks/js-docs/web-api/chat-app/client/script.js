@@ -28,7 +28,15 @@ function saveUsername() {
   username = usernameInput.value.trim();
 
   if (username) {
-    document.getElementById('username-saved').classList.remove('hidden');
+    const showNotification = () => {
+      const notification = document.getElementById('username-saved');
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    };
+    showNotification();
+
     document.getElementById('message-container').classList.remove('hidden');
     console.log('Ім’я збережено:', username);
     document.getElementById('topbar').style.display = 'block';
