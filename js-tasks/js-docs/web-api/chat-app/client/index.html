@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App Using WebSockets</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Повідомлення про збереження імені -->
+    <p id="username-saved" class="hidden">Nickname has been saved</p>
+    <div class="page-container">
+      <div id="chat">
+        <h2 id="main-title">Chat App Using WebSockets</h2>
+        <div id="topbar" class="topbar">
+          <h2 class="topbar-title">Chat App Using WebSockets</h2>
+        </div>
+        <ul id="messages"></ul>
+        <div id="username-container">
+          <input
+            type="text"
+            id="username"
+            placeholder="Type your nickname here"
+            required
+          />
+          <button onclick="saveUsername()">Save</button>
+        </div>
+
+        <!-- Поле для вводу повідомлення (спочатку приховане) -->
+        <div id="message-container" class="hidden">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Type your message here..."
+          />
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
