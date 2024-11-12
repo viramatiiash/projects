@@ -8,38 +8,31 @@ const server = https.createServer({
 });
 const wss = new WebSocket.Server({ server });
 
-let clients = [];
+function broadcast(data) {
+  const message = JSON.stringify(data);
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(message);
+    }
+  });
+}
 
 wss.on('connection', (ws) => {
-  clients.push(ws);
   console.log("Клієнт підключився через захищене з'єднання");
 
   ws.on('message', (message) => {
-    const data = JSON.parse(message); // Парсинг JSON від клієнта
-    console.log('Отримано повідомлення:', data);
-
-    // Якщо це системне повідомлення, то не відправляти його як повідомлення від користувача
-    if (data.systemMessage) {
-      // Відправка системного повідомлення всім клієнтам
-      clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify(data)); // Відправка системного повідомлення всім клієнтам
-        }
-      });
-    } else {
-      // Якщо це звичайне повідомлення, надсилаємо його всім клієнтам як звичайне повідомлення
-      clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify(data)); // Відправка звичайного повідомлення
-        }
-      });
+    try {
+      const data = JSON.parse(message);
+      console.log('Отримано повідомлення:', data);
+      broadcast(data);
+    } catch (error) {
+      console.error('Помилка парсингу повідомлення:', error);
     }
   });
 
-ws.on('close', () => {
-  clients = clients.filter((client) => client !== ws);
-  console.log('Клієнт відключився');
-});
+  ws.on('close', () => {
+    console.log('Клієнт відключився');
+  });
 });
 
 server.listen(8080, () => {
