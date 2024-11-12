@@ -11,6 +11,8 @@ body {
   color: $c-white;
   position: relative;
   height: 100vh;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 #username-saved {
@@ -28,8 +30,8 @@ body {
   border-bottom-right-radius: 5px;
 
   &.show {
-  transform: translateX(300px);
-}
+    transform: translateX(300px);
+  }
 }
 
 .username {
@@ -54,6 +56,8 @@ li {
   align-items: start;
   background-color: $c-message-bg;
   width: fit-content;
+  word-break: break-word;
+  max-width: 50%;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -67,11 +71,21 @@ li {
     align-items: center;
     gap: 5px;
 
-    & .online {
+    & .online,
+    & .offline {
       margin-bottom: 0;
       color: $c-white;
       font-weight: $fw-regular;
-      font-size: 14px;
+      font-size: 12px;
+      vertical-align: super;
+    }
+
+    & .online {
+      color: rgb(255, 167, 35);
+    }
+
+    & .offline {
+      color: rgb(255, 82, 82);
     }
   }
 }
@@ -206,5 +220,3 @@ li {
 .hidden {
   display: none !important;
 }
-
-

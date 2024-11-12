@@ -14,16 +14,13 @@
 
 const ws = new WebSocket('wss://localhost:8080');
 let username = '';
-const tick = `
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-`;
+let usersOnlineStatus = {};
 
-// Коли з'єднання встановлено
 ws.onopen = () => {
   console.log('Підключено до WebSocket-сервера');
 };
 
-function saveUsername() {
+const saveUsername = () => {
   const usernameInput = document.getElementById('username');
   username = usernameInput.value.trim();
 
@@ -38,35 +35,40 @@ function saveUsername() {
     showNotification();
 
     document.getElementById('message-container').classList.remove('hidden');
-    console.log('Ім’я збережено:', username);
     document.getElementById('topbar').style.display = 'block';
     document.getElementById('main-title').style.display = 'none';
     document.getElementById('username-container').classList.add('hidden');
     document.getElementById('chat').style.display = 'block';
     document.getElementById('messages').style.display = 'block';
 
-    // Надіслати повідомлення про підключення без прив'язки до конкретного користувача
     ws.send(
       JSON.stringify({
         message: `User ${username} has joined the chat.`,
         systemMessage: true,
+        username,
       })
     );
   } else {
     alert('Please, enter your nickname.');
   }
-}
+};
 
 ws.onmessage = (event) => {
   try {
-    const data = JSON.parse(event.data); // Парсинг отриманих даних з JSON
+    const data = JSON.parse(event.data);
 
-    // Якщо це системне повідомлення (про підключення), то воно не має бути частиною чат-потоку
     if (data.systemMessage) {
+      if (data.message.includes('joined the chat')) {
+        userConnected(data.username);
+      }
+
+      if (data.message.includes('left the chat')) {
+        userDisconnected(data.username);
+      }
+
       const systemMessage = document.createElement('div');
       systemMessage.classList.add('system-message');
 
-      // Додаємо контейнер з іконкою
       const icon = document.createElement('div');
       icon.classList.add('iconContainer');
       icon.innerHTML = `
@@ -76,45 +78,104 @@ ws.onmessage = (event) => {
   `;
       systemMessage.appendChild(icon);
 
-      // Додаємо текстове повідомлення
       const messageText = document.createElement('span');
       messageText.classList.add('messageText');
       messageText.innerText = data.message;
       systemMessage.appendChild(messageText);
 
-      document.getElementById('messages').appendChild(systemMessage); // Додавання до чату
-      return; // Виходимо, щоб не додавати це як звичайне повідомлення
+      document.getElementById('messages').appendChild(systemMessage);
+      return;
     }
 
-    // Відображаємо повідомлення як звичайне повідомлення в чаті
+    const userStatus = usersOnlineStatus[data.username] || 'offline';
     const listItem = document.createElement('li');
-    listItem.innerHTML = `<span><span class="online"></span>${data.username}</span> ${data.message}`; // Відображення імені користувача та повідомлення
-    document.getElementById('messages').appendChild(listItem); // Додавання до списку повідомлень
+    listItem.innerHTML = `<span>${data.username}<sup class="online">${userStatus}</sup></span> ${data.message}`;
+    document.getElementById('messages').appendChild(listItem);
   } catch (error) {
     console.error('Помилка при обробці отриманого повідомлення:', error);
   }
 };
 
-// Функція надсилання повідомлення
-function sendMessage() {
+const sendMessage = () => {
   const messageInput = document.getElementById('messageInput');
   const message = messageInput.value.trim();
 
   if (message && username) {
-    // Перевірка, чи є ім'я та повідомлення
-    ws.send(JSON.stringify({ type: 'message', username, message })); // Відправка повідомлення з ім'ям
-    messageInput.value = ''; // Очищення поля вводу повідомлення
+    ws.send(JSON.stringify({ type: 'message', username, message }));
+    messageInput.value = '';
+    userConnected(username);
   } else if (!username) {
     alert("Спершу введіть і збережіть ваше ім'я.");
   }
-}
+};
 
-// Обробка помилок з'єднання
+messageInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    // Якщо натиснуто Enter
+    event.preventDefault();
+    sendMessage();
+  }
+});
+
 ws.onerror = (error) => {
   console.error('WebSocket помилка:', error);
 };
 
-// Коли з'єднання закрите
+window.addEventListener('beforeunload', () => {
+  if (username) {
+    ws.send(
+      JSON.stringify({
+        message: `User ${username} has left the chat.`,
+        systemMessage: true,
+        username,
+      })
+    );
+    usersOnlineStatus[username] = 'offline';
+  }
+});
+
 ws.onclose = () => {
   console.log("З'єднання закрито");
+  usersOnlineStatus[username] = 'offline';
+  updateUserStatus(username, 'offline');
+  userDisconnected(username);
 };
+
+const updateUserStatus = (username, status) => {
+  usersOnlineStatus[username] = status;
+  const allMessages = document.querySelectorAll('#messages li');
+  allMessages.forEach((message) => {
+    if (message.innerHTML.includes(username)) {
+      const statusElement =
+        message.querySelector('.online') || message.querySelector('.offline');
+      if (statusElement) {
+        statusElement.textContent = status;
+        statusElement.className = status;
+      }
+    }
+  });
+};
+
+// window.addEventListener('storage', (event) => {
+//   if (event.key === 'userStatus' && event.newValue) {
+//     const statusData = JSON.parse(event.newValue);
+//     updateUserStatus(statusData.username, statusData.status);
+//   }
+// });
+
+// // Зберігаємо статус в localStorage
+// function updateUserStatusInLocalStorage(username, status) {
+//   const statusData = { username, status };
+//   localStorage.setItem('userStatus', JSON.stringify(statusData));
+// }
+
+function userConnected(username) {
+  usersOnlineStatus[username] = 'online';
+  updateUserStatus(username, 'online');
+}
+
+// Зміна статусу на "offline" при відключенні
+function userDisconnected(username) {
+  usersOnlineStatus[username] = 'offline';
+  updateUserStatus(username, 'offline');
+}
