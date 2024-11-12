@@ -10,7 +10,7 @@
 
 [+] Безпека з'єднань: Забезпечте безпеку зв'язку через SSL/TLS і розгляньте міркування безпеки, такі як XSS та CSRF захисти.
 
-[] Повідомлення про статус: Додайте функціональність, щоб користувачі могли бачити, чи є інші користувачі онлайн. */
+[+] Повідомлення про статус: Додайте функціональність, щоб користувачі могли бачити, чи є інші користувачі онлайн. */
 
 const ws = new WebSocket('wss://localhost:8080');
 let username = '';
@@ -111,7 +111,6 @@ const sendMessage = () => {
 
 messageInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    // Якщо натиснуто Enter
     event.preventDefault();
     sendMessage();
   }
@@ -156,25 +155,11 @@ const updateUserStatus = (username, status) => {
   });
 };
 
-// window.addEventListener('storage', (event) => {
-//   if (event.key === 'userStatus' && event.newValue) {
-//     const statusData = JSON.parse(event.newValue);
-//     updateUserStatus(statusData.username, statusData.status);
-//   }
-// });
-
-// // Зберігаємо статус в localStorage
-// function updateUserStatusInLocalStorage(username, status) {
-//   const statusData = { username, status };
-//   localStorage.setItem('userStatus', JSON.stringify(statusData));
-// }
-
 function userConnected(username) {
   usersOnlineStatus[username] = 'online';
   updateUserStatus(username, 'online');
 }
 
-// Зміна статусу на "offline" при відключенні
 function userDisconnected(username) {
   usersOnlineStatus[username] = 'offline';
   updateUserStatus(username, 'offline');
