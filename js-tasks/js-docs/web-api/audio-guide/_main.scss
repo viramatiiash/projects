@@ -1,0 +1,100 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $ff;
+  background-color: $c-body;
+  color: $c-white;
+  position: relative;
+  height: 100vh;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.page-container {
+  padding-top: 50px;
+  height: 100vh;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1440px;
+  background-color: $c-bg;
+
+  #main-title {
+    font-family: $ff-title;
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    font-size: 36px;
+    color: $c-primary;
+  }
+
+  button {
+    background-color: $c-primary;
+    color: $c-white;
+    font-weight: $fw-medium;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: $t-normal;
+
+    &:hover {
+      background-color: $c-btn;
+    }
+  }
+
+  #map {
+    margin-bottom: 20px;
+  }
+
+  #current-location {
+    text-align: center;
+    margin-bottom: 40px;
+
+    & span {
+      font-weight: $fw-bold;
+    }
+
+    & .coordinates {
+      font-weight: $fw-regular;
+      color: $c-primary;
+    }
+  }
+
+  h3 {
+    color: $c-primary;
+    margin-bottom: 20px;
+  }
+
+  #audio-list-container {
+    padding-left: 40px;
+    padding-right: 40px;
+    list-style-position: inside; /* Встановіть inside для правильного відображення номерів */
+    list-style-type: decimal;
+  }
+
+  #audio-list {
+    width: 100%;
+    max-width: 600px;
+    & li {
+      font-weight: $fw-medium;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      & button {
+        margin-left: auto;
+      }
+    }
+
+    & li::marker {
+      color: $c-yellow;
+      font-size: 16px;
+    }
+  }
+}
+
+

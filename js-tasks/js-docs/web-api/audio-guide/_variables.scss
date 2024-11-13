@@ -1,0 +1,21 @@
+// Font Family
+$ff: "Red Hat Text", sans-serif;
+$ff-title: "Lacquer", system-ui;
+// Font weights
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+
+// ? Colors
+$c-black: #000;
+$c-bg: rgba(28, 28, 28, 0.7);
+$c-body: #0F0F0F;
+$c-white: #fff;
+$c-btn: #950101;
+$c-primary: #fd3c3c;
+$c-yellow: rgb(253, 188, 36);
+
+// ? Transition
+$t-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);

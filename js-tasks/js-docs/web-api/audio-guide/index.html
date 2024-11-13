@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Guide</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-container">
+      <h2 id="main-title">Audio Guide</h2>
+      <div id="map" style="height: 500px; width: 100%"></div>
+      <div id="current-location"></div>
+      <div id="audio-list-container">
+        <h3>Tracks available:</h3>
+        <ol id="audio-list"></ol>
+      </div>
+    </div>
+    <script src="./map.js"></script>
+    <script>
+      window.initMap = function () {
+      };
+    </script>
+    <script src="./script.js" defer></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrYYQNvgZ3JIsAMo8fVld6hPj_ThUZGbs&callback=initMap"
+      async
+      defer
+    ></script>
+  </body>
+</html>
