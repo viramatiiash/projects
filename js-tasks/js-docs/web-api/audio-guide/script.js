@@ -20,7 +20,7 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('./sw.js') // шлях до файлу service worker
+      .register('./sw.js')
       .then((registration) => {
         console.log('Service Worker зареєстровано:', registration);
       })
@@ -115,6 +115,11 @@ let isPlaying = false;
 let stopTime = 0;
 let currentTrack = null;
 
+const playIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>`;
+const pauseIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000"><path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z"/></svg>`;
+const volumeIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000"><path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/></svg>`;
+const volumeOffIcon = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#00000"><path d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"/></svg>`;
+
 const audioListContainer = document.getElementById('audio-list');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -125,146 +130,101 @@ document.addEventListener('DOMContentLoaded', () => {
   setupAudioControls();
 });
 
-function setupAudioControls() {
-  audioTracks.forEach((track) => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `${track.title} (${track.location.latitude}, ${track.location.longitude})`;
+function parseSVG(svgString) {
+  const parser = new DOMParser();
+  return parser.parseFromString(svgString, 'image/svg+xml').documentElement;
+}
 
-    const playButton = document.createElement('button');
-    playButton.textContent = 'Play';
-    playButton.onclick = () => toggleAudioForLocation(track, playButton);
+function song(track) {
+  const listItem = document.createElement('li');
+  listItem.textContent = `${track.title} (${track.location.latitude}, ${track.location.longitude})`;
 
-    listItem.appendChild(playButton);
-    audioListContainer.appendChild(listItem);
+  const audio = document.createElement('audio');
+  audio.src = track.audioUrl;
+
+  const progress = document.createElement('input');
+  progress.type = 'range';
+  progress.value = 0;
+  progress.classList.add('progress-bar');
+
+  const volumeRange = document.createElement('input');
+  volumeRange.type = 'range';
+  volumeRange.value = 100;
+  volumeRange.classList.add('volume-control');
+  const volumeContainer = document.createElement('div');
+  volumeContainer.classList.add('volumeContainer');
+  volumeContainer.innerHTML = volumeIcon;
+  volumeContainer.append(volumeRange);
+
+  volumeContainer.addEventListener('click', () => {
+    volumeRange.classList.toggle('active');
   });
-}
 
-function toggleAudioForLocation(track, playButton) {
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    gainNode = audioContext.createGain();
-    gainNode.connect(audioContext.destination);
-  }
+  const playPauseButton = document.createElement('button');
+  playPauseButton.innerHTML = playIcon;
 
-  if (isPlaying && currentTrack === track) {
-    pauseAudioForTrack();
-    playButton.textContent = 'Play';
-  } else if (!isPlaying && currentTrack === track) {
-    resumeAudioForTrack();
-    playButton.textContent = 'Stop';
-  } else {
-    playAudioForTrack(track);
-    playButton.textContent = 'Stop';
-  }
-}
-
-function playAudioForTrack(track) {
-  if (currentSource) {
-    currentSource.stop();
-    currentSource = null;
-  }
-
-  fetch(track.audioUrl)
-    .then((response) => response.arrayBuffer())
-    .then((data) => audioContext.decodeAudioData(data))
-    .then((buffer) => {
-      currentTrack = track;
-      currentSource = audioContext.createBufferSource();
-      currentSource.buffer = buffer;
-      currentSource.connect(gainNode);
-      currentSource.start(0, stopTime);
-
-      lastPlayedUrl = track.audioUrl;
-      isPlaying = true;
-
-      currentSource.onended = () => {
-        isPlaying = false;
-        currentSource = null;
-        stopTime = 0;
-      };
-    })
-    .catch((error) => console.error('Помилка при завантаженні аудіо:', error));
-}
-
-function pauseAudioForTrack() {
-  if (currentSource) {
-    currentSource.stop();
-    stopTime = audioContext.currentTime;
-    isPlaying = false;
-  }
-}
-
-function resumeAudioForTrack() {
-  if (currentTrack && !isPlaying) {
-    currentSource = audioContext.createBufferSource();
-    fetch(currentTrack.audioUrl)
-      .then((response) => response.arrayBuffer())
-      .then((data) => audioContext.decodeAudioData(data))
-      .then((buffer) => {
-        currentSource.buffer = buffer;
-        currentSource.connect(gainNode);
-        currentSource.start(0, stopTime);
-        isPlaying = true;
-      });
-  }
-}
-
-function updateAudioList(latitude, longitude) {
-  audioListContainer.innerHTML = ''; 
-
-  audioTracks.forEach((track) => {
-    const distance = getDistanceFromLatLonInKm(
-      latitude,
-      longitude,
-      track.location.latitude,
-      track.location.longitude
-    );
-
-    if (distance < 300) {
-      const listItem = document.createElement('li');
-      listItem.textContent = `${track.title} (${track.location.latitude}, ${track.location.longitude})`;
-
-      const playButton = document.createElement('button');
-      playButton.textContent = 'Play';
-      playButton.onclick = () => toggleAudioForLocation(track, playButton);
-
-      listItem.appendChild(playButton);
-      audioListContainer.appendChild(listItem);
+  playPauseButton.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      playPauseButton.innerHTML = pauseIcon;
+    } else {
+      audio.pause();
+      playPauseButton.innerHTML = playIcon;
     }
   });
+
+  const buttonsContainer = document.createElement('div');
+  buttonsContainer.classList.add('buttonsContainer');
+  buttonsContainer.append(volumeContainer, playPauseButton)
+
+  audio.addEventListener('timeupdate', () => {
+    progress.max = audio.duration;
+    progress.value = audio.currentTime;
+  });
+
+  progress.addEventListener('input', () => {
+    audio.currentTime = progress.value;
+  });
+
+  volumeRange.addEventListener('input', () => {
+    audio.volume = volumeRange.value / 100;
+
+    if (volumeRange.value == 0) {
+      volumeContainer.appendChild(svgString(volumeOffIcon));
+    } else {
+      volumeContainer.appendChild(svgString(volumeIcon));
+    }
+  });
+
+  const controls = document.createElement('div');
+  controls.classList.add('controls');
+  const bars = document.createElement('div');
+  bars.classList.add('bars');
+  bars.append(progress, buttonsContainer);
+  controls.appendChild(bars);
+
+  listItem.append(audio, controls);
+  audioListContainer.appendChild(listItem);
 }
 
-window.initMap = function () {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 50.4501, lng: 30.5234 },
-    zoom: 9,
-    styles: mapStyle,
-    mapTypeControl: false, 
-    zoomControl: false, 
-    streetViewControl: false, 
-    fullscreenControl: false, 
-    scaleControl: false, 
-    rotateControl: false, 
-    keyboardShortcuts: false, 
-    panControl: false,
+function setupAudioControls() {
+  audioTracks.forEach((track) => {
+    song(track);
   });
-  getUserLocation();
-};
+}
 
 function getUserLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-
-        const currentLocationDisplay =
-          document.getElementById('current-location');
-        currentLocationDisplay.innerHTML = `<span>Your Coordinates:</span> <span class="coordinates">Latitude</span> ${latitude.toFixed(
-          4
-        )}, <span class="coordinates">Longitude</span> ${longitude.toFixed(4)}`;
-
+        document.getElementById('current-location').innerHTML = `
+          <span>Your Coordinates:</span> <span class="coordinates">Latitude</span> ${latitude.toFixed(
+            4
+          )}, 
+          <span class="coordinates">Longitude</span> ${longitude.toFixed(4)}
+        `;
         updateAudioList(latitude, longitude);
-
         const userLocation = { lat: latitude, lng: longitude };
         new google.maps.Marker({
           position: userLocation,
@@ -281,8 +241,23 @@ function getUserLocation() {
   }
 }
 
+function updateAudioList(latitude, longitude) {
+  audioListContainer.innerHTML = '';
+  audioTracks.forEach((track) => {
+    const distance = getDistanceFromLatLonInKm(
+      latitude,
+      longitude,
+      track.location.latitude,
+      track.location.longitude
+    );
+    if (distance < 300) {
+      song(track);
+    }
+  });
+}
+
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-  const R = 6371; 
+  const R = 6371;
   const dLat = deg2rad(lat2 - lat1);
   const dLon = deg2rad(lon2 - lon1);
   const a =
@@ -292,9 +267,26 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
       Math.sin(dLon / 2) *
       Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c; 
+  return R * c;
 }
 
 function deg2rad(deg) {
   return deg * (Math.PI / 180);
 }
+
+window.initMap = function () {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 50.4501, lng: 30.5234 },
+    zoom: 9,
+    styles: mapStyle,
+    mapTypeControl: false,
+    zoomControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+    scaleControl: false,
+    rotateControl: false,
+    keyboardShortcuts: false,
+    panControl: false,
+  });
+  getUserLocation();
+};

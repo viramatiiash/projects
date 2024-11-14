@@ -1,39 +1,30 @@
 @media screen and (max-width: 768px) {
+  body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #audio-list-container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
   li {
-    max-width: 70%;
+    font-size: 14px;
+  }
+
+  .controls {
+    width: 80%;
   }
 }
 
-@media screen and (max-width: 515px) {
-  body {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  #messages {
-    padding: 25px !important;
-  }
-
+@media screen and (max-width: 480px) {
   li {
-    max-width: 85%;
-  }
-}
-
-@media screen and (max-width: 350px) {
-  body {
-    padding-left: 10px;
-    padding-right: 10px;
+    flex-direction: column;
+    align-items: start !important;
   }
 
-  #messages {
-    padding: 25px 15px !important;
-  }
-
-  li {
-    max-width: 90%;
-  }
-
-  #topbar {
-    padding-left: 15px;
+  .controls {
+    width: 100%;
   }
 }

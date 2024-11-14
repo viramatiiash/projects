@@ -32,18 +32,8 @@ body {
   }
 
   button {
-    background-color: $c-primary;
-    color: $c-white;
-    font-weight: $fw-medium;
     border: none;
-    padding: 10px;
-    font-size: 14px;
     cursor: pointer;
-    transition: $t-normal;
-
-    &:hover {
-      background-color: $c-btn;
-    }
   }
 
   #map {
@@ -78,23 +68,114 @@ body {
 
   #audio-list {
     width: 100%;
-    max-width: 600px;
     & li {
       font-weight: $fw-medium;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       margin-bottom: 10px;
-
-      & button {
-        margin-left: auto;
-      }
-    }
-
-    & li::marker {
-      color: $c-yellow;
-      font-size: 16px;
     }
   }
 }
 
+.controls {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
 
+.bars {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.volumeContainer, button {
+  width: 35px;
+  height: 35px;
+  background-color: $c-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  transition: $t-normal;
+  border-radius: 50%;
+
+  & svg {
+    fill: $c-white;
+  }
+
+  &:hover {
+    background-color: $c-btn;
+  }
+}
+
+.progress-bar {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: $c-white;
+  border-radius: 4px;
+  cursor: pointer;
+
+}
+
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: $c-primary;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.volume-control {
+  display: none;
+  position: absolute;
+  bottom: 58px;
+  left: -27px;
+  -webkit-appearance: none;
+  width: 70px;
+  height: 3px;
+  background: $c-primary;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+  transform: rotate(-90deg);
+}
+
+.volume-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: $c-btn;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#currentTime,
+#duration {
+  color: #093009;
+}
+
+.active {
+  display: block;
+}
