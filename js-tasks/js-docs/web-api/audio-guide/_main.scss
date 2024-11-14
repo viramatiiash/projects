@@ -111,6 +111,7 @@ body {
   flex-shrink: 0;
   transition: $t-normal;
   border-radius: 50%;
+  cursor: pointer;
 
   & svg {
     fill: $c-white;
