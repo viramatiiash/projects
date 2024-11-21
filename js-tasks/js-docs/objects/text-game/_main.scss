@@ -1,0 +1,148 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: $c-text;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #bg-video {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(70%);
+    z-index: -1;
+  }
+
+  #choose-character {
+    background-color: $c-bg;
+    width: 90%;
+    height: 75%;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+
+    .character-card,
+    .character-card-2,
+    .character-card-3,
+    .character-card-4 {
+      width: 100%;
+      max-width: 22%;
+      background-color: $c-blue;
+      padding: 20px 30px 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0px 5px 40px 15px $c-light-blue-tran;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+
+      .characteristics-container {
+        transform: rotateY(180deg);
+        display: none;
+      }
+
+      &:hover {
+        transform: rotateY(180deg);
+
+        .characteristics-container {
+          display: block;
+        }
+
+        .image-container,
+        .character-name,
+        .character-description {
+          display: none;
+        }
+
+        .character-race {
+          transform: rotateY(180deg);
+        }
+      }
+
+      & .character-info {
+        position: relative;
+        padding-top: 35px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        .character-race {
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          top: 0;
+          width: 100%;
+          position: absolute;
+          padding: 5px 5px 10px 5px;
+          text-align: center;
+        }
+
+        & .line-top {
+          opacity: 0.5;
+          margin: 0 auto;
+          height: 1px;
+          background-color: $c-text;
+          width: 50%;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+
+        & .line-bottom {
+          opacity: 0.5;
+          margin: 0 auto;
+          height: 1px;
+          background-color: $c-text;
+          width: 90%;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      }
+
+      & .image-container {
+        border-radius: 10px;
+
+        & img {
+          border-radius: 10px;
+          object-fit: cover;
+        }
+      }
+
+      & .character-name {
+        text-align: center;
+        font-weight: $fw-bold;
+        margin-bottom: 10px;
+      }
+      & .character-description {
+        text-align: center;
+      }
+    }
+
+    & .character-card-2 {
+      background-color: $c-green;
+      box-shadow: 0px 5px 40px 15px $c-green;
+    }
+    & .character-card-3 {
+      background-color: $c-brown;
+      box-shadow: 0px 5px 40px 15px $c-brown;
+    }
+    & .character-card-4 {
+      background-color: $c-mage-blue;
+      box-shadow: 0px 5px 40px 15px $c-mage-blue;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+// Font Family
+$ff: "Cormorant Unicase", serif;
+// Font weights
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+
+// ? Colors
+$c-black: #000;
+$c-bg: rgba(19, 19, 19, 0.7);
+$c-body: rgba(5, 5, 5, 0.9);
+$c-text: rgb(215, 180, 110);
+$c-btn: rgb(231, 107, 24);
+$c-btn-hover: rgb(146, 65, 11);
+$c-red: rgb(202, 68, 68);
+$c-green: #1f2b1b;
+$c-blue: rgba(18, 34, 41, 0.822);
+$c-light-blue: rgb(29, 57, 77);
+$c-light-blue-tran:  rgb(22, 34, 43);
+$c-brown: #2f2f2fe6;
+$c-mage-blue: rgb(13, 42, 63);
+
+// ? Transition
+$t-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
