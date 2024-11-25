@@ -1,5 +1,7 @@
 // Font Family
-$ff: "Cormorant Unicase", serif;
+$ff: "Alegreya SC", serif;
+$ff-secondary: "Aref Ruqaa Ink", serif;
+
 // Font weights
 $fw-light: 300;
 $fw-regular: 400;
@@ -8,6 +10,7 @@ $fw-semi-bold: 600;
 $fw-bold: 700;
 
 // ? Colors
+$c-white: #fff;
 $c-black: #000;
 $c-bg: rgba(19, 19, 19, 0.7);
 $c-body: rgba(5, 5, 5, 0.9);

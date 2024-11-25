@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Battlefield</title>
+    <link rel="stylesheet" href="./../style.css" />
+  </head>
+  <body>
+    <div id="item-modal" class="modal hidden">
+  <div class="modal-content">
+    <h3 id="modal-item-name"></h3>
+    <img id="modal-item-image" src="" alt="Item">
+    <p id="modal-item-description"></p>
+    <button id="close-modal-btn">Accept</button>
+  </div>
+</div>
+    <div id="battlefield-container">
+      <div class="battlefield">
+        <div id="character-details"></div>
+        <div id="battle-swords"><img src="./../assets/items/battle-swords.png" alt="Battle Swords"></div>
+        <div id="monster-container"></div>
+      </div>
+      <button id="next-level-btn">Next Level</button>
+    </div>
+    <script type="module" src="battlefield.js"></script>
+  </body>
+</html>
