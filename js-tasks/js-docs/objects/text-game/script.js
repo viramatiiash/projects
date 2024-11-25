@@ -217,7 +217,7 @@ characters.forEach((character) => {
     // Зберігаємо обраного персонажа в localStorage
     localStorage.setItem('selectedCharacter', JSON.stringify(character));
     // Перехід на сторінку battlefield.html
-    window.location.href = '/battlefield/battlefield.html';
+    window.location.href = './battlefield/battlefield.html';
   });
 
   container.appendChild(card);
