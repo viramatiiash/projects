@@ -2,6 +2,8 @@ import { items } from '../items.js';
 import { levels } from '../levels.js';
 
 let currentLevelIndex = 0;
+const dynamicEffects = []; // Для динамічних (одноразових) ефектів
+const staticEffects = [];
 
 // Функція для випадкового вибору предмета
 function getRandomItem() {
@@ -21,26 +23,63 @@ function showItemModal(item) {
 
   modal.classList.remove('hidden');
 
-  document.getElementById('close-modal-btn').addEventListener('click', () => {
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  closeModalBtn.removeEventListener('click', closeModalHandler); // Знімаємо попередній слухач
+  closeModalBtn.addEventListener('click', closeModalHandler, { once: true });
+
+  function closeModalHandler() {
     modal.classList.add('hidden');
-    addEffectToHero(item); // Додаємо ефект до героя
-  });
+    addEffectToHero(item);
+  }
 }
 
-// Додавання ефекту до героя
 function addEffectToHero(item) {
-  const effectsContainer = document.querySelector('.additional-effects');
-  const effectElement = document.createElement('div');
-  effectElement.classList.add('effect-element');
-  effectElement.innerHTML = `<img src="./../${item.image}">`;
-  effectsContainer.appendChild(effectElement);
+  if (item.dynamic) {
+    dynamicEffects.push(item);
+  } else {
+    if (!staticEffects.some((effect) => effect.name === item.name)) {
+      staticEffects.push(item);
+    }
+  }
+
+  updateEffectsDisplay();
 }
 
-// Завантаження рівня
+function updateEffectsDisplay() {
+  const effectsContainer = document.querySelector('.additional-effects');
+  const dynamicContainer = document.createElement('div');
+  dynamicContainer.classList.add('dynamic-effects');
+  const staticContainer = document.createElement('div');
+  staticContainer.classList.add('static-effects');
+
+  effectsContainer.innerHTML = '';
+  dynamicContainer.innerHTML = '';
+  staticContainer.innerHTML = '';
+
+  dynamicEffects.forEach((effect) => {
+    const effectElement = document.createElement('div');
+    effectElement.classList.add('effect-element');
+    effectElement.innerHTML = `
+      <img src="./../${effect.image}" alt="${effect.name}">
+    `;
+    dynamicContainer.appendChild(effectElement);
+  });
+
+  staticEffects.forEach((effect) => {
+    const effectElement = document.createElement('div');
+    effectElement.classList.add('effect-element');
+    effectElement.innerHTML = `
+      <img src="./../${effect.image}" alt="${effect.name}">
+    `;
+    staticContainer.appendChild(effectElement);
+  });
+
+  effectsContainer.append(dynamicContainer, staticContainer);
+}
+
 function loadLevel(levelIndex) {
   const levelData = levels[levelIndex];
 
-  // Оновлюємо фон
   document.getElementById(
     'battlefield-container'
   ).style.backgroundImage = `url(./../${levelData.background})`;
@@ -53,23 +92,35 @@ function loadLevel(levelIndex) {
     <img src="./../${levelData.monster.image}" alt="${
     levelData.monster.name
   }"></div>
-    <p>Health: ${levelData.monster.health}</p>
-    <ul>
-      ${levelData.monster.attacks
+  <div class="character-skills">
+    <h3>Characteristics (dynamic/static)</h3>
+    <ul class="character-chars">
+      ${levelData.monster.characteristics
         .map(
-          (attack) =>
-            `<li><strong>${attack.name}:</strong> ${attack.damage} damage</li>`
+          (stat) =>
+            `<li class="stats"><span class="stat-name">${stat.name}:</span> <span class="stat-value">${stat.value}</span></li>`
         )
         .join('')}
-    </ul>
+      </ul>
+      <div class="attacks-container">
+        <h3>Attacks</h3>
+        <ul class="character-attacks">
+
+          ${levelData.monster.attacks
+            .map(
+              (attack) =>
+                `<button class="attack"><span>${attack.name}</span></button>`
+            )
+            .join('')}
+        </ul>
   `;
 
-  // Вибір випадкового предмета
+  updateEffectsDisplay();
+
   const randomItem = getRandomItem();
   showItemModal(randomItem);
 }
 
-// Наступний рівень
 function nextLevel() {
   if (currentLevelIndex < levels.length - 1) {
     currentLevelIndex++;
@@ -79,12 +130,10 @@ function nextLevel() {
   }
 }
 
-// Початкове завантаження
 document.addEventListener('DOMContentLoaded', () => {
   loadLevel(currentLevelIndex);
 });
 
-// Отримання даних персонажа
 const selectedCharacter = JSON.parse(localStorage.getItem('selectedCharacter'));
 
 if (selectedCharacter) {
@@ -96,8 +145,9 @@ if (selectedCharacter) {
     selectedCharacter.name
   }"></div>
     <div class="character-skills">
+            <h3>Characteristics (dynamic/static)</h3>
       <ul class="character-chars">
-        <h3>Characteristics</h3>
+
         ${selectedCharacter.characteristics
           .map(
             (stat) =>
@@ -106,8 +156,9 @@ if (selectedCharacter) {
           .join('')}
       </ul>
       <div class="attacks-container">
+        <h3>Attacks</h3>
         <ul class="character-attacks">
-          <h3>Attacks</h3>
+
           ${selectedCharacter.attacks
             .map(
               (attack) =>
@@ -115,8 +166,9 @@ if (selectedCharacter) {
             )
             .join('')}
         </ul>
+        <h3>Additional Effects (dynamic/static)</h3>
         <div class="additional-effects">
-          <h3>Additional Effects</h3>
+          
         </div>
       </div>
     </div>

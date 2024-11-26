@@ -5,7 +5,11 @@ export const levels = [
     monster: {
       name: 'Wraithwood',
       image: './assets/monsters/wraithwood.jpg',
-      health: 20,
+      characteristics: [
+        { name: 'Health', value: 100 },
+        { name: 'Damage', value: 3 },
+        { name: 'Defense', value: 4 },
+      ],
       attacks: [
         { name: 'Punch', damage: 5 },
         { name: 'Kick', damage: 3 },
@@ -18,7 +22,11 @@ export const levels = [
     monster: {
       name: 'Drowned Phantom',
       image: './assets/monsters/drowned-phantom.jpg',
-      health: 30,
+      characteristics: [
+        { name: 'Health', value: 100 },
+        { name: 'Damage', value: 3 },
+        { name: 'Defense', value: 4 },
+      ],
       attacks: [
         { name: 'Axe Slash', damage: 7 },
         { name: 'Headbutt', damage: 5 },
@@ -30,8 +38,12 @@ export const levels = [
     background: './assets/backgrounds/volcano.jpg',
     monster: {
       name: 'Ifritis',
-      image: './assets/monsters/ifritis.png',
-      health: 40,
+      image: './assets/monsters/ifritis.jpg',
+      characteristics: [
+        { name: 'Health', value: 100 },
+        { name: 'Damage', value: 3 },
+        { name: 'Defense', value: 4 },
+      ],
       attacks: [
         { name: 'Club Smash', damage: 10 },
         { name: 'Stomp', damage: 8 },
@@ -43,8 +55,12 @@ export const levels = [
     background: './assets/backgrounds/dark-castle.jpg',
     monster: {
       name: 'Nightmare',
-      image: './assets/monsters/nightmare.png',
-      health: 40,
+      image: './assets/monsters/nightmare.jpg',
+      characteristics: [
+        { name: 'Health', value: 100 },
+        { name: 'Damage', value: 3 },
+        { name: 'Defense', value: 4 },
+      ],
       attacks: [
         { name: 'Club Smash', damage: 10 },
         { name: 'Stomp', damage: 8 },
@@ -56,8 +72,12 @@ export const levels = [
     background: './assets/backgrounds/thone-hall.jpg',
     monster: {
       name: 'Dark Lord',
-      image: './assets/monsters/boss.png',
-      health: 40,
+      image: './assets/monsters/boss.jpg',
+      characteristics: [
+        { name: 'Health', value: 100 },
+        { name: 'Damage', value: 3 },
+        { name: 'Defense', value: 4 },
+      ],
       attacks: [
         { name: 'Club Smash', damage: 10 },
         { name: 'Stomp', damage: 8 },
@@ -65,5 +85,3 @@ export const levels = [
     },
   },
 ];
-
-

@@ -63,6 +63,7 @@ img {
       transform-style: preserve-3d;
       transition: transform 0.5s;
       cursor: pointer;
+      transition: $t-normal;
 
       .characteristics-container {
         transform: rotateY(180deg);
@@ -220,35 +221,39 @@ img {
 }
 
 .img-container {
+  margin: 0 auto;
   width: 100%;
-  max-width: 400px;
+  max-width: 200px;
+  height: 200px;
+  border: 6px solid $c-text;
   margin-bottom: 20px;
-  border-radius: 20px;
+  border-radius: 50%;
 
   & img {
-    border-radius: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 0 0%;
   }
 }
 
 .character-skills {
   display: flex;
-  gap: 40px;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .character-chars {
   width: 100%;
-  max-width: 150px;
   list-style-type: none;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-between;
   text-align: center;
-  gap: 7px;
+  gap: 3px;
 }
 
 .character-attacks {
   display: flex;
-  flex-direction: column;
   gap: 10px;
   margin-bottom: 10px;
 
@@ -271,6 +276,7 @@ img {
 
 .stats {
   width: 100%;
+  max-width: 150px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -306,6 +312,41 @@ img {
   }
 }
 
+.additional-effects {
+  display: flex;
+  justify-content: center;
+
+  & .effect-element {
+    border: 1px solid $c-text;
+  }
+}
+
+.effect-element {
+  width: 50px;
+  height: 50px;
+}
+
+.dynamic-effects {
+  width: 50%;
+  border-right: 2px solid $c-text;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: end;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.static-effects {
+  width: 50%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: start;
+}
+
 // ! Modal
 .modal {
   position: fixed;
@@ -327,27 +368,36 @@ img {
 }
 
 .modal-content {
-  background: white;
+  background-color: darken($c-green-tran, 6%);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  box-shadow: 0px 5px 40px 25px darken($c-green, 6%);
 }
 
 .modal-content img {
   max-width: 150px;
   margin: 10px 0;
+  border: 2px solid $c-text;
+}
+
+#modal-item-description {
+  margin-bottom: 20px;
 }
 
 #close-modal-btn {
   padding: 10px 20px;
-  background: #007bff;
+  background-color: $c-brown;
+  border: 2px solid darken($c-brown, 10%);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: $t-normal;
+
+  &:hover {
+    background-color: lighten($c-brown, 20%);
+  }
 }
 
-.effect-element {
-  width: 50px;
-  height: 50px;
-}
+
