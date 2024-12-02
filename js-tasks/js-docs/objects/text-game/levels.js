@@ -7,7 +7,6 @@ export const levels = [
       image: './assets/monsters/wraithwood.jpg',
       characteristics: [
         { name: 'Health', value: 14 },
-        { name: 'Damage', value: 3 },
         { name: 'Defense', value: 4 },
       ],
       attacks: [
@@ -33,7 +32,6 @@ export const levels = [
       image: './assets/monsters/drowned-phantom.jpg',
       characteristics: [
         { name: 'Health', value: 20 },
-        { name: 'Damage', value: 3 },
         { name: 'Defense', value: 4 },
       ],
       attacks: [
@@ -58,7 +56,6 @@ export const levels = [
       image: './assets/monsters/ifritis.jpg',
       characteristics: [
         { name: 'Health', value: 25 },
-        { name: 'Damage', value: 3 },
         { name: 'Defense', value: 4 },
       ],
       attacks: [
@@ -83,7 +80,6 @@ export const levels = [
       image: './assets/monsters/nightmare.jpg',
       characteristics: [
         { name: 'Health', value: 30 },
-        { name: 'Damage', value: 3 },
         { name: 'Defense', value: 4 },
       ],
       attacks: [
@@ -110,7 +106,6 @@ export const levels = [
       image: './assets/monsters/boss.jpg',
       characteristics: [
         { name: 'Health', value: 35 },
-        { name: 'Damage', value: 3 },
         { name: 'Defense', value: 4 },
       ],
       attacks: [

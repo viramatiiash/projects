@@ -80,6 +80,7 @@ const vaelith = new Character(
       name: 'Healing',
       description: 'Restores 2 health points to the character.',
       magicCost: 4,
+      healing: 2,
     },
   ]
 );
@@ -93,7 +94,7 @@ const astralis = new Character(
     { name: 'Health', value: 10 },
     { name: 'Damage', value: 3 },
     { name: 'Stamina', value: 4 },
-    { name: 'Defense', value: 3 },
+    { name: 'Defense', value: 0 },
     { name: 'Magic', value: 7 },
   ],
   [
@@ -106,6 +107,7 @@ const astralis = new Character(
       name: 'Healing',
       description: 'Restores 4 health to the Mage.',
       magicCost: 3,
+      healing: 4,
     },
     {
       name: 'Lightning Bolt',
@@ -127,7 +129,7 @@ const lorien = new Character(
     { name: 'Damage', value: 2 },
     { name: 'Stamina', value: 8 },
     { name: 'Defense', value: 3 },
-    { name: 'Magic', value: 3 },
+    { name: 'Magic', value: 6 },
   ],
   [
     {
@@ -164,6 +166,7 @@ const lorien = new Character(
       name: 'Healing',
       description: 'Restores 2 health to the Wood Elf.',
       magicCost: 4,
+      healing: 2,
     },
   ]
 );
@@ -225,6 +228,7 @@ const tharok = new Character(
       name: 'Healing',
       description: 'Restores 2 health to the Warrior.',
       magicCost: 4,
+      healing: 2,
     },
   ]
 );

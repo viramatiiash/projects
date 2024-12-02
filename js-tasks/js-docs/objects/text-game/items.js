@@ -21,17 +21,17 @@ export const items = [
     description: 'Increases stamina by 2 points.',
     dynamic: true,
   },
-  {
-    name: 'Fire Potion',
-    type: 'health',
-    image: './assets/items/fire-potion.jpg',
-    effect: {
-      characteristics: 'Damage',
-      value: 2,
-    },
-    description: 'Adds 2 extra damage points in attacks.',
-    dynamic: true,
-  },
+  // {
+  //   name: 'Fire Potion',
+  //   type: 'health',
+  //   image: './assets/items/fire-potion.jpg',
+  //   effect: {
+  //     characteristics: 'Damage',
+  //     value: 2,
+  //   },
+  //   description: 'Adds 2 extra damage points in attacks.',
+  //   dynamic: true,
+  // },
   {
     name: 'Magic Potion',
     type: 'magic',

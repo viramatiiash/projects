@@ -2,8 +2,6 @@ import { items } from '../items.js';
 import { levels } from '../levels.js';
 import { Character, characters } from './../characters.js';
 
-console.log(characters);
-
 let turn = Math.random() > 0.5 ? 'hero' : 'monster'; // Рандомний вибір першого ходу
 let isHeroTurn = turn === 'hero'; // Хто зараз ходить
 let currentLevelIndex = 0;
@@ -43,6 +41,24 @@ function heroTurn(selectedAttack) {
 
   console.log('Hero turn with attack:', selectedAttack);
 
+  // Отримуємо характеристику "Stamina" героя
+  const staminaStat = selectedCharacter.characteristics.find(
+    (stat) => stat.name === 'Stamina'
+  );
+
+  // Якщо атака вимагає stamina, перевіряємо та витрачаємо
+  if (selectedAttack.staminaCost) {
+    if (!staminaStat || staminaStat.value < selectedAttack.staminaCost) {
+      console.log('Not enough stamina for this attack');
+      alert('Not enough stamina to perform this attack!');
+      return;
+    }
+
+    // Зменшуємо значення stamina
+    staminaStat.value -= selectedAttack.staminaCost;
+    updateCharacterStats();
+  }
+
   // Якщо атака - це Berserker's Rage, застосовуємо ефект
   if (selectedAttack.name === "Berserker's Rage") {
     selectedAttack.applyEffect(selectedCharacter); // Застосовуємо ефект
@@ -59,15 +75,27 @@ function heroTurn(selectedAttack) {
 
     // Перевірка, чи достатньо магії для зцілення
     if (magicStat.value >= selectedAttack.magicCost) {
-      // Зцілення: додаємо 2 до здоров'я героя
-      selectedCharacter.characteristics.find(
-        (stat) => stat.name === 'Health'
-      ).value += 2;
-      // Витрачаємо магію
-      magicStat.value -= selectedAttack.magicCost;
-      console.log(
-        `Healing applied: +2 Health, Remaining Magic: ${magicStat.value}`
-      );
+      const healingAmount = selectedAttack.healing || 2; // Використовуємо поле healing або за замовчуванням 2
+      const healthStat = selectedCharacter.getCharacteristic('Health');
+
+      if (healthStat) {
+        healthStat.value += healingAmount;
+
+        // Логіка для обмеження здоров'я (якщо потрібно, наприклад, maxHealth)
+        const maxHealth =
+          selectedCharacter.getCharacteristic('MaxHealth')?.value;
+        if (maxHealth && healthStat.value > maxHealth) {
+          healthStat.value = maxHealth; // Обмеження до максимального здоров'я
+        }
+
+        // Витрачаємо магію
+        magicStat.value -= selectedAttack.magicCost;
+        console.log(
+          `Healing applied: +${healingAmount} Health, Remaining Magic: ${magicStat.value}`
+        );
+      } else {
+        console.error('Health characteristic not found for the character.');
+      }
     } else {
       console.log('Not enough magic for Healing');
       alert('Not enough magic to cast Healing!');
@@ -234,24 +262,22 @@ function showItemModal(item) {
 }
 
 function addEffectToHero(item) {
+  console.log(item);
+
   if (item && item.dynamic) {
+    console.log(item.dynamic);
+
     dynamicEffects.push(item);
+    console.log(dynamicEffects);
   } else {
     if (!staticEffects.some((effect) => effect.name === item.name)) {
       staticEffects.push(item);
 
       // Застосовуємо статичний ефект до характеристик героя
       if (item && item.effect && item.effect.characteristics) {
-        console.log(item);
-        console.log(item.effect);
-        console.log(item.effect.characteristics);
-
         const stat = selectedCharacter.characteristics.find(
           (stat) => stat.name === item.effect.characteristics
         );
-
-        console.log(stat);
-
         if (stat) {
           // Додаємо ефект до характеристики героя
           stat.value += item.effect.value;
@@ -262,15 +288,66 @@ function addEffectToHero(item) {
   }
 
   // Змінюємо характеристику героя після всіх змін
-  updateCharacterStats(); // Переконайтесь, що це викликається після змін
+  // Переконайтесь, що це викликається після змін
   saveCharacterState();
-  updateEffectsDisplay(selectedCharacter);
+  updateEffectsDisplay();
+  updateCharacterStats();
+}
+
+function applyDynamicEffect(item) {
+  console.log(item);
+  console.log(item.effect);
+
+  if (!item || !item.effect) return;
+
+  // Застосовуємо динамічний ефект
+  const stat = selectedCharacter.characteristics.find(
+    (stat) => stat.name === item.effect.characteristics
+  );
+
+  if (stat) {
+    stat.value += item.effect.value;
+    console.log(
+      `Applied dynamic effect to ${stat.name}: +${item.effect.value}`
+    );
+  }
+
+  saveCharacterState();
+  updateCharacterStats();
+}
+
+function onItemIconClick(item) { // todo
+  console.log(`${item} here`);
+  console.log('item:', item);
+  console.log(
+    'dynamicEffects:',
+    dynamicEffects.map((effect) => effect.name)
+  );
+
+  if (item.dynamic) {
+    applyDynamicEffect(item);
+
+    // Видаляємо предмет зі списку після використання
+    const index = dynamicEffects.findIndex((effect) => {
+      const match = effect.name === item;
+      console.log(`Comparing: ${effect.name} === ${item}:`, match);
+      return match;
+    });
+
+    if (index !== -1) {
+      console.log(`Removing effect at index ${index}:`, dynamicEffects[index]);
+      dynamicEffects.splice(index, 1);
+    } else {
+      console.log('Item not found in dynamicEffects');
+    }
+
+    updateEffectsDisplay();
+  }
 }
 
 function updateCharacterStats() {
   // Update the character's stats on the UI after effects have been applied
   const statsContainer = document.querySelector('.character-chars');
-  console.log(statsContainer);
 
   if (!statsContainer) {
     console.error('Stats container not found');
@@ -280,6 +357,7 @@ function updateCharacterStats() {
   const healthStat = selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Health'
   );
+
   const defenseStat = selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Defense'
   );
@@ -287,40 +365,58 @@ function updateCharacterStats() {
     (stat) => stat.name === 'Damage'
   );
 
+  const staminaStat = selectedCharacter.characteristics.find(
+    (stat) => stat.name === 'Stamina'
+  );
+
   // Update the displayed values of stats
   if (healthStat) {
     const healthElement = statsContainer.querySelector(
       '.stats:first-child .stat-value'
     );
+
     if (healthElement) {
       healthElement.textContent = healthStat.value;
     } else {
       console.error('Health stat element not found');
     }
   }
-  if (defenseStat) {
-    const defenseElement = statsContainer.querySelector(
-      '.stats:nth-child(5) .stat-value'
-    );
-    if (defenseElement) {
-      defenseElement.textContent = defenseStat.value;
-    } else {
-      console.error('Defense stat element not found');
-    }
-  }
   if (damageStat) {
     const damageElement = statsContainer.querySelector(
-      '.stats:nth-child(4) .stat-value'
+      '.stats:nth-child(2) .stat-value'
     );
+
     if (damageElement) {
       damageElement.textContent = damageStat.value;
     } else {
       console.error('Damage stat element not found');
     }
   }
+  if (staminaStat) {
+    const staminaElement = statsContainer.querySelector(
+      '.stats:nth-child(3) .stat-value'
+    );
+
+    if (staminaElement) {
+      staminaElement.textContent = staminaStat.value;
+    } else {
+      console.error('Stamina stat element not found');
+    }
+  }
+  if (defenseStat) {
+    const defenseElement = statsContainer.querySelector(
+      '.stats:nth-child(4) .stat-value'
+    );
+
+    if (defenseElement) {
+      defenseElement.textContent = defenseStat.value;
+    } else {
+      console.error('Defense stat element not found');
+    }
+  }
 }
 
-function updateEffectsDisplay(character) {
+function updateEffectsDisplay() {
   const effectsContainer = document.querySelector('.additional-effects');
 
   const dynamicContainer = document.createElement('div');
@@ -336,9 +432,19 @@ function updateEffectsDisplay(character) {
     const effectElement = document.createElement('div');
     effectElement.classList.add('effect-element');
     effectElement.innerHTML = `
-      <img src="./../${effect.image}" alt="${effect.name}">
-    `;
+    <img src="./../${effect.image}" alt="${effect.name}">
+  `;
+
+    // Додаємо атрибут data-item-name
+    effectElement.dataset.itemName = effect.name;
+
     dynamicContainer.appendChild(effectElement);
+
+    effectElement.addEventListener('click', () => {
+      const itemName = effectElement.dataset.itemName;
+      console.log(itemName); // Має тепер виводити правильну назву
+      onItemIconClick(itemName);
+    });
   });
 
   staticEffects.forEach((effect) => {
