@@ -174,8 +174,6 @@ function heroTurn(selectedAttack) {
     (stat) => stat.name === 'Magic'
   );
 
-    
-
   // Якщо вибрана атака - зцілення
   if (selectedAttack.name === 'Healing') {
     console.log(`Using Healing, Magic Cost: ${selectedAttack.magicCost}`);
@@ -197,6 +195,7 @@ function heroTurn(selectedAttack) {
 
         // Витрачаємо магію
         magicStat.value -= selectedAttack.magicCost;
+
         console.log(
           `Healing applied: +${healingAmount} Health, Remaining Magic: ${magicStat.value}`
         );
@@ -208,28 +207,27 @@ function heroTurn(selectedAttack) {
     }
   }
 
-   let damage = selectedCharacter.characteristics.find(
-     (attack) => attack.name === 'Damage'
-   ).value;
+  magicStat.value -= selectedAttack.magicCost;
+  updateCharacterStats();
+  let damage = selectedCharacter.characteristics.find(
+    (attack) => attack.name === 'Damage'
+  ).value;
 
-    // Розраховуємо захист монстра
-    const monsterDefense = levelData.monster.characteristics.find(
-      (stat) => stat.name === 'Defense'
-    ).value;
+  // Розраховуємо захист монстра
+  const monsterDefense = levelData.monster.characteristics.find(
+    (stat) => stat.name === 'Defense'
+  ).value;
 
-    // Вираховуємо фінальне пошкодження з урахуванням захисту
-    const finalDamage = Math.max(0, damage - monsterDefense); // Пошкодження не може бути менше 0
-      showBattleActions(
-        `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> attack damage: <span class="selectedAttackName">${damage}</span>, <span class="monster">Monster</span> defense: <span class="selectedAttackName">${monsterDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
-      );
+  // Вираховуємо фінальне пошкодження з урахуванням захисту
+  const finalDamage = Math.max(0, damage - monsterDefense); // Пошкодження не може бути менше 0
+  showBattleActions(
+    `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> attack damage: <span class="selectedAttackName">${damage}</span>, <span class="monster">Monster</span> defense: <span class="selectedAttackName">${monsterDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
+  );
 
-    // Зменшуємо здоров'я монстра на отриману кількість пошкодження
-    levelData.monster.characteristics.find(
-      (stat) => stat.name === 'Health'
-    ).value -= finalDamage;
-
-
-  
+  // Зменшуємо здоров'я монстра на отриману кількість пошкодження
+  levelData.monster.characteristics.find(
+    (stat) => stat.name === 'Health'
+  ).value -= finalDamage;
 
   updateHealthBars();
   saveCharacterState();
@@ -721,7 +719,7 @@ battlefieldContainer.appendChild(buttonsContainer);
 
 startLevelButton.addEventListener('click', () => {
   if (isHeroTurn) {
-    showBattleActions(`<p class="hero">Hero starts</p>`)
+    showBattleActions(`<p class="hero">Hero starts</p>`);
   } else {
     console.log('Monster starts');
     monsterTurn();
