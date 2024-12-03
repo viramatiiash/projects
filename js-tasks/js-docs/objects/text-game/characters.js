@@ -68,13 +68,6 @@ const vaelith = new Character(
       description:
         'A swift slash imbued with shadow magic, temporarily reducing the enemy’s defense.',
       staminaCost: 4,
-      applyEffect(target) {
-        target.getCharacteristic('Defense').value = 0;
-      },
-      resetEffect(target) {
-        target.getCharacteristic('Defense').value =
-          target.getCharacteristic('Defense').originalValue;
-      },
     },
     {
       name: 'Healing',
@@ -148,19 +141,6 @@ const lorien = new Character(
       description:
         'Harnesses the power of the forest to double the base attack power until the end of the battle.',
       staminaCost: 5,
-      applyEffect(character) {
-        const damageStat = character.getCharacteristic('Damage');
-        if (damageStat) {
-          damageStat.originalValue = damageStat.value; // Збереження оригінального значення
-          damageStat.value += 3; // Збільшення значення
-        } else {
-          console.error('Damage stat not found in applyEffect.');
-        }
-      },
-      resetEffect(character) {
-        const baseDamage = character.getCharacteristic('Damage').value / 2;
-        character.getCharacteristic('Damage').value = baseDamage;
-      },
     },
     {
       name: 'Healing',
@@ -200,29 +180,6 @@ const tharok = new Character(
       name: "Berserker's Rage",
       description: 'Temporarily increases attack power.',
       staminaCost: 5,
-      applyEffect(character) {
-        const damageStat = character.getCharacteristic('Damage');
-        if (damageStat) {
-          console.log(
-            "Applying Berserker's Rage. Current Damage:",
-            damageStat.value
-          );
-          damageStat.originalValue = damageStat.value; // Збереження оригінального значення
-          damageStat.value += 3; // Збільшення значення Damage
-
-          // Оновлюємо LocalStorage після зміни характеристики
-          localStorage.setItem('characterData', JSON.stringify(character)); // Приклад збереження
-          console.log('New Damage after applying effect:', damageStat.value);
-        } else {
-          console.error('Damage stat not found in applyEffect.');
-        }
-      },
-      resetEffect(character) {
-        const damageStat = character.getCharacteristic('Damage');
-        if (damageStat && damageStat.originalValue !== undefined) {
-          damageStat.value = damageStat.originalValue; // Відновлення оригінального значення
-        }
-      },
     },
     {
       name: 'Healing',
@@ -232,5 +189,8 @@ const tharok = new Character(
     },
   ]
 );
-
 export const characters = [vaelith, astralis, lorien, tharok];
+
+
+
+  

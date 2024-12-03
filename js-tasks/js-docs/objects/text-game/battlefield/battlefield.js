@@ -21,6 +21,8 @@ const selectedCharacter = new Character(
   selectedCharacterData.attacks
 );
 
+console.log(selectedCharacter.attacks[2]);
+
 let initialHealth = null;
 let healthStat = selectedCharacter.characteristics.find(
   (characteristic) => characteristic.name === 'Health'
@@ -55,12 +57,10 @@ function heroTurn(selectedAttack) {
     `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> is taking his/her turn with attack: <span class="selectedAttackName">${selectedAttack.name}</span></p>`
   );
 
-  // Отримуємо характеристику "Stamina" героя
   const staminaStat = selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Stamina'
   );
 
-  // Якщо атака вимагає stamina, перевіряємо та витрачаємо
   if (selectedAttack.staminaCost) {
     if (!staminaStat || staminaStat.value < selectedAttack.staminaCost) {
       showBattleActions(
@@ -69,20 +69,112 @@ function heroTurn(selectedAttack) {
       return;
     }
 
-    // Зменшуємо значення stamina
     staminaStat.value -= selectedAttack.staminaCost;
     updateCharacterStats();
   }
 
   // Якщо атака - це Berserker's Rage, застосовуємо ефект
   if (selectedAttack.name === "Berserker's Rage") {
-    selectedAttack.applyEffect(selectedCharacter); // Застосовуємо ефект
+    let damage = selectedCharacter.characteristics.find(
+      (attack) => attack.name === 'Damage'
+    ).value;
+    let defense = selectedCharacter.characteristics.find(
+      (attack) => attack.name === 'Defense'
+    ).value;
+    const statsContainer = document.querySelector('.character-chars');
+
+    if (!statsContainer) {
+      console.error('Stats container not found');
+      return;
+    }
+    const damageStat = selectedCharacter.characteristics.find(
+      (stat) => stat.name === 'Damage'
+    );
+    if (damageStat) {
+      const damageElement = statsContainer.querySelector(
+        '.stats:nth-child(2) .stat-value'
+      );
+
+      if (damageElement) {
+        damageElement.textContent = damage + 2;
+      } else {
+        console.error('Damage stat element not found');
+      }
+    }
+
+    const defenseStat = selectedCharacter.characteristics.find(
+      (stat) => stat.name === 'Defense'
+    );
+    if (defenseStat) {
+      const defenseElement = statsContainer.querySelector(
+        '.stats:nth-child(4) .stat-value'
+      );
+
+      if (defenseElement) {
+        defenseElement.textContent = defense + 2;
+      } else {
+        console.error('Defense stat element not found');
+      }
+    }
+  }
+
+  // Якщо атака - це Focus of the Forest, застосовуємо ефект
+  if (selectedAttack.name === 'Focus of the Forest') {
+    let damage = selectedCharacter.characteristics.find(
+      (attack) => attack.name === 'Damage'
+    ).value;
+    const statsContainer = document.querySelector('.character-chars');
+
+    if (!statsContainer) {
+      console.error('Stats container not found');
+      return;
+    }
+    const damageStat = selectedCharacter.characteristics.find(
+      (stat) => stat.name === 'Damage'
+    );
+    if (damageStat) {
+      const damageElement = statsContainer.querySelector(
+        '.stats:nth-child(2) .stat-value'
+      );
+
+      if (damageElement) {
+        damageElement.textContent = damage * 2;
+      } else {
+        console.error('Damage stat element not found');
+      }
+    }
+  }
+
+  // Якщо атака - це Night Slash, застосовуємо ефект
+  if (selectedAttack.name === 'Night Slash') {
+    const monsterDefense = levelData.monster.characteristics.find(
+      (stat) => stat.name === 'Defense'
+    ).value;
+
+    const statsContainer = document.querySelector(
+      '#monster-container .character-chars'
+    );
+    console.log(statsContainer);
+
+    if (monsterDefense) {
+      const defenseElement = statsContainer.querySelector(
+        '.stats:nth-child(2) .stat-value'
+      );
+
+      if (defenseElement) {
+        defenseElement.textContent = monsterDefense - 3;
+      } else {
+        console.error('Defense stat element not found');
+      }
+    }
   }
 
   // Отримуємо характеристику "Magic" героя
   const magicStat = selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Magic'
   );
+
+    
 
   // Якщо вибрана атака - зцілення
   if (selectedAttack.name === 'Healing') {
@@ -114,23 +206,11 @@ function heroTurn(selectedAttack) {
     } else {
       showBattleActions(`<p class="error">- Not enough magic for Healing</p>`);
     }
-  } else {
-    // Перевірка, чи є у атаки метод damage
-    let damage;
-    if (typeof selectedAttack.damage === 'function') {
-      console.log('Calling damage function for attack:', selectedAttack.name);
-      damage = selectedAttack.damage(selectedCharacter);
-      console.log(damage);
-    } else {
-      damage = selectedAttack.damage;
-      console.log('Selected is a value');
-    }
+  }
 
-    // Перевірка, чи значення damage не є undefined або NaN
-    if (damage === undefined || isNaN(damage)) {
-      console.error('Invalid damage value:', damage);
-      return;
-    }
+   let damage = selectedCharacter.characteristics.find(
+     (attack) => attack.name === 'Damage'
+   ).value;
 
     // Розраховуємо захист монстра
     const monsterDefense = levelData.monster.characteristics.find(
@@ -139,25 +219,21 @@ function heroTurn(selectedAttack) {
 
     // Вираховуємо фінальне пошкодження з урахуванням захисту
     const finalDamage = Math.max(0, damage - monsterDefense); // Пошкодження не може бути менше 0
-    showBattleActions(
-      `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> attack damage: <span class="selectedAttackName">${damage}</span>, <span class="monster">Monster</span> defense: <span class="selectedAttackName">${monsterDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
-    );
+      showBattleActions(
+        `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> attack damage: <span class="selectedAttackName">${damage}</span>, <span class="monster">Monster</span> defense: <span class="selectedAttackName">${monsterDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
+      );
 
     // Зменшуємо здоров'я монстра на отриману кількість пошкодження
     levelData.monster.characteristics.find(
       (stat) => stat.name === 'Health'
     ).value -= finalDamage;
-  }
+
+
+  
 
   updateHealthBars();
-
-  // Зберігаємо стан героя
   saveCharacterState();
-
-  // Перевіряємо, чи гра завершена
   checkGameOver();
-
-  // Завершуємо хід
   endTurn();
 }
 
@@ -645,7 +721,7 @@ battlefieldContainer.appendChild(buttonsContainer);
 
 startLevelButton.addEventListener('click', () => {
   if (isHeroTurn) {
-    console.log('Hero starts');
+    showBattleActions(`<p class="hero">Hero starts</p>`)
   } else {
     console.log('Monster starts');
     monsterTurn();

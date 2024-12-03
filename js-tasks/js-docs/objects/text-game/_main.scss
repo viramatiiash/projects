@@ -469,11 +469,33 @@ img {
   box-shadow: 1px 1px 5px darken($c-brown, 10%);
   border-radius: 10px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px; /* Ширина вертикального скролу */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: darken($c-brown, 5%); /* Колір доріжки */
+    border-radius: 10px; /* Закруглені краї */
+    cursor: pointer;
+  }
+
+  /* Стиль для повзунка (смуги) скролу */
+  &::-webkit-scrollbar-thumb {
+    background: $c-text; /* Колір смуги */
+    border-radius: 10px; /* Закруглені краї */
+    cursor: pointer;
+    transition: $t-normal;
+  }
+
+  /* Стиль при наведенні на смугу */
+  &::-webkit-scrollbar-thumb:hover {
+    background: darken($c-text, 5%); /* Зміна кольору при наведенні */
+  }
 }
 
-
 .selectedAttackName {
-color: $c-white;
+  color: $c-white;
 }
 
 .error {
