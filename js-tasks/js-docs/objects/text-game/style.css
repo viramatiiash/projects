@@ -567,11 +567,8 @@ img {
 
 #battle-swords {
   width: 100%;
-  max-width: 250px;
-  height: 250px;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  max-width: 150px;
+  height: 150px;
 }
 
 .img-container {
@@ -796,4 +793,110 @@ img {
 }
 #close-modal-btn:hover {
   background-color: rgba(98, 98, 98, 0.9019607843);
+}
+
+#next-level-btn {
+  display: none;
+  padding: 12px 7px;
+  background-color: rgba(47, 47, 47, 0.9019607843);
+  border: 2px solid rgba(22, 22, 22, 0.9019607843);
+  outline: none;
+  color: rgb(215, 180, 110);
+  -webkit-box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.9019607843);
+          box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.9019607843);
+  cursor: pointer;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 10px;
+}
+#next-level-btn:hover {
+  background-color: rgba(98, 98, 98, 0.9019607843);
+}
+
+.active {
+  display: block !important;
+}
+
+#start-battle-btn {
+  padding: 12px 7px;
+  background-color: rgba(47, 47, 47, 0.9019607843);
+  border: 2px solid rgba(22, 22, 22, 0.9019607843);
+  outline: none;
+  color: rgb(215, 180, 110);
+  -webkit-box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.9019607843);
+          box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.9019607843);
+  cursor: pointer;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 10px;
+}
+#start-battle-btn:hover {
+  background-color: rgba(98, 98, 98, 0.9019607843);
+}
+
+.buttonsContainer {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 20px;
+}
+
+#central-container {
+  width: 100%;
+  max-width: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+#battle-actions {
+  width: 100%;
+  max-width: 250px;
+  height: 250px;
+  padding: 20px 20px;
+  background-color: rgba(47, 47, 47, 0.9019607843);
+  border: 2px solid rgba(22, 22, 22, 0.9019607843);
+  outline: none;
+  color: rgb(215, 180, 110);
+  -webkit-box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.9019607843);
+          box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.9019607843);
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+.selectedAttackName {
+  color: #fff;
+}
+
+.error {
+  color: rgb(202, 68, 68);
+}
+
+.hero {
+  color: rgb(81, 255, 28);
+}
+
+.monster {
+  color: rgb(63, 169, 255);
 }

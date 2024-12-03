@@ -6,7 +6,7 @@ export const levels = [
       name: 'Wraithwood',
       image: './assets/monsters/wraithwood.jpg',
       characteristics: [
-        { name: 'Health', value: 14 },
+        { name: 'Health', value: 13 },
         { name: 'Defense', value: 4 },
       ],
       attacks: [

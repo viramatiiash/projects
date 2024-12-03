@@ -2,13 +2,13 @@ import { items } from '../items.js';
 import { levels } from '../levels.js';
 import { Character, characters } from './../characters.js';
 
-let turn = Math.random() > 0.5 ? 'hero' : 'monster'; // Рандомний вибір першого ходу
-let isHeroTurn = turn === 'hero'; // Хто зараз ходить
-let currentLevelIndex = 0;
-const dynamicEffects = []; // Для динамічних (одноразових) ефектів
-const staticEffects = [];
-let levelData = levels[currentLevelIndex];
+const tooltip = document.createElement('div');
+tooltip.classList.add('tooltip');
+const battleActions = [];
 
+let currentLevelIndex = 0;
+let levelData = levels[currentLevelIndex];
+const nextLevelButton = document.getElementById('next-level-btn');
 const selectedCharacterData = JSON.parse(
   localStorage.getItem('selectedCharacter')
 );
@@ -21,7 +21,25 @@ const selectedCharacter = new Character(
   selectedCharacterData.attacks
 );
 
+let initialHealth = null;
+let healthStat = selectedCharacter.characteristics.find(
+  (characteristic) => characteristic.name === 'Health'
+);
+console.log(healthStat);
+
+initialHealth = healthStat.value;
+console.log(initialHealth);
+
+const monsterHealth = levelData.monster.characteristics.find(
+  (stat) => stat.name === 'Health'
+).value;
+
 let selectedAttack = selectedCharacter.attacks[0];
+let turn = Math.random() > 0.5 ? 'hero' : 'monster'; // Рандомний вибір першого ходу
+let isHeroTurn = turn === 'hero'; // Хто зараз ходить
+
+const dynamicEffects = []; // Для динамічних (одноразових) ефектів
+const staticEffects = [];
 
 function heroTurn(selectedAttack) {
   // Перевірка, чи дійсно герой може здійснити свій хід
@@ -33,13 +51,9 @@ function heroTurn(selectedAttack) {
     return;
   }
 
-  // Перевірка, чи атака доступна
-  if (!isAttackAvailable(selectedAttack)) {
-    alert('Attack is not available!');
-    return;
-  }
-
-  console.log('Hero turn with attack:', selectedAttack);
+  showBattleActions(
+    `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> is taking his/her turn with attack: <span class="selectedAttackName">${selectedAttack.name}</span></p>`
+  );
 
   // Отримуємо характеристику "Stamina" героя
   const staminaStat = selectedCharacter.characteristics.find(
@@ -49,8 +63,9 @@ function heroTurn(selectedAttack) {
   // Якщо атака вимагає stamina, перевіряємо та витрачаємо
   if (selectedAttack.staminaCost) {
     if (!staminaStat || staminaStat.value < selectedAttack.staminaCost) {
-      console.log('Not enough stamina for this attack');
-      alert('Not enough stamina to perform this attack!');
+      showBattleActions(
+        `<p class="error">- Not enough stamina for this attack</p>`
+      );
       return;
     }
 
@@ -97,19 +112,16 @@ function heroTurn(selectedAttack) {
         console.error('Health characteristic not found for the character.');
       }
     } else {
-      console.log('Not enough magic for Healing');
-      alert('Not enough magic to cast Healing!');
+      showBattleActions(`<p class="error">- Not enough magic for Healing</p>`);
     }
   } else {
     // Перевірка, чи є у атаки метод damage
     let damage;
     if (typeof selectedAttack.damage === 'function') {
-      // Якщо damage є функцією, викликаємо її для розрахунку пошкодження
       console.log('Calling damage function for attack:', selectedAttack.name);
       damage = selectedAttack.damage(selectedCharacter);
       console.log(damage);
     } else {
-      // Якщо damage є значенням, просто використовуємо його
       damage = selectedAttack.damage;
       console.log('Selected is a value');
     }
@@ -127,8 +139,8 @@ function heroTurn(selectedAttack) {
 
     // Вираховуємо фінальне пошкодження з урахуванням захисту
     const finalDamage = Math.max(0, damage - monsterDefense); // Пошкодження не може бути менше 0
-    console.log(
-      `Attack damage: ${damage}, Monster defense: ${monsterDefense}, Final Damage: ${finalDamage}`
+    showBattleActions(
+      `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> attack damage: <span class="selectedAttackName">${damage}</span>, <span class="monster">Monster</span> defense: <span class="selectedAttackName">${monsterDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
     );
 
     // Зменшуємо здоров'я монстра на отриману кількість пошкодження
@@ -137,7 +149,6 @@ function heroTurn(selectedAttack) {
     ).value -= finalDamage;
   }
 
-  // Оновлюємо панелі здоров'я
   updateHealthBars();
 
   // Зберігаємо стан героя
@@ -163,7 +174,7 @@ function isAttackAvailable(attack) {
     ).value;
     return magic >= attack.magicCost;
   }
-  return true; // Якщо немає спеціальних умов
+  return true;
 }
 
 function monsterTurn() {
@@ -171,13 +182,17 @@ function monsterTurn() {
     levelData.monster.attacks[
       Math.floor(Math.random() * levelData.monster.attacks.length)
     ];
+  showBattleActions(
+    `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> is taking its turn with attack: <span class="selectedAttackName">${randomAttack.name}</span>.</p>`
+  );
+
   const damage = randomAttack.damage;
   const heroDefense = selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Defense'
   ).value;
-  const finalDamage = damage - heroDefense > 0 ? damage - heroDefense : 0; // Ensure no negative damage
-  console.log(
-    `Monster attack: ${randomAttack.name}, Damage: ${damage}, Hero defense: ${heroDefense}, Final Damage: ${finalDamage}`
+  const finalDamage = damage - heroDefense > 0 ? damage - heroDefense : 0;
+  showBattleActions(
+    `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> attack damage: <span class="selectedAttackName">${damage}</span>, <span class="hero">Hero</span> defense: <span class="selectedAttackName">${heroDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
   );
   selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Health'
@@ -222,12 +237,12 @@ function calculateAttackResult(heroAttack, monsterAttack) {
 
 function endTurn() {
   if (checkGameOver()) {
-    return; // Завершити гру, якщо є переможець
+    return;
   }
 
   isHeroTurn = !isHeroTurn;
   if (!isHeroTurn) {
-    setTimeout(monsterTurn, 1000); // Затримка, щоб симулювати анімацію
+    setTimeout(monsterTurn, 1000);
   }
 }
 
@@ -238,8 +253,6 @@ function getRandomItem() {
 
 // Відображення модального вікна з вибраним предметом
 function showItemModal(item) {
-  // console.log(item);
-
   const modal = document.getElementById('item-modal');
   const itemName = document.getElementById('modal-item-name');
   const itemImage = document.getElementById('modal-item-image');
@@ -252,7 +265,7 @@ function showItemModal(item) {
   modal.classList.remove('hidden');
 
   const closeModalBtn = document.getElementById('close-modal-btn');
-  closeModalBtn.removeEventListener('click', closeModalHandler); // Знімаємо попередній слухач
+  closeModalBtn.removeEventListener('click', closeModalHandler);
   closeModalBtn.addEventListener('click', closeModalHandler, { once: true });
 
   function closeModalHandler() {
@@ -262,53 +275,49 @@ function showItemModal(item) {
 }
 
 function addEffectToHero(item) {
-  console.log(item);
-
   if (item && item.dynamic) {
-    console.log(item.dynamic);
-
     dynamicEffects.push(item);
-    console.log(dynamicEffects);
+    showBattleActions(
+      `<p class="selectedAttackParagraph">Hero gets: <span class="selectedAttackName">${item.name}</span></p>`
+    );
   } else {
     if (!staticEffects.some((effect) => effect.name === item.name)) {
       staticEffects.push(item);
 
-      // Застосовуємо статичний ефект до характеристик героя
       if (item && item.effect && item.effect.characteristics) {
         const stat = selectedCharacter.characteristics.find(
           (stat) => stat.name === item.effect.characteristics
         );
         if (stat) {
-          // Додаємо ефект до характеристики героя
           stat.value += item.effect.value;
-          console.log(`Applied effect to ${stat.name}: +${item.effect.value}`);
+          showBattleActions(
+            `<p class="selectedAttackParagraph">Applied effect to ${stat.name}: <span class="selectedAttackName">+${item.effect.value}</span></p>`
+          );
         }
       }
     }
   }
-
-  // Змінюємо характеристику героя після всіх змін
-  // Переконайтесь, що це викликається після змін
   saveCharacterState();
   updateEffectsDisplay();
   updateCharacterStats();
 }
 
 function applyDynamicEffect(item) {
-  console.log(item);
-  console.log(item.effect);
-
   if (!item || !item.effect) return;
 
-  // Застосовуємо динамічний ефект
   const stat = selectedCharacter.characteristics.find(
     (stat) => stat.name === item.effect.characteristics
   );
 
-  if (stat) {
+  if (stat && stat.name === 'Health') {
+    stat.value = Math.min(stat.value + item.effect.value, initialHealth);
+    showBattleActions(
+      `<p class="selectedAttackParagraph">Applied dynamic effect to ${stat.name}: <span class="selectedAttackName">+${item.effect.value}</span></p>`
+    );
+  } else if (stat && stat.name !== 'Health') {
     stat.value += item.effect.value;
-    console.log(
-      `Applied dynamic effect to ${stat.name}: +${item.effect.value}`
+    showBattleActions(
+      `<p class="selectedAttackParagraph">Applied dynamic effect to ${stat.name}: <span class="selectedAttackName">+${item.effect.value}</span></p>`
     );
   }
 
@@ -316,37 +325,27 @@ function applyDynamicEffect(item) {
   updateCharacterStats();
 }
 
-function onItemIconClick(item) { // todo
-  console.log(`${item} here`);
-  console.log('item:', item);
-  console.log(
-    'dynamicEffects:',
-    dynamicEffects.map((effect) => effect.name)
-  );
-
+function onItemIconClick(item) {
   if (item.dynamic) {
     applyDynamicEffect(item);
 
-    // Видаляємо предмет зі списку після використання
     const index = dynamicEffects.findIndex((effect) => {
-      const match = effect.name === item;
-      console.log(`Comparing: ${effect.name} === ${item}:`, match);
+      const match = effect.name === item.name;
       return match;
     });
 
     if (index !== -1) {
-      console.log(`Removing effect at index ${index}:`, dynamicEffects[index]);
       dynamicEffects.splice(index, 1);
     } else {
-      console.log('Item not found in dynamicEffects');
+      showBattleActions(
+        `<p class="selectedAttackParagraph">Item not found in dynamicEffects</p>`
+      );
     }
-
     updateEffectsDisplay();
   }
 }
 
 function updateCharacterStats() {
-  // Update the character's stats on the UI after effects have been applied
   const statsContainer = document.querySelector('.character-chars');
 
   if (!statsContainer) {
@@ -369,7 +368,10 @@ function updateCharacterStats() {
     (stat) => stat.name === 'Stamina'
   );
 
-  // Update the displayed values of stats
+  const magicStat = selectedCharacter.characteristics.find(
+    (stat) => stat.name === 'Magic'
+  );
+
   if (healthStat) {
     const healthElement = statsContainer.querySelector(
       '.stats:first-child .stat-value'
@@ -377,6 +379,17 @@ function updateCharacterStats() {
 
     if (healthElement) {
       healthElement.textContent = healthStat.value;
+    } else {
+      console.error('Health stat element not found');
+    }
+  }
+  if (magicStat) {
+    const magicElement = statsContainer.querySelector(
+      '.stats:nth-child(5) .stat-value'
+    );
+
+    if (magicElement) {
+      magicElement.textContent = magicStat.value;
     } else {
       console.error('Health stat element not found');
     }
@@ -418,7 +431,6 @@ function updateCharacterStats() {
 
 function updateEffectsDisplay() {
   const effectsContainer = document.querySelector('.additional-effects');
-
   const dynamicContainer = document.createElement('div');
   dynamicContainer.classList.add('dynamic-effects');
   const staticContainer = document.createElement('div');
@@ -435,15 +447,10 @@ function updateEffectsDisplay() {
     <img src="./../${effect.image}" alt="${effect.name}">
   `;
 
-    // Додаємо атрибут data-item-name
     effectElement.dataset.itemName = effect.name;
-
     dynamicContainer.appendChild(effectElement);
-
     effectElement.addEventListener('click', () => {
-      const itemName = effectElement.dataset.itemName;
-      console.log(itemName); // Має тепер виводити правильну назву
-      onItemIconClick(itemName);
+      onItemIconClick(effect);
     });
   });
 
@@ -468,11 +475,12 @@ function checkGameOver() {
   ).value;
 
   if (heroHealth <= 0) {
-    alert('Game Over! The monster has won.');
+    showBattleActions(`<p class="error">Game Over! The monster has won.</p>`);
     return true;
   }
   if (monsterHealth <= 0) {
-    alert('Victory! You defeated the monster.');
+    showBattleActions(`<p class="hero">Victory! You defeated the monster.</p>`);
+    showNextLevelButton();
     return true;
   }
   return false;
@@ -524,14 +532,6 @@ function loadLevel(levelIndex) {
 
   const randomItem = getRandomItem();
   showItemModal(randomItem);
-}
-
-function endBattle(character) {
-  character.attacks.forEach((attack) => {
-    if (attack.resetEffect) {
-      attack.resetEffect(character); // Скидаємо ефекти після бою
-    }
-  });
 }
 
 function nextLevel() {
@@ -589,7 +589,6 @@ if (selectedCharacter) {
 }
 
 function updateHealthBars() {
-  // Оновлення здоров'я героя
   const heroHealthElement = document.querySelector(
     '#character-details .character-chars .stats .stat-value'
   );
@@ -600,7 +599,6 @@ function updateHealthBars() {
     heroHealthElement.textContent = heroHealth;
   }
 
-  // Оновлення здоров'я монстра
   const monsterHealthElement = document.querySelector(
     '#monster-container .character-chars .stats .stat-value'
   );
@@ -612,32 +610,45 @@ function updateHealthBars() {
   }
 }
 
+function showNextLevelButton() {
+  nextLevelButton.classList.add('active');
+}
+
+const showBattleActions = (code) => {
+  console.log(code);
+
+  const battleActionsContainer = document.getElementById('battle-actions');
+  battleActionsContainer.insertAdjacentHTML('beforeend', code);
+};
+
 document.querySelectorAll('.attack').forEach((btn) => {
   btn.addEventListener('click', (e) => {
-    const attackName = e.target.closest('.attack').textContent.trim(); // Завжди отримуємо текст кнопки
+    const attackName = e.target.closest('.attack').textContent.trim();
     selectedAttack = selectedCharacter.attacks.find(
       (attack) => attack.name === attackName
     );
 
     if (selectedAttack) {
-      // Додати перевірку характеристик
-      const damageStat = selectedCharacter.getCharacteristic('Damage');
-      console.log(damageStat); // Перевірка значення Damage
-
       heroTurn(selectedAttack);
     }
   });
 });
 
-document.getElementById('next-level-btn').addEventListener('click', nextLevel);
+nextLevelButton.addEventListener('click', nextLevel);
+const battlefieldContainer = document.getElementById('battlefield-container');
+const startLevelButton = document.getElementById('start-battle-btn');
 
-document.getElementById('start-battle-btn').addEventListener('click', () => {
+const buttonsContainer = document.createElement('div');
+buttonsContainer.classList.add('buttonsContainer');
+buttonsContainer.append(startLevelButton, nextLevelButton);
+battlefieldContainer.appendChild(buttonsContainer);
+
+startLevelButton.addEventListener('click', () => {
   if (isHeroTurn) {
-    alert('Your turn to attack!');
-    // Handle Hero's turn logic here
+    console.log('Hero starts');
   } else {
-    alert('Monster is attacking!');
-    // Handle Monster's turn logic here
+    console.log('Monster starts');
+    monsterTurn();
   }
 
   document.getElementById('start-battle-btn').disabled = true;
