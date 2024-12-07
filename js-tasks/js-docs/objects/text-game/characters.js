@@ -51,6 +51,7 @@ const vaelith = new Character(
   [
     {
       name: 'Basic Attack',
+      type: 'damage',
       description:
         'A swift slash with his blade, dealing minimal but reliable damage. Can be deflected.',
       staminaCost: 0,
@@ -58,6 +59,7 @@ const vaelith = new Character(
     },
     {
       name: 'Shadow Strike',
+      type: 'damage',
       description:
         'A strike enhanced by shadow magic, allowing Vaelith to bypass a portion of the enemy’s defense.',
       staminaCost: 3,
@@ -65,12 +67,14 @@ const vaelith = new Character(
     },
     {
       name: 'Night Slash',
+      type: 'special',
       description:
         'A swift slash imbued with shadow magic, temporarily reducing the enemy’s defense.',
       staminaCost: 4,
     },
     {
       name: 'Healing',
+      type: 'healing',
       description: 'Restores 2 health points to the character.',
       magicCost: 4,
       healing: 2,
@@ -93,17 +97,20 @@ const astralis = new Character(
   [
     {
       name: 'Basic Attack',
+      type: 'damage',
       description: 'Staff damage +3, can be deflected.',
       damage: 3,
     },
     {
       name: 'Healing',
+      type: 'healing',
       description: 'Restores 4 health to the Mage.',
       magicCost: 3,
       healing: 4,
     },
     {
       name: 'Lightning Bolt',
+      type: 'damage',
       description:
         'Electric attack with 50% chance to stun, when the enemy skips the move.',
       magicCost: 5,
@@ -118,32 +125,36 @@ const lorien = new Character(
   './assets/characters/wood-elf.jpg',
   'An archer and guardian of the forests. Her mission is to protect the balance of nature, which has now been disrupted.',
   [
-    { name: 'Health', value: 10 },
+    { name: 'Health', value: 100 },
     { name: 'Damage', value: 2 },
-    { name: 'Stamina', value: 8 },
+    { name: 'Stamina', value: 100 },
     { name: 'Defense', value: 3 },
     { name: 'Magic', value: 6 },
   ],
   [
     {
       name: 'Basic Attack',
+      type: 'damage',
       description: 'Bow damage, can be deflected.',
       damage: 2,
     },
     {
       name: 'Arrow Rain',
+      type: 'damage',
       description: 'A barrage of arrows.',
       staminaCost: 4,
       damage: 5,
     },
     {
       name: 'Focus of the Forest',
+      type: 'special',
       description:
         'Harnesses the power of the forest to double the base attack power until the end of the battle.',
       staminaCost: 5,
     },
     {
       name: 'Healing',
+      type: 'special',
       description: 'Restores 2 health to the Wood Elf.',
       magicCost: 4,
       healing: 2,
@@ -166,11 +177,13 @@ const tharok = new Character(
   [
     {
       name: 'Basic Attack',
+      type: 'damage',
       description: 'Ordinary axe damage, can be deflected.',
       damage: 3,
     },
     {
       name: 'Skullcrusher',
+      type: 'damage',
       description: 'Heavy blow, reduces defense by 1.',
       damage: 5,
       staminaCost: 4,
@@ -178,11 +191,13 @@ const tharok = new Character(
     },
     {
       name: "Berserker's Rage",
+      type: 'special',
       description: 'Temporarily increases attack power.',
       staminaCost: 5,
     },
     {
       name: 'Healing',
+      type: 'special',
       description: 'Restores 2 health to the Warrior.',
       magicCost: 4,
       healing: 2,
@@ -190,7 +205,3 @@ const tharok = new Character(
   ]
 );
 export const characters = [vaelith, astralis, lorien, tharok];
-
-
-
-  

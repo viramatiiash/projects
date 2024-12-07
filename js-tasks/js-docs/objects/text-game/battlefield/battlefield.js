@@ -21,29 +21,56 @@ const selectedCharacter = new Character(
   selectedCharacterData.attacks
 );
 
-console.log(selectedCharacter.attacks[2]);
-
 let initialHealth = null;
 let healthStat = selectedCharacter.characteristics.find(
   (characteristic) => characteristic.name === 'Health'
 );
-console.log(healthStat);
 
 initialHealth = healthStat.value;
-console.log(initialHealth);
 
 const monsterHealth = levelData.monster.characteristics.find(
   (stat) => stat.name === 'Health'
 ).value;
 
-let selectedAttack = selectedCharacter.attacks[0];
+let initialHeroHealth = selectedCharacter.characteristics.find(
+  (characteristic) => characteristic.name === 'Health'
+);
+console.log(initialHeroHealth);
+
+
+
+
+
+let selectedAttack;
+let updatedDamage;
+let randomDamage;
 let turn = Math.random() > 0.5 ? 'hero' : 'monster'; // Рандомний вибір першого ходу
 let isHeroTurn = turn === 'hero'; // Хто зараз ходить
 
 const dynamicEffects = []; // Для динамічних (одноразових) ефектів
 const staticEffects = [];
 
+// ! Hero Turn
 function heroTurn(selectedAttack) {
+  if (
+    selectedAttack.type === 'damage' &&
+    selectedAttack.name !== 'Basic Attack'
+  ) {
+    updatedDamage = selectedAttack.damage;
+  } else {
+    updatedDamage = selectedCharacter.characteristics.find(
+      (stat) => stat.name === 'Damage'
+    ).value;
+  }
+  console.log(selectedAttack);
+  console.log('initial damage: ', updatedDamage);
+
+  if (updatedDamage === 0) {
+    updatedDamage = selectedAttack.damage;
+  }
+
+  console.log(updatedDamage);
+
   // Перевірка, чи дійсно герой може здійснити свій хід
   if (!isHeroTurn) return;
 
@@ -73,240 +100,345 @@ function heroTurn(selectedAttack) {
     updateCharacterStats();
   }
 
-  // Якщо атака - це Berserker's Rage, застосовуємо ефект
-  if (selectedAttack.name === "Berserker's Rage") {
-    let damage = selectedCharacter.characteristics.find(
-      (attack) => attack.name === 'Damage'
-    ).value;
-    let defense = selectedCharacter.characteristics.find(
-      (attack) => attack.name === 'Defense'
-    ).value;
-    const statsContainer = document.querySelector('.character-chars');
-
-    if (!statsContainer) {
-      console.error('Stats container not found');
-      return;
-    }
-    const damageStat = selectedCharacter.characteristics.find(
-      (stat) => stat.name === 'Damage'
-    );
-    if (damageStat) {
-      const damageElement = statsContainer.querySelector(
-        '.stats:nth-child(2) .stat-value'
-      );
-
-      if (damageElement) {
-        damageElement.textContent = damage + 2;
-      } else {
-        console.error('Damage stat element not found');
-      }
-    }
-
-    const defenseStat = selectedCharacter.characteristics.find(
-      (stat) => stat.name === 'Defense'
-    );
-    if (defenseStat) {
-      const defenseElement = statsContainer.querySelector(
-        '.stats:nth-child(4) .stat-value'
-      );
-
-      if (defenseElement) {
-        defenseElement.textContent = defense + 2;
-      } else {
-        console.error('Defense stat element not found');
-      }
-    }
-  }
-
-  // Якщо атака - це Focus of the Forest, застосовуємо ефект
-  if (selectedAttack.name === 'Focus of the Forest') {
-    let damage = selectedCharacter.characteristics.find(
-      (attack) => attack.name === 'Damage'
-    ).value;
-    const statsContainer = document.querySelector('.character-chars');
-
-    if (!statsContainer) {
-      console.error('Stats container not found');
-      return;
-    }
-    const damageStat = selectedCharacter.characteristics.find(
-      (stat) => stat.name === 'Damage'
-    );
-    if (damageStat) {
-      const damageElement = statsContainer.querySelector(
-        '.stats:nth-child(2) .stat-value'
-      );
-
-      if (damageElement) {
-        damageElement.textContent = damage * 2;
-      } else {
-        console.error('Damage stat element not found');
-      }
-    }
-  }
-
-  // Якщо атака - це Night Slash, застосовуємо ефект
-  if (selectedAttack.name === 'Night Slash') {
-    const monsterDefense = levelData.monster.characteristics.find(
-      (stat) => stat.name === 'Defense'
-    ).value;
-
-    const statsContainer = document.querySelector(
-      '#monster-container .character-chars'
-    );
-    console.log(statsContainer);
-
-    if (monsterDefense) {
-      const defenseElement = statsContainer.querySelector(
-        '.stats:nth-child(2) .stat-value'
-      );
-
-      if (defenseElement) {
-        defenseElement.textContent = monsterDefense - 3;
-      } else {
-        console.error('Defense stat element not found');
-      }
-    }
-  }
-
-  // Отримуємо характеристику "Magic" героя
   const magicStat = selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Magic'
   );
 
-  // Якщо вибрана атака - зцілення
-  if (selectedAttack.name === 'Healing') {
-    console.log(`Using Healing, Magic Cost: ${selectedAttack.magicCost}`);
-
-    // Перевірка, чи достатньо магії для зцілення
-    if (magicStat.value >= selectedAttack.magicCost) {
-      const healingAmount = selectedAttack.healing || 2; // Використовуємо поле healing або за замовчуванням 2
-      const healthStat = selectedCharacter.getCharacteristic('Health');
-
-      if (healthStat) {
-        healthStat.value += healingAmount;
-
-        // Логіка для обмеження здоров'я (якщо потрібно, наприклад, maxHealth)
-        const maxHealth =
-          selectedCharacter.getCharacteristic('MaxHealth')?.value;
-        if (maxHealth && healthStat.value > maxHealth) {
-          healthStat.value = maxHealth; // Обмеження до максимального здоров'я
-        }
-
-        // Витрачаємо магію
-        magicStat.value -= selectedAttack.magicCost;
-
-        console.log(
-          `Healing applied: +${healingAmount} Health, Remaining Magic: ${magicStat.value}`
-        );
-      } else {
-        console.error('Health characteristic not found for the character.');
-      }
-    } else {
-      showBattleActions(`<p class="error">- Not enough magic for Healing</p>`);
+  if (selectedAttack.magicCost) {
+    if (!magicStat || magicStat.value < selectedAttack.magicCost) {
+      showBattleActions(
+        `<p class="error">- Not enough magic for this attack</p>`
+      );
+      return;
     }
+
+    magicStat.value -= selectedAttack.magicCost;
+    updateCharacterStats();
   }
 
-  magicStat.value -= selectedAttack.magicCost;
-  updateCharacterStats();
-  let damage = selectedCharacter.characteristics.find(
-    (attack) => attack.name === 'Damage'
-  ).value;
+  // ! Berserker's Rage
+  if (selectedAttack.name === "Berserker's Rage") {
+    handleBerserkersRage();
+  }
 
+  // ! Focus of the Forest
+  if (selectedAttack.name === 'Focus of the Forest') {
+    handleFocusOfForest();
+  }
+
+  // ! Night Slash
+  if (selectedAttack.name === 'Night Slash') {
+    handleNightSlash();
+  }
+
+  // ! Healing
+  if (selectedAttack.name === 'Healing') {
+    handleHealing();
+  }
+  console.log(updatedDamage);
+  if (selectedAttack.name === 'Basic Attack') {
+    selectedAttack.damage = updatedDamage;
+  }
   // Розраховуємо захист монстра
   const monsterDefense = levelData.monster.characteristics.find(
     (stat) => stat.name === 'Defense'
   ).value;
-
-  // Вираховуємо фінальне пошкодження з урахуванням захисту
-  const finalDamage = Math.max(0, damage - monsterDefense); // Пошкодження не може бути менше 0
-  showBattleActions(
-    `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> attack damage: <span class="selectedAttackName">${damage}</span>, <span class="monster">Monster</span> defense: <span class="selectedAttackName">${monsterDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
+  console.log(
+    'updated Damage before apply Special Attack Effect: ',
+    updatedDamage
   );
 
-  // Зменшуємо здоров'я монстра на отриману кількість пошкодження
-  levelData.monster.characteristics.find(
-    (stat) => stat.name === 'Health'
-  ).value -= finalDamage;
+  if (selectedAttack.type === 'damage') {
+    applySpecialAttackEffects({ ...selectedAttack, damage: updatedDamage });
 
+    console.log(selectedAttack);
+
+    console.log('random damage:', randomDamage);
+
+    // Вираховуємо фінальне пошкодження з урахуванням захисту
+    const finalDamage = Math.max(0, randomDamage - monsterDefense);
+    console.log(updatedDamage);
+    // Пошкодження не може бути менше 0
+    showBattleActions(
+      `<p class="selectedAttackParagraph">- <span class="hero">Hero</span> attack damage: <span class="selectedAttackName">${randomDamage}</span>, <span class="monster">Monster</span> defense: <span class="selectedAttackName">${monsterDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
+    );
+    // updatedDamage = selectedAttack.damage;
+
+    // Зменшуємо здоров'я монстра на отриману кількість пошкодження
+    levelData.monster.characteristics.find(
+      (stat) => stat.name === 'Health'
+    ).value -= finalDamage;
+  }
   updateHealthBars();
   saveCharacterState();
   checkGameOver();
   endTurn();
 }
 
-function isAttackAvailable(attack) {
-  if (attack.staminaCost) {
-    const stamina = selectedCharacter.characteristics.find(
-      (stat) => stat.name === 'Stamina'
-    ).value;
-    return stamina >= attack.staminaCost;
+// ! Special Attacks
+// handle Berserker's Rage
+const handleBerserkersRage = () => {
+  const statsContainer = document.querySelector('.character-chars');
+
+  if (!statsContainer) {
+    console.error('Stats container not found');
+    return;
   }
-  if (attack.magicCost) {
-    const magic = selectedCharacter.characteristics.find(
-      (stat) => stat.name === 'Magic'
-    ).value;
-    return magic >= attack.magicCost;
+  const damageStat = selectedCharacter.characteristics.find(
+    (stat) => stat.name === 'Damage'
+  );
+
+  updatedDamage = damageStat.value;
+  updatedDamage += 2;
+  damageStat.value = updatedDamage;
+  const damageElement = statsContainer.querySelector(
+    '.stats:nth-child(2) .stat-value'
+  );
+
+  if (damageElement) {
+    damageElement.textContent = updatedDamage;
+  } else {
+    console.error('Damage stat element not found');
   }
-  return true;
+
+  let defenseStat = selectedCharacter.characteristics.find(
+    (stat) => stat.name === 'Defense'
+  );
+  if (defenseStat) {
+    defenseStat.value += 2;
+    const defenseElement = statsContainer.querySelector(
+      '.stats:nth-child(4) .stat-value'
+    );
+
+    if (defenseElement) {
+      defenseElement.textContent = defenseStat.value;
+    } else {
+      console.error('Defense stat element not found');
+    }
+    saveCharacterState();
+    updateCharacterStats();
+  }
+};
+
+// handle Focus Of the Forest
+const handleFocusOfForest = () => {
+  const statsContainer = document.querySelector('.character-chars');
+
+  if (!statsContainer) {
+    console.error('Stats container not found');
+    return;
+  }
+  const damageStat = selectedCharacter.characteristics.find(
+    (stat) => stat.name === 'Damage'
+  );
+  updatedDamage *= 2;
+  damageStat.value = updatedDamage;
+  const damageElement = statsContainer.querySelector(
+    '.stats:nth-child(2) .stat-value'
+  );
+
+  if (damageElement) {
+    damageElement.textContent = updatedDamage;
+  } else {
+    console.error('Defense stat element not found');
+  }
+
+  saveCharacterState();
+};
+
+// Handle Night Slash
+const handleNightSlash = () => {
+  const monsterDefense = levelData.monster.characteristics.find(
+    (stat) => stat.name === 'Defense'
+  ).value;
+
+  const statsContainer = document.querySelector(
+    '#monster-container .character-chars'
+  );
+  console.log(statsContainer);
+
+  if (monsterDefense) {
+    const defenseElement = statsContainer.querySelector(
+      '.stats:nth-child(2) .stat-value'
+    );
+
+    if (defenseElement) {
+      const updatedDefense = monsterDefense - 3;
+      defenseElement.textContent = updatedDefense;
+
+      // Оновіть дані в levelData
+      const monsterDefenseStat = levelData.monster.characteristics.find(
+        (stat) => stat.name === 'Defense'
+      );
+      if (monsterDefenseStat) {
+        monsterDefenseStat.value = updatedDefense;
+      }
+    } else {
+      console.error('Defense stat element not found');
+    }
+  }
+  saveCharacterState();
+  updateCharacterStats();
+};
+
+// Handle Healing
+const handleHealing = () => {
+  console.log(`Using Healing, Magic Cost: ${selectedAttack.magicCost}`);
+  const magicStat = selectedCharacter.characteristics.find(
+    (stat) => stat.name === 'Magic'
+  );
+
+  if (selectedAttack.magicCost) {
+    if (!magicStat || magicStat.value < selectedAttack.magicCost) {
+      showBattleActions(
+        `<p class="error">- Not enough magic for this attack</p>`
+      );
+      return;
+    }
+  }
+  // Перевірка, чи достатньо магії для зцілення
+  if (magicStat.value >= selectedAttack.magicCost) {
+    const healingAmount = selectedAttack.healing || 2; // Використовуємо поле healing або за замовчуванням 2
+    const healthStat = selectedCharacter.getCharacteristic('Health');
+
+    if (healthStat) {
+      healthStat.value += healingAmount;
+
+      // Логіка для обмеження здоров'я (якщо потрібно, наприклад, maxHealth)
+      const maxHealth = selectedCharacter.getCharacteristic('MaxHealth')?.value;
+      if (maxHealth && healthStat.value > maxHealth) {
+        healthStat.value = maxHealth; // Обмеження до максимального здоров'я
+      }
+
+      // Витрачаємо магію
+      magicStat.value -= selectedAttack.magicCost;
+
+      showBattleActions(
+        `<p class="selectedAttackParagraph">- Healing applied: <span class="selectedAttackName">+${healingAmount}</span> Health, Remaining Magic: <span class="selectedAttackName">${magicStat.value}</span></p>`
+      );
+    } else {
+      console.error('Health characteristic not found for the character.');
+    }
+  } else {
+    showBattleActions(`<p class="error">- Not enough magic for Healing</p>`);
+  }
+  saveCharacterState();
+  endTurn();
+  return;
+};
+
+function applySpecialAttackEffects(selectedAttack) {
+  console.log(selectedAttack);
+
+  const randomChance = Math.random();
+  // let randomDamage;
+  console.log(randomChance);
+
+  // Визначаємо, який ефект застосовуємо
+  if (randomChance <= 0.4) {
+    randomDamage = selectedAttack.damage;
+    console.log(randomDamage);
+
+    showBattleActions(
+      `<p class="selectedAttackParagraph">- Full attack: <span class="error">${randomDamage}!</span></p>`
+    );
+  } else if (randomChance <= 0.85) {
+    const randomMultiplier = Math.random() * (0.99 - 0.01) + 0.01;
+    randomDamage = selectedAttack.damage * randomMultiplier;
+    randomDamage = Math.round(randomDamage);
+    console.log(randomDamage);
+
+    showBattleActions(
+      `<p class="selectedAttackParagraph">- Random damage: <span class="error">${randomDamage}</span> with <span class="selectedAttackName">${selectedAttack.name}</span></p>`
+    );
+  } else if (randomChance <= 0.9) {
+    randomDamage = 0;
+    console.log(randomDamage);
+
+    showBattleActions(
+      `<p class="miss">- Attack missed: <span class="error">${randomDamage}!</span></p>`
+    );
+  } else {
+    randomDamage = selectedAttack.damage * 2;
+    console.log(randomDamage);
+
+    showBattleActions(
+      `<p class="selectedAttackParagraph">- Fatality! Critical hit: <span class="error">${randomDamage}!</span></p>`
+    );
+  }
+  // updatedDamage = randomDamage;
+  updateCharacterStats();
+  saveCharacterState();
 }
 
 function monsterTurn() {
-  const randomAttack =
-    levelData.monster.attacks[
-      Math.floor(Math.random() * levelData.monster.attacks.length)
-    ];
-  showBattleActions(
-    `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> is taking its turn with attack: <span class="selectedAttackName">${randomAttack.name}</span>.</p>`
-  );
+  // Генеруємо випадкове число від 0 до 1 для визначення типу атаки
+  const randomChance = Math.random();
+  let randomAttack;
 
-  const damage = randomAttack.damage;
+  // Генеруємо випадкову атаку залежно від шансів
+  if (randomChance <= 0.4) {
+    // 40% ймовірність для повної атаки
+    randomAttack =
+      levelData.monster.attacks[
+        Math.floor(Math.random() * levelData.monster.attacks.length)
+      ];
+    showBattleActions(
+      `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> is taking its turn with Full attack: <span class="selectedAttackName">${randomAttack.name}</span>.</p>`
+    );
+  } else if (randomChance <= 0.85) {
+    // 45% ймовірність для випадкової атаки
+    // Генеруємо випадкову атаку, подібно до випадкової атаки героя
+    randomAttack =
+      levelData.monster.attacks[
+        Math.floor(Math.random() * levelData.monster.attacks.length)
+      ];
+    const randomMultiplier = Math.random() * (0.99 - 0.01) + 0.01; // Множник від 1% до 99%
+    randomAttack.damage = Math.round(randomAttack.damage * randomMultiplier);
+    showBattleActions(
+      `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> is taking its turn with Random damage: <span class="selectedAttackName">${randomAttack.name}</span>, Damage: <span class="error">${randomAttack.damage}</span></p>`
+    );
+  } else if (randomChance <= 0.9) {
+    // 5% ймовірність для промаху
+    randomAttack = { name: 'Miss', damage: 0 };
+    showBattleActions(
+      `<p class="miss">- <span class="monster">Monster</span> attack missed!</p>`
+    );
+  } else {
+    // 5% ймовірність для фаталіті
+    randomAttack =
+      levelData.monster.attacks[
+        Math.floor(Math.random() * levelData.monster.attacks.length)
+      ];
+    randomAttack.damage *= 2; // Фаталіті дає подвоєний урон
+    showBattleActions(
+      `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> used Fatality! Critical hit: <span class="error">${randomAttack.damage}</span></p>`
+    );
+  }
+
+  // Обчислюємо фінальний урон з урахуванням захисту героя
   const heroDefense = selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Defense'
   ).value;
-  const finalDamage = damage - heroDefense > 0 ? damage - heroDefense : 0;
+  const finalDamage =
+    randomAttack.damage - heroDefense > 0
+      ? randomAttack.damage - heroDefense
+      : 0;
+
   showBattleActions(
-    `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> attack damage: <span class="selectedAttackName">${damage}</span>, <span class="hero">Hero</span> defense: <span class="selectedAttackName">${heroDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
+    `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> attack damage: <span class="selectedAttackName">${randomAttack.damage}</span>, <span class="hero">Hero</span> defense: <span class="selectedAttackName">${heroDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
   );
+
+  // Оновлюємо здоров'я героя
   selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Health'
   ).value -= finalDamage;
+
+  // Оновлюємо статус здоров'я
   updateHealthBars();
   saveCharacterState();
   checkGameOver();
   endTurn();
-}
-
-function calculateAttackResult(heroAttack, monsterAttack) {
-  const missChance = Math.random();
-  const fatalityChance = Math.random();
-
-  // Miss - no damage dealt
-  if (missChance < 0.2) {
-    console.log('Attack missed!');
-    return { heroDamage: 0, monsterDamage: 0 };
-  }
-
-  // Partial Attack - damage is reduced
-  const heroPartialDamage =
-    missChance < 0.5
-      ? heroAttack.damage * (Math.random() * 0.5 + 0.5)
-      : heroAttack.damage;
-  const monsterPartialDamage =
-    missChance < 0.5
-      ? monsterAttack.damage * (Math.random() * 0.5 + 0.5)
-      : monsterAttack.damage;
-
-  // Fatality - Hero's attack doubles, monster's attack increases by 4
-  if (fatalityChance < 0.1) {
-    console.log('Fatality! Hero damage doubled, Monster damage increased by 4');
-    return {
-      heroDamage: heroAttack.damage * 2,
-      monsterDamage: monsterAttack.damage + 4,
-    };
-  }
-
-  return { heroDamage: heroPartialDamage, monsterDamage: monsterPartialDamage };
 }
 
 function endTurn() {
@@ -359,6 +491,7 @@ function addEffectToHero(item) {
       staticEffects.push(item);
 
       if (item && item.effect && item.effect.characteristics) {
+        updatedDamage += item.effect.value;
         const stat = selectedCharacter.characteristics.find(
           (stat) => stat.name === item.effect.characteristics
         );
@@ -457,17 +590,6 @@ function updateCharacterStats() {
       console.error('Health stat element not found');
     }
   }
-  if (magicStat) {
-    const magicElement = statsContainer.querySelector(
-      '.stats:nth-child(5) .stat-value'
-    );
-
-    if (magicElement) {
-      magicElement.textContent = magicStat.value;
-    } else {
-      console.error('Health stat element not found');
-    }
-  }
   if (damageStat) {
     const damageElement = statsContainer.querySelector(
       '.stats:nth-child(2) .stat-value'
@@ -499,6 +621,17 @@ function updateCharacterStats() {
       defenseElement.textContent = defenseStat.value;
     } else {
       console.error('Defense stat element not found');
+    }
+  }
+  if (magicStat) {
+    const magicElement = statsContainer.querySelector(
+      '.stats:nth-child(5) .stat-value'
+    );
+
+    if (magicElement) {
+      magicElement.textContent = magicStat.value;
+    } else {
+      console.error('Health stat element not found');
     }
   }
 }
@@ -689,8 +822,6 @@ function showNextLevelButton() {
 }
 
 const showBattleActions = (code) => {
-  console.log(code);
-
   const battleActionsContainer = document.getElementById('battle-actions');
   battleActionsContainer.insertAdjacentHTML('beforeend', code);
 };
@@ -701,6 +832,7 @@ document.querySelectorAll('.attack').forEach((btn) => {
     selectedAttack = selectedCharacter.attacks.find(
       (attack) => attack.name === attackName
     );
+    console.log('initial attack: ', selectedAttack);
 
     if (selectedAttack) {
       heroTurn(selectedAttack);
