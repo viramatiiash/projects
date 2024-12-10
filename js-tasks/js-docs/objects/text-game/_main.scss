@@ -323,6 +323,7 @@ img {
 .effect-element {
   width: 50px;
   height: 50px;
+  cursor: pointer;
 }
 
 .dynamic-effects {
@@ -508,4 +509,107 @@ img {
 
 .monster {
   color: $c-monster;
+}
+
+// ! Start Modal
+#startModal {
+  display: block;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $c-body;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: $t-normal;
+}
+
+#storyModal {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $c-body;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $t-normal;
+
+  & p {
+    width: 100%;
+    max-width: 600px;
+  }
+}
+
+#mainTitle {
+  font-size: 66px;
+}
+
+#start-game-btn,
+#closeModal {
+  padding: 10px 20px;
+  background-color: $c-brown;
+  border: 2px solid darken($c-brown, 10%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: $t-normal;
+
+  &:hover {
+    background-color: lighten($c-brown, 20%);
+  }
+}
+
+.closed {
+  opacity: 0 !important;
+  display: none !important;
+}
+
+.storyModalClosed {
+  opacity: 0 !important;
+  display: none !important;
+}
+
+.storyContainer {
+  & .imageContainer {
+    width: 100%;
+    max-width: 86%;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 33%;
+  background-color: $c-blue;
+  padding: 20px 30px 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 40px 15px $c-light-blue-tran;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  cursor: pointer;
+  transition: $t-normal;
+}
+
+.stones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+
+  .stone-container {
+    width: 100%;
+    max-width: 200px;
+  }
 }

@@ -1,6 +1,6 @@
 import { items } from '../items.js';
 import { levels } from '../levels.js';
-import { Character, characters } from './../characters.js';
+import { Character } from './../characters.js';
 
 const tooltip = document.createElement('div');
 tooltip.classList.add('tooltip');
@@ -9,16 +9,20 @@ const battleActions = [];
 let currentLevelIndex = 0;
 let levelData = levels[currentLevelIndex];
 const nextLevelButton = document.getElementById('next-level-btn');
+
 const selectedCharacterData = JSON.parse(
   localStorage.getItem('selectedCharacter')
 );
+
 const selectedCharacter = new Character(
   selectedCharacterData.race,
+  selectedCharacterData.level,
   selectedCharacterData.name,
   selectedCharacterData.image,
   selectedCharacterData.description,
   selectedCharacterData.characteristics,
-  selectedCharacterData.attacks
+  selectedCharacterData.attacks,
+  selectedCharacterData.sounds
 );
 
 let initialHealth = null;
@@ -37,13 +41,10 @@ let initialHeroHealth = selectedCharacter.characteristics.find(
 );
 console.log(initialHeroHealth);
 
-
-
-
-
 let selectedAttack;
 let updatedDamage;
 let randomDamage;
+let randomMonsterDamage;
 let turn = Math.random() > 0.5 ? 'hero' : 'monster'; // Рандомний вибір першого ходу
 let isHeroTurn = turn === 'hero'; // Хто зараз ходить
 
@@ -374,45 +375,41 @@ function applySpecialAttackEffects(selectedAttack) {
 function monsterTurn() {
   // Генеруємо випадкове число від 0 до 1 для визначення типу атаки
   const randomChance = Math.random();
-  let randomAttack;
+  let randomAttack =
+    levelData.monster.attacks[
+      Math.floor(Math.random() * levelData.monster.attacks.length)
+    ];
+  randomMonsterDamage = randomAttack.damage;
+  console.log('random monster damage:', randomMonsterDamage);
+  console.log('random attack damage:', randomAttack.damage);
 
   // Генеруємо випадкову атаку залежно від шансів
   if (randomChance <= 0.4) {
     // 40% ймовірність для повної атаки
-    randomAttack =
-      levelData.monster.attacks[
-        Math.floor(Math.random() * levelData.monster.attacks.length)
-      ];
+    randomMonsterDamage;
     showBattleActions(
       `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> is taking its turn with Full attack: <span class="selectedAttackName">${randomAttack.name}</span>.</p>`
     );
   } else if (randomChance <= 0.85) {
     // 45% ймовірність для випадкової атаки
     // Генеруємо випадкову атаку, подібно до випадкової атаки героя
-    randomAttack =
-      levelData.monster.attacks[
-        Math.floor(Math.random() * levelData.monster.attacks.length)
-      ];
     const randomMultiplier = Math.random() * (0.99 - 0.01) + 0.01; // Множник від 1% до 99%
-    randomAttack.damage = Math.round(randomAttack.damage * randomMultiplier);
+    randomMonsterDamage = Math.round(randomMonsterDamage * randomMultiplier);
     showBattleActions(
-      `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> is taking its turn with Random damage: <span class="selectedAttackName">${randomAttack.name}</span>, Damage: <span class="error">${randomAttack.damage}</span></p>`
+      `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> is taking its turn with Random damage: <span class="selectedAttackName">${randomAttack.name}</span>, Damage: <span class="error">${randomMonsterDamage}</span></p>`
     );
   } else if (randomChance <= 0.9) {
     // 5% ймовірність для промаху
-    randomAttack = { name: 'Miss', damage: 0 };
+    randomMonsterDamage = 0;
     showBattleActions(
       `<p class="miss">- <span class="monster">Monster</span> attack missed!</p>`
     );
   } else {
     // 5% ймовірність для фаталіті
-    randomAttack =
-      levelData.monster.attacks[
-        Math.floor(Math.random() * levelData.monster.attacks.length)
-      ];
-    randomAttack.damage *= 2; // Фаталіті дає подвоєний урон
+
+    randomMonsterDamage *= 2; // Фаталіті дає подвоєний урон
     showBattleActions(
-      `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> used Fatality! Critical hit: <span class="error">${randomAttack.damage}</span></p>`
+      `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> used Fatality! Critical hit: <span class="error">${randomMonsterDamage}</span></p>`
     );
   }
 
@@ -421,19 +418,19 @@ function monsterTurn() {
     (stat) => stat.name === 'Defense'
   ).value;
   const finalDamage =
-    randomAttack.damage - heroDefense > 0
-      ? randomAttack.damage - heroDefense
+    randomMonsterDamage - heroDefense > 0
+      ? randomMonsterDamage - heroDefense
       : 0;
 
   showBattleActions(
-    `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> attack damage: <span class="selectedAttackName">${randomAttack.damage}</span>, <span class="hero">Hero</span> defense: <span class="selectedAttackName">${heroDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
+    `<p class="selectedAttackParagraph">- <span class="monster">Monster</span> attack damage: <span class="selectedAttackName">${randomMonsterDamage}</span>, <span class="hero">Hero</span> defense: <span class="selectedAttackName">${heroDefense}</span>, Final Damage: <span class="selectedAttackName">${finalDamage}</span></p>`
   );
 
   // Оновлюємо здоров'я героя
   selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Health'
   ).value -= finalDamage;
-
+  randomMonsterDamage = randomAttack.damage;
   // Оновлюємо статус здоров'я
   updateHealthBars();
   saveCharacterState();
@@ -475,6 +472,11 @@ function showItemModal(item) {
   closeModalBtn.addEventListener('click', closeModalHandler, { once: true });
 
   function closeModalHandler() {
+    let audio = document.createElement('audio');
+    audio.src = `../assets/audio/items/stamina-potion.mp3`;
+    audio.autoplay = true;
+    audio.loop = false;
+    document.body.appendChild(audio);
     modal.classList.add('hidden');
     addEffectToHero(item);
   }
@@ -657,6 +659,11 @@ function updateEffectsDisplay() {
     effectElement.dataset.itemName = effect.name;
     dynamicContainer.appendChild(effectElement);
     effectElement.addEventListener('click', () => {
+      let audio = document.createElement('audio');
+      audio.src = `../assets/audio/items/drinking-potion.mp3`;
+      audio.autoplay = true;
+      audio.loop = false;
+      document.body.appendChild(audio);
       onItemIconClick(effect);
     });
   });
@@ -681,7 +688,19 @@ function checkGameOver() {
     (stat) => stat.name === 'Health'
   ).value;
 
+  const heroDeathSound = selectedCharacter.sounds.find(
+    (sound) => sound.name === 'Death'
+  );
+
+  console.log(heroDeathSound);
+  
+
   if (heroHealth <= 0) {
+    let audio = document.createElement('audio');
+    audio.src = `../${heroDeathSound.url}`;
+    audio.autoplay = true;
+    audio.loop = false;
+    document.body.appendChild(audio);
     showBattleActions(`<p class="error">Game Over! The monster has won.</p>`);
     return true;
   }
@@ -745,8 +764,96 @@ function nextLevel() {
   if (currentLevelIndex < levels.length - 1) {
     currentLevelIndex++;
     loadLevel(currentLevelIndex);
+    increaseHeroLevel();
+    resetHeroEffects();
+
+    changeMonster();
+    const startBattleBtn = document.getElementById('start-battle-btn');
+    startBattleBtn.disabled = false;
+    nextLevelButton.classList.remove('active');
+
+    // Очищаємо поле битви від попередніх дій
+    const battleActionsContainer = document.getElementById('battle-actions');
+    battleActionsContainer.innerHTML = '';
   } else {
     alert('Congratulations! You have completed all levels!');
+  }
+}
+
+const increaseHeroLevel = () => {
+  selectedCharacter.level++;
+  document.getElementById(
+    'heroLevel'
+  ).textContent = `Level: ${selectedCharacter.level}`;
+
+  // if (selectedCharacter.level > 1) {
+  //   selectedCharacter.characteristics.forEach((stat) => {
+  //     // Якщо це не статичні характеристики, скидаємо їх
+  //     if (stat.name) {
+  //       stat.value++; // Повертаємо до значення за замовчуванням
+  //     }
+  //   });
+  // }
+};
+
+function resetHeroEffects() {
+  // Припустимо, що "additionalEffects" зберігає динамічні ефекти героя
+  selectedCharacter.characteristics.forEach((stat, index) => {
+    // Якщо це не статичні характеристики, скидаємо їх
+    if (stat.name) {
+      stat.value = stat.defaultValue || stat.value;
+      stat.value = stat.value + selectedCharacter.level - 1; // Повертаємо до значення за замовчуванням
+    }
+  });
+  if (staticEffects) {
+    staticEffects.map((item) => {
+      updatedDamage += item.effect.value;
+      const stat = selectedCharacter.characteristics.find(
+        (stat) => stat.name === item.effect.characteristics
+      );
+      if (stat) {
+        stat.value += item.effect.value;
+      }
+    });
+  }
+
+  // Оновлюємо відображення характеристик героя
+  updateHealthBars();
+  showBattleActions(
+    `<p class="hero">Hero's effects have been reset for the next level.</p>`
+  );
+}
+
+function changeMonster() {
+  const newMonsterData = levels[currentLevelIndex].monster; // Отримуємо нового монстра для поточного рівня
+  levelData.monster = { ...newMonsterData }; // Оновлюємо монстра в даних гри
+
+  updateMonsterUI();
+}
+
+function updateMonsterUI() {
+  const monsterHealthElement = document.querySelector(
+    '#monster-container .character-chars .stat-value'
+  );
+  const monsterHealth = levelData.monster.characteristics.find(
+    (stat) => stat.name === 'Health'
+  ).value;
+  if (monsterHealthElement) {
+    monsterHealthElement.textContent = monsterHealth;
+  }
+
+  // Можна також оновити інші характеристики монстра
+  // Оновлюємо атаку монстра, якщо потрібно
+  const monsterAttacksElement = document.querySelector(
+    '#monster-container .character-attacks'
+  );
+  if (monsterAttacksElement) {
+    monsterAttacksElement.innerHTML = levelData.monster.attacks
+      .map(
+        (attack) =>
+          `<button class="attack"><span>${attack.name}</span></button>`
+      )
+      .join('');
   }
 }
 
@@ -758,6 +865,7 @@ if (selectedCharacter) {
   const characterContainer = document.querySelector('#character-details');
   characterContainer.innerHTML = `
     <h3 class="battle-name">${selectedCharacter.name}</h3>
+    <h4 id="heroLevel">Level: ${selectedCharacter.level}</h4>
     <div class="img-container">
     <img src="./../${selectedCharacter.image}" alt="${
     selectedCharacter.name
@@ -826,17 +934,51 @@ const showBattleActions = (code) => {
   battleActionsContainer.insertAdjacentHTML('beforeend', code);
 };
 
+function decideFirstTurn() {
+  // Рандомно обираємо: true (герой) або false (монстр)
+  isHeroTurn = Math.random() < 0.5;
+
+  // Відображаємо, хто починає
+  if (isHeroTurn) {
+    showBattleActions(`<p class="hero">Hero starts the battle!</p>`);
+  } else {
+    showBattleActions(`<p class="monster">Monster starts the battle!</p>`);
+    monsterTurn();
+  }
+}
+
 document.querySelectorAll('.attack').forEach((btn) => {
   btn.addEventListener('click', (e) => {
     const attackName = e.target.closest('.attack').textContent.trim();
-    selectedAttack = selectedCharacter.attacks.find(
+    const selectedAttack = selectedCharacter.attacks.find(
       (attack) => attack.name === attackName
     );
-    console.log('initial attack: ', selectedAttack);
 
-    if (selectedAttack) {
-      heroTurn(selectedAttack);
+    if (!selectedAttack) {
+      console.error('Attack not found:', attackName);
+      return;
     }
+
+    console.log('Selected attack:', selectedAttack);
+
+    // Перевіряємо чи аудіо вже існує
+    let audio = document.querySelector(`#audio-${attackName}`);
+    if (!audio) {
+      // Створюємо аудіо лише якщо його ще немає
+      audio = document.createElement('audio');
+      audio.id = `audio-${attackName}`;
+      audio.src = `../${selectedAttack.sound}`;
+      audio.autoplay = true; // Автоматичне програвання
+      audio.loop = false; // Повторення можна увімкнути за потреби
+      document.body.appendChild(audio); // Додаємо до DOM
+    } else {
+      // Перезапускаємо існуюче аудіо
+      audio.currentTime = 0; // Починаємо з початку
+      audio.play();
+    }
+
+    // Виклик функції атаки
+    heroTurn(selectedAttack);
   });
 });
 
@@ -850,12 +992,7 @@ buttonsContainer.append(startLevelButton, nextLevelButton);
 battlefieldContainer.appendChild(buttonsContainer);
 
 startLevelButton.addEventListener('click', () => {
-  if (isHeroTurn) {
-    showBattleActions(`<p class="hero">Hero starts</p>`);
-  } else {
-    console.log('Monster starts');
-    monsterTurn();
-  }
+  decideFirstTurn();
 
   document.getElementById('start-battle-btn').disabled = true;
 });

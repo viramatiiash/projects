@@ -9,6 +9,7 @@ export const items = [
     },
     description: 'Restores 2 health points.',
     dynamic: true,
+
   },
   {
     name: 'Elixir of Agility',
