@@ -117,8 +117,8 @@ function heroTurn(selectedAttack) {
     updateCharacterStats();
   }
 
-  // ! Berserker's Rage
-  if (selectedAttack.name === "Berserker's Rage") {
+  // ! Berserker Rage
+  if (selectedAttack.name === 'Berserker Rage') {
     handleBerserkersRage();
   }
 
@@ -177,7 +177,7 @@ function heroTurn(selectedAttack) {
 }
 
 // ! Special Attacks
-// handle Berserker's Rage
+// handle Berserker Rage
 const handleBerserkersRage = () => {
   const statsContainer = document.querySelector('.character-chars');
 
@@ -379,6 +379,11 @@ function monsterTurn() {
     levelData.monster.attacks[
       Math.floor(Math.random() * levelData.monster.attacks.length)
     ];
+  let audio = document.createElement('audio');
+  audio.src = `../${randomAttack.sound}`;
+  audio.autoplay = true;
+  audio.loop = false;
+  document.body.appendChild(audio);
   randomMonsterDamage = randomAttack.damage;
   console.log('random monster damage:', randomMonsterDamage);
   console.log('random attack damage:', randomAttack.damage);
@@ -693,7 +698,6 @@ function checkGameOver() {
   );
 
   console.log(heroDeathSound);
-  
 
   if (heroHealth <= 0) {
     let audio = document.createElement('audio');
@@ -718,6 +722,22 @@ function saveCharacterState() {
 
 function loadLevel(levelIndex) {
   const levelData = levels[levelIndex];
+
+  let audio = document.querySelector('#level-audio');
+  if (!audio) {
+    audio = document.createElement('audio');
+    audio.id = 'level-audio'; 
+    audio.src = '../assets/audio/levels/battle-music.mp3';
+    audio.volume = 0.4;
+    audio.loop = true;
+    document.body.appendChild(audio);
+  }
+
+  // Перезапускаємо аудіо
+  audio.currentTime = 0;
+  audio.play().catch((error) => {
+    console.error('Cannot play audio:', error);
+  });
 
   document.getElementById(
     'battlefield-container'

@@ -160,7 +160,7 @@ const lorien = new Character(
   './assets/characters/wood-elf.jpg',
   'An archer and guardian of the forests. Her mission is to protect the balance of nature, which has now been disrupted.',
   [
-    { name: 'Health', value: 1, defaultValue: 100 },
+    { name: 'Health', value: 100, defaultValue: 100 },
     { name: 'Damage', value: 2, defaultValue: 2 },
     { name: 'Stamina', value: 100, defaultValue: 100 },
     { name: 'Defense', value: 3, defaultValue: 3 },
@@ -238,7 +238,7 @@ const tharok = new Character(
       sound: './assets/audio/heroes/tharok/skullcrusher.mp3',
     },
     {
-      name: "Berserker's Rage",
+      name: "Berserker Rage",
       type: 'special',
       description: 'Temporarily increases attack power.',
       staminaCost: 5,

@@ -1042,6 +1042,10 @@ img {
 .storyContainer .imageContainer {
   width: 100%;
   max-width: 86%;
+  border-radius: 20px;
+}
+.storyContainer .imageContainer img {
+  border-radius: 20px;
 }
 
 .stones {
@@ -1060,4 +1064,26 @@ img {
 .stones .stone-container {
   width: 100%;
   max-width: 200px;
+  height: 200px;
+  border-radius: 20px;
+}
+.stones .stone-container img {
+  border-radius: 20px;
+}
+
+.img-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 200px;
+  height: 200px;
+  border: 6px solid rgb(215, 180, 110);
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+.img-container img {
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 0 0%;
+     object-position: 0 0%;
 }
