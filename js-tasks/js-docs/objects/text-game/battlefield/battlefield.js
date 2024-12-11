@@ -24,7 +24,7 @@ const selectedCharacter = new Character(
   selectedCharacterData.attacks,
   selectedCharacterData.sounds
 );
-
+let isLevelLoading = false;
 let initialHealth = null;
 let healthStat = selectedCharacter.characteristics.find(
   (characteristic) => characteristic.name === 'Health'
@@ -63,14 +63,10 @@ function heroTurn(selectedAttack) {
       (stat) => stat.name === 'Damage'
     ).value;
   }
-  console.log(selectedAttack);
-  console.log('initial damage: ', updatedDamage);
 
   if (updatedDamage === 0) {
     updatedDamage = selectedAttack.damage;
   }
-
-  console.log(updatedDamage);
 
   // Перевірка, чи дійсно герой може здійснити свій хід
   if (!isHeroTurn) return;
@@ -140,6 +136,7 @@ function heroTurn(selectedAttack) {
   if (selectedAttack.name === 'Basic Attack') {
     selectedAttack.damage = updatedDamage;
   }
+
   // Розраховуємо захист монстра
   const monsterDefense = levelData.monster.characteristics.find(
     (stat) => stat.name === 'Defense'
@@ -152,9 +149,18 @@ function heroTurn(selectedAttack) {
   if (selectedAttack.type === 'damage') {
     applySpecialAttackEffects({ ...selectedAttack, damage: updatedDamage });
 
-    console.log(selectedAttack);
-
-    console.log('random damage:', randomDamage);
+    if (monsterHealth > 0) {
+      setTimeout(() => {
+        let audio = document.createElement('audio');
+        const monsterDamageSound = levelData.monster.sounds.find(
+          (sound) => sound.name === 'Damage'
+        );
+        audio.src = `../${monsterDamageSound.url}`;
+        audio.autoplay = true;
+        audio.loop = false;
+        document.body.appendChild(audio);
+      }, 500);
+    }
 
     // Вираховуємо фінальне пошкодження з урахуванням захисту
     const finalDamage = Math.max(0, randomDamage - monsterDefense);
@@ -385,8 +391,17 @@ function monsterTurn() {
   audio.loop = false;
   document.body.appendChild(audio);
   randomMonsterDamage = randomAttack.damage;
-  console.log('random monster damage:', randomMonsterDamage);
-  console.log('random attack damage:', randomAttack.damage);
+
+  setTimeout(() => {
+    audio = document.createElement('audio');
+    const heroDamageSound = selectedCharacter.sounds.find(
+      (sound) => sound.name === 'Damage'
+    );
+    audio.src = `../${heroDamageSound.url}`;
+    audio.autoplay = true;
+    audio.loop = false;
+    document.body.appendChild(audio);
+  }, 500);
 
   // Генеруємо випадкову атаку залежно від шансів
   if (randomChance <= 0.4) {
@@ -697,20 +712,56 @@ function checkGameOver() {
     (sound) => sound.name === 'Death'
   );
 
-  console.log(heroDeathSound);
+  const heroVictorySound = selectedCharacter.sounds.find(
+    (sound) => sound.name === 'Victory'
+  );
+
+  const monsterDeathSound = levelData.monster.sounds.find(
+    (sound) => sound.name === 'Death'
+  );
+  const monsterVictorySound = levelData.monster.sounds.find(
+    (sound) => sound.name === 'Virctory'
+  );
 
   if (heroHealth <= 0) {
     let audio = document.createElement('audio');
-    audio.src = `../${heroDeathSound.url}`;
-    audio.autoplay = true;
-    audio.loop = false;
-    document.body.appendChild(audio);
+    setTimeout(() => {
+      audio.src = `../${heroDeathSound.url}`;
+      audio.autoplay = true;
+      audio.loop = false;
+      document.body.appendChild(audio);
+    }, 500);
+
     showBattleActions(`<p class="error">Game Over! The monster has won.</p>`);
+    setTimeout(() => {
+      audio = document.createElement('audio');
+      audio.src = `../${monsterVictorySound.url}`;
+      audio.autoplay = true;
+      audio.loop = false;
+      document.body.appendChild(audio);
+    }, 1500);
     return true;
   }
   if (monsterHealth <= 0) {
     showBattleActions(`<p class="hero">Victory! You defeated the monster.</p>`);
     showNextLevelButton();
+
+    let audio = document.createElement('audio');
+
+    setTimeout(() => {
+      audio.src = `../${monsterDeathSound.url}`;
+      audio.autoplay = true;
+      audio.loop = false;
+      document.body.appendChild(audio);
+    }, 1000);
+
+    // setTimeout(() => {
+    //   audio = document.createElement('audio');
+    //   audio.src = `../${heroVictorySound.url}`;
+    //   audio.autoplay = true;
+    //   audio.loop = false;
+    //   document.body.appendChild(audio);
+    // }, 1000);
     return true;
   }
   return false;
@@ -721,12 +772,15 @@ function saveCharacterState() {
 }
 
 function loadLevel(levelIndex) {
+  console.log('load level level index:', levelIndex);
+
   const levelData = levels[levelIndex];
+  console.log('load level:', levelData);
 
   let audio = document.querySelector('#level-audio');
   if (!audio) {
     audio = document.createElement('audio');
-    audio.id = 'level-audio'; 
+    audio.id = 'level-audio';
     audio.src = '../assets/audio/levels/battle-music.mp3';
     audio.volume = 0.4;
     audio.loop = true;
@@ -781,8 +835,14 @@ function loadLevel(levelIndex) {
 }
 
 function nextLevel() {
+  if (isLevelLoading) return; // Уникаємо повторного виклику
+  isLevelLoading = true;
+
   if (currentLevelIndex < levels.length - 1) {
+    console.log(`Current Level: ${currentLevelIndex}`); // Лог для перевірки
     currentLevelIndex++;
+    console.log(`Next Level: ${currentLevelIndex}`); // Лог після зміни індексу
+
     loadLevel(currentLevelIndex);
     increaseHeroLevel();
     resetHeroEffects();
@@ -798,6 +858,10 @@ function nextLevel() {
   } else {
     alert('Congratulations! You have completed all levels!');
   }
+
+  setTimeout(() => {
+    isLevelLoading = false; // Розблокувати після завантаження
+  }, 1000);
 }
 
 const increaseHeroLevel = () => {
@@ -805,15 +869,6 @@ const increaseHeroLevel = () => {
   document.getElementById(
     'heroLevel'
   ).textContent = `Level: ${selectedCharacter.level}`;
-
-  // if (selectedCharacter.level > 1) {
-  //   selectedCharacter.characteristics.forEach((stat) => {
-  //     // Якщо це не статичні характеристики, скидаємо їх
-  //     if (stat.name) {
-  //       stat.value++; // Повертаємо до значення за замовчуванням
-  //     }
-  //   });
-  // }
 };
 
 function resetHeroEffects() {
@@ -1002,7 +1057,81 @@ document.querySelectorAll('.attack').forEach((btn) => {
   });
 });
 
-nextLevelButton.addEventListener('click', nextLevel);
+function levelUpModal() {
+  const modal = document.getElementById('levelUp');
+  modal.classList.remove('modalHidden');
+  const stoneImg = document.getElementById('stoneImg');
+  console.log('levelUpModal current level index:', currentLevelIndex);
+
+  if (currentLevelIndex === 0) {
+    stoneImg.src = '../assets/items/stone-harmony-forest.jpg';
+  }
+  if (currentLevelIndex === 1) {
+    stoneImg.src = '../assets/items/stone-harmony-ice.jpg';
+  }
+  if (currentLevelIndex === 2) {
+    stoneImg.src = '../assets/items/stone-harmony-volcano.jpg';
+  }
+  if (currentLevelIndex === 3) {
+    stoneImg.src = '../assets/items/stone-harmony-rainbow.jpg';
+  }
+
+  let audio = document.createElement('audio');
+  audio.src = `../assets/audio/levels/next-level.mp3`;
+  audio.autoplay = true;
+  audio.loop = false;
+  document.body.appendChild(audio);
+
+  audio = document.createElement('audio');
+
+  audio.src = `../assets/audio/levels/next-level-2.mp3`;
+  audio.autoplay = true;
+  audio.loop = false;
+  document.body.appendChild(audio);
+
+  const startGameBtn = document.getElementById('closeBtn');
+  startGameBtn.replaceWith(startGameBtn.cloneNode(true));
+  const newStartGameBtn = document.getElementById('closeBtn');
+  newStartGameBtn.addEventListener('click', () => {
+    modal.classList.add('modalHidden');
+    if (currentLevelIndex <= 3) {
+      nextLevelStoryModal();
+    } else {
+      endOfGameModal();
+    }
+  });
+}
+
+const endOfGameModal = () => {
+  const modal = document.getElementById('endOfGameModal');
+  modal.classList.remove('endOfGameModalClosed');
+};
+
+const nextLevelStoryModal = () => {
+  const modal = document.getElementById('battleStoryModal');
+  modal.classList.remove('storyModalClosed');
+  const place = document.getElementById('place');
+  const placeDescription = document.getElementById('place-description');
+  console.log('next level story modal current level inx:', currentLevelIndex);
+
+  place.textContent = levels[currentLevelIndex + 1].name;
+  placeDescription.textContent = levels[currentLevelIndex + 1].description;
+
+  const closeStoryModal = () => {
+    modal.classList.add('storyModalClosed');
+    if (!isLevelLoading) {
+      nextLevel();
+    }
+  };
+
+  const closeModal = document.getElementById('closeModal');
+  closeModal.addEventListener('click', closeStoryModal);
+};
+
+nextLevelButton.addEventListener(
+  'click',
+  currentLevelIndex <= 3 ? levelUpModal : endOfGameModal
+);
 const battlefieldContainer = document.getElementById('battlefield-container');
 const startLevelButton = document.getElementById('start-battle-btn');
 

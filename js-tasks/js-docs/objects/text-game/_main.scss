@@ -353,7 +353,7 @@ img {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
@@ -513,6 +513,8 @@ img {
 
 // ! Start Modal
 #startModal {
+  width: 100%;
+  height: 100vh;
   display: block;
   opacity: 1;
   position: absolute;
@@ -529,7 +531,9 @@ img {
   transition: $t-normal;
 }
 
-#storyModal {
+#battleStoryModal {
+  width: 100%;
+  height: 100vh;
   opacity: 1;
   position: absolute;
   top: 0;
@@ -575,6 +579,11 @@ img {
 }
 
 .storyModalClosed {
+  opacity: 0 !important;
+  display: none !important;
+}
+
+.modalHidden {
   opacity: 0 !important;
   display: none !important;
 }
@@ -639,4 +648,134 @@ img {
     object-fit: cover;
     object-position: 0 0%;
   }
+}
+
+// levelup modal
+#levelUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & .stoneContainer {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 20px;
+
+    & img {
+      border-radius: 20px;
+    }
+  }
+
+  & .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 98;
+  transition: all 0.3s ease;
+
+  & ul {
+    list-style-type: none;
+  }
+
+  & .levelUp_stat-value {
+    color: $c-white;
+  }
+
+  & #closeBtn {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: $c-brown;
+    border: 2px solid darken($c-brown, 10%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: $t-normal;
+
+    &:hover {
+      background-color: lighten($c-brown, 20%);
+    }
+  }
+}
+
+#endOfGameModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & .stoneContainer {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 20px;
+
+    & img {
+      border-radius: 20px;
+    }
+  }
+
+  & .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 98;
+  transition: all 0.3s ease;
+
+  & ul {
+    list-style-type: none;
+  }
+
+  & .levelUp_stat-value {
+    color: $c-white;
+  }
+
+  & #closeEndOfGameModalModal {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: $c-brown;
+    border: 2px solid darken($c-brown, 10%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: $t-normal;
+
+    &:hover {
+      background-color: lighten($c-brown, 20%);
+    }
+  }
+}
+
+.endOfGameModalClosed {
+  opacity: 0 !important;
+  display: none !important;
 }

@@ -2,6 +2,9 @@ export const levels = [
   {
     level: 1,
     background: './assets/backgrounds/dark-forest.jpg',
+    name: 'The Enchanted Dark Forest',
+    description:
+      'The hero begins his/her journey in the Dark Forest, where stars are obscured by a veil of magical fog. This place is teeming with ghosts and enchanted trees that come alive to guard the secrets of the Forest’s Heart - the first Stone of Harmony.',
     monster: {
       name: 'Wraithwood',
       image: './assets/monsters/wraithwood.jpg',
@@ -39,14 +42,17 @@ export const levels = [
         },
         {
           name: 'LevelStory',
-          url: './assets/audio/levels/level-1/nightmare.mp3',
-        }, // todo
+          url: './assets/audio/levels/level-1/story.mp3',
+        },
       ],
     },
   },
   {
     level: 2,
     background: './assets/backgrounds/dark-lake.jpg',
+    name: 'The Ice Lake',
+    description:
+      "In the middle of the Forest, the hero finds a mysterious lake that, according to legend, reveals the second Stone only to those who overcome the lake's monstrous guardian.",
     sound: './assets/audio/female-choir.mp3',
     monster: {
       name: 'Drowned Phantom',
@@ -89,6 +95,9 @@ export const levels = [
   {
     level: 3,
     background: './assets/backgrounds/volcano.jpg',
+    name: 'The Fiery Volcano',
+    description:
+      'The path leads to an active volcano, where the third Stone is hidden. The heroes face rivers of lava, underground demons, and scorching winds.',
     monster: {
       name: 'Ifritis',
       image: './assets/monsters/ifritis.jpg',
@@ -130,6 +139,9 @@ export const levels = [
   {
     level: 4,
     background: './assets/backgrounds/dark-castle.jpg',
+    name: 'The Enchanted Dark Castle',
+    description:
+      'A battlefield where the Shadow Lord’s army clashes with the heroes. The castle is protected by an army of the undead, and the skies are filled with shadow dragons and nightmares.',
     monster: {
       name: 'Nightmare',
       image: './assets/monsters/nightmare.jpg',
@@ -176,6 +188,9 @@ export const levels = [
   {
     level: 5,
     background: './assets/backgrounds/thone-hall.jpg',
+    name: 'The Dark Castle Throne Hall',
+    description:
+      'In the throne room of the Shadow Lord, the heroes confront his terrifying power.',
     monster: {
       name: 'Dark Lord',
       image: './assets/monsters/boss.jpg',
@@ -185,16 +200,16 @@ export const levels = [
       ],
       attacks: [
         {
-          name: 'Void Slash',
+          name: 'Void',
           description: 'A blade of shadow slices through space and time.',
           damage: 10,
-          sound: './assets/audio/monster-scream.mp3', // todo
+          sound: './assets/audio/levels/level-5/void.mp3',
         },
         {
           name: 'Dark Pulse',
           description: 'A wave of energy erupts, devouring hope and life.',
           damage: 12,
-          sound: './assets/audio/monster-scream.mp3', // todo
+          sound: './assets/audio/levels/level-5/dark-pulse.mp3',
         },
       ],
       sounds: [
@@ -204,7 +219,14 @@ export const levels = [
           url: './assets/audio/levels/level-5/boss-victory.mp3',
         },
         { name: 'Death', url: './assets/audio/levels/level-5/boss-dying.wav' },
-        { name: 'LevelStory', url: './assets/audio/nightmare.mp3' }, // todo
+        {
+          name: 'LevelStory',
+          url: './assets/audio/levels/level-5/battle-music.mp3',
+        },
+        {
+          name: 'Battle',
+          url: './assets/audio/levels/level-5/battle-music-boss.mp3',
+        },
       ],
     },
   },

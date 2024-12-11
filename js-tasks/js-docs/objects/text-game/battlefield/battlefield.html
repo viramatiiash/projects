@@ -15,6 +15,56 @@
         <button id="close-modal-btn">Accept</button>
       </div>
     </div>
+    <div id="levelUp" class="modalHidden">
+      <div class="modal-content">
+        <h3>Congratulations! Level Up!</h3>
+        <div class="stoneContainer">
+          <img id="stoneImg" src="" alt="Stone of Harmony" />
+        </div>
+        <p>Yo've obtained the Stone of Harmony!</p>
+        <ul class="levelUp_character-chars">
+          <li class="levelUp_stats">
+            <span class="levelUp_stat-name">Health:</span>
+            <span class="levelUp_stat-value">+1</span>
+          </li>
+          <li class="levelUp_stats">
+            <span class="levelUp_stat-name">Damage:</span>
+            <span class="levelUp_stat-value">+1</span>
+          </li>
+          <li class="levelUp_stats">
+            <span class="levelUp_stat-name">Stamina:</span>
+            <span class="levelUp_stat-value">+1</span>
+          </li>
+          <li class="levelUp_stats">
+            <span class="levelUp_stat-name">Defense:</span>
+            <span class="levelUp_stat-value">+1</span>
+          </li>
+          <li class="levelUp_stats">
+            <span class="levelUp_stat-name">Magic:</span>
+            <span class="levelUp_stat-value">+1</span>
+          </li>
+        </ul>
+        <button id="closeBtn">Close</button>
+      </div>
+    </div>
+    <div id="battleStoryModal" class="storyModalClosed">
+      <div class="storyContainer">
+        <h2 id="place"></h2>
+
+        <p id="place-description"></p>
+
+        <button id="closeModal">Close</button>
+      </div>
+    </div>
+    <div id="endOfGameModal" class="endOfGameModalClosed">
+      <div class="storyContainer">
+        <h2 id="heading">You won!</h2>
+
+        <p id="endGameDescription">With the world freed from the Shadow Lord, each hero returns home, forever changed. The curse on the dark elf is lifted, the mage casts a spell to banish dark magic, and Tharok finds peace after uncovering the truth about his family. Lorien returns to the forest to safeguard the renewed balance of the world.</p>
+
+        <button id="closeEndOfGameModalModal">Finish Game</button>
+      </div>
+    </div>
     <div id="battlefield-container">
       <div class="battlefield">
         <div id="character-details"></div>

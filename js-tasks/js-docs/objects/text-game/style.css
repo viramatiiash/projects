@@ -742,7 +742,7 @@ img {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.7);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -924,6 +924,8 @@ img {
 }
 
 #startModal {
+  width: 100%;
+  height: 100vh;
   display: block;
   opacity: 1;
   position: absolute;
@@ -950,7 +952,9 @@ img {
   transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#storyModal {
+#battleStoryModal {
+  width: 100%;
+  height: 100vh;
   opacity: 1;
   position: absolute;
   top: 0;
@@ -971,7 +975,7 @@ img {
   -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-#storyModal p {
+#battleStoryModal p {
   width: 100%;
   max-width: 600px;
 }
@@ -1003,6 +1007,11 @@ img {
 }
 
 .storyModalClosed {
+  opacity: 0 !important;
+  display: none !important;
+}
+
+.modalHidden {
   opacity: 0 !important;
   display: none !important;
 }
@@ -1086,4 +1095,161 @@ img {
      object-fit: cover;
   -o-object-position: 0 0%;
      object-position: 0 0%;
+}
+
+#levelUp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 98;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+#levelUp .stoneContainer {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 20px;
+}
+#levelUp .stoneContainer img {
+  border-radius: 20px;
+}
+#levelUp .modal-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 20px;
+}
+#levelUp ul {
+  list-style-type: none;
+}
+#levelUp .levelUp_stat-value {
+  color: #fff;
+}
+#levelUp #closeBtn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: rgba(47, 47, 47, 0.9019607843);
+  border: 2px solid rgba(22, 22, 22, 0.9019607843);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#levelUp #closeBtn:hover {
+  background-color: rgba(98, 98, 98, 0.9019607843);
+}
+
+#endOfGameModal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 98;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+#endOfGameModal .stoneContainer {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 20px;
+}
+#endOfGameModal .stoneContainer img {
+  border-radius: 20px;
+}
+#endOfGameModal .modal-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 20px;
+}
+#endOfGameModal ul {
+  list-style-type: none;
+}
+#endOfGameModal .levelUp_stat-value {
+  color: #fff;
+}
+#endOfGameModal #closeEndOfGameModalModal {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: rgba(47, 47, 47, 0.9019607843);
+  border: 2px solid rgba(22, 22, 22, 0.9019607843);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#endOfGameModal #closeEndOfGameModalModal:hover {
+  background-color: rgba(98, 98, 98, 0.9019607843);
+}
+
+.endOfGameModalClosed {
+  opacity: 0 !important;
+  display: none !important;
 }
