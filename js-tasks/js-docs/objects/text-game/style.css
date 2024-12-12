@@ -564,8 +564,129 @@ img {
   transition: transform 0.5s;
   transition: transform 0.5s, -webkit-transform 0.5s;
   list-style-type: none;
+  -webkit-animation: none;
+          animation: none;
 }
 
+@-webkit-keyframes pulse {
+  0%, 100% {
+    -webkit-box-shadow: 0 0 25px 10px rgba(208, 255, 255, 0.7);
+            box-shadow: 0 0 25px 10px rgba(208, 255, 255, 0.7);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 35px 15px rgba(166, 255, 255, 0.9);
+            box-shadow: 0 0 35px 15px rgba(166, 255, 255, 0.9);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    -webkit-box-shadow: 0 0 25px 10px rgba(208, 255, 255, 0.7);
+            box-shadow: 0 0 25px 10px rgba(208, 255, 255, 0.7);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 35px 15px rgba(166, 255, 255, 0.9);
+            box-shadow: 0 0 35px 15px rgba(166, 255, 255, 0.9);
+  }
+}
+.filtered {
+  -webkit-filter: blur(0.1px) grayscale(1);
+          filter: blur(0.1px) grayscale(1);
+}
+
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  20% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  30% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  40% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  50% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  60% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  70% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  80% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  90% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  20% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  30% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  40% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  50% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  60% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  70% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  80% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  90% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
 #battle-swords {
   width: 100%;
   max-width: 150px;
@@ -1230,7 +1351,7 @@ img {
 #endOfGameModal .levelUp_stat-value {
   color: #fff;
 }
-#endOfGameModal #closeEndOfGameModalModal {
+#endOfGameModal #closeEndOfGameModal {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -1245,11 +1366,54 @@ img {
   -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-#endOfGameModal #closeEndOfGameModalModal:hover {
+#endOfGameModal #closeEndOfGameModal:hover {
   background-color: rgba(98, 98, 98, 0.9019607843);
 }
 
 .endOfGameModalClosed {
   opacity: 0 !important;
   display: none !important;
+}
+
+.bloodModal {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(61, 1, 1, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 40px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.bloodModal h2 {
+  font-size: 52px;
+}
+.bloodModal .restartButton {
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: rgba(47, 47, 47, 0.9019607843);
+  border: 2px solid rgba(22, 22, 22, 0.9019607843);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bloodModal .restartButton:hover {
+  background-color: rgba(98, 98, 98, 0.9019607843);
 }

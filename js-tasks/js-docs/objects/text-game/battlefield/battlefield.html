@@ -17,12 +17,12 @@
     </div>
     <div id="levelUp" class="modalHidden">
       <div class="modal-content">
-        <h3>Congratulations! Level Up!</h3>
+        <h3 id="levelUp_title">Congratulations! Level Up!</h3>
         <div class="stoneContainer">
           <img id="stoneImg" src="" alt="Stone of Harmony" />
         </div>
-        <p>Yo've obtained the Stone of Harmony!</p>
-        <ul class="levelUp_character-chars">
+        <p id="levelUp_text">Yo've obtained the Stone of Harmony!</p>
+        <ul id="levelUp_stats" class="levelUp_character-chars">
           <li class="levelUp_stats">
             <span class="levelUp_stat-name">Health:</span>
             <span class="levelUp_stat-value">+1</span>
@@ -62,7 +62,7 @@
 
         <p id="endGameDescription">With the world freed from the Shadow Lord, each hero returns home, forever changed. The curse on the dark elf is lifted, the mage casts a spell to banish dark magic, and Tharok finds peace after uncovering the truth about his family. Lorien returns to the forest to safeguard the renewed balance of the world.</p>
 
-        <button id="closeEndOfGameModalModal">Finish Game</button>
+        <a href="./../index.html" id="closeEndOfGameModal">Finish Game</a>
       </div>
     </div>
     <div id="battlefield-container">

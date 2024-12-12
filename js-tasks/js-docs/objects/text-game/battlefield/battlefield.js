@@ -6,6 +6,9 @@ const tooltip = document.createElement('div');
 tooltip.classList.add('tooltip');
 const battleActions = [];
 
+const closeButtonAudio = new Audio('./../assets/audio/levels/button.mp3');
+const battleAudio = new Audio('./../assets/audio/levels/battle-music.mp3');
+
 let currentLevelIndex = 0;
 let levelData = levels[currentLevelIndex];
 const nextLevelButton = document.getElementById('next-level-btn');
@@ -30,6 +33,9 @@ let healthStat = selectedCharacter.characteristics.find(
   (characteristic) => characteristic.name === 'Health'
 );
 
+const heroCard = document.getElementById('character-details');
+const monsterCard = document.getElementById('monster-container');
+
 initialHealth = healthStat.value;
 
 const monsterHealth = levelData.monster.characteristics.find(
@@ -53,6 +59,17 @@ const staticEffects = [];
 
 // ! Hero Turn
 function heroTurn(selectedAttack) {
+  console.log(isHeroTurn);
+
+  heroCard.style.animation = 'none';
+  monsterCard.style.animation = 'none';
+
+  setTimeout(() => {
+    monsterCard.classList.add('filtered');
+    heroCard.style.animation = 'pulse 1.5s ease-in-out 1';
+    monsterCard.style.animation = 'shake 1s ease-in-out 1';
+  }, 50);
+
   if (
     selectedAttack.type === 'damage' &&
     selectedAttack.name !== 'Basic Attack'
@@ -379,6 +396,20 @@ function applySpecialAttackEffects(selectedAttack) {
 }
 
 function monsterTurn() {
+  monsterCard.classList.remove('filtered');
+  monsterCard.style.animation = 'none';
+  heroCard.style.animation = 'none';
+
+  setTimeout(() => {
+    monsterCard.style.animation = 'pulse 1.5s ease-in-out 1';
+    heroCard.style.animation = 'shake 1s ease-in-out 1';
+    heroCard.classList.add('filtered');
+  }, 50);
+
+  setTimeout(() => {
+    heroCard.classList.remove('filtered');
+  }, 1050);
+
   // Генеруємо випадкове число від 0 до 1 для визначення типу атаки
   const randomChance = Math.random();
   let randomAttack =
@@ -724,6 +755,7 @@ function checkGameOver() {
   );
 
   if (heroHealth <= 0) {
+    heroCard.classList.add('filtered');
     let audio = document.createElement('audio');
     setTimeout(() => {
       audio.src = `../${heroDeathSound.url}`;
@@ -733,6 +765,7 @@ function checkGameOver() {
     }, 500);
 
     showBattleActions(`<p class="error">Game Over! The monster has won.</p>`);
+
     setTimeout(() => {
       audio = document.createElement('audio');
       audio.src = `../${monsterVictorySound.url}`;
@@ -740,9 +773,38 @@ function checkGameOver() {
       audio.loop = false;
       document.body.appendChild(audio);
     }, 1500);
+
+    setTimeout(() => {
+      audio = document.createElement('audio');
+      audio.src = `./../assets/audio/levels/death.mp3`;
+      audio.autoplay = true;
+      audio.loop = false;
+      document.body.appendChild(audio);
+    }, 1700);
+
+    const bloodModal = document.createElement('div');
+    bloodModal.classList.add('bloodModal');
+    const text = document.createElement('h2');
+    text.textContent = "You've lost";
+    bloodModal.appendChild(text);
+    const body = document.querySelector('body');
+    setTimeout(() => {
+      body.appendChild(bloodModal);
+    }, 1700);
+
+    const restartButton = document.createElement('a');
+    restartButton.setAttribute('href', './../index.html');
+    restartButton.classList.add('restartButton');
+    restartButton.textContent = 'Restart';
+
+    setTimeout(() => {
+      bloodModal.appendChild(restartButton);
+    }, 1900);
+
     return true;
   }
   if (monsterHealth <= 0) {
+
     showBattleActions(`<p class="hero">Victory! You defeated the monster.</p>`);
     showNextLevelButton();
 
@@ -772,24 +834,16 @@ function saveCharacterState() {
 }
 
 function loadLevel(levelIndex) {
+  heroCard.classList.remove('filtered');
+  monsterCard.classList.remove('filtered');
   console.log('load level level index:', levelIndex);
 
   const levelData = levels[levelIndex];
   console.log('load level:', levelData);
-
-  let audio = document.querySelector('#level-audio');
-  if (!audio) {
-    audio = document.createElement('audio');
-    audio.id = 'level-audio';
-    audio.src = '../assets/audio/levels/battle-music.mp3';
-    audio.volume = 0.4;
-    audio.loop = true;
-    document.body.appendChild(audio);
-  }
-
-  // Перезапускаємо аудіо
-  audio.currentTime = 0;
-  audio.play().catch((error) => {
+  battleAudio.play();
+  battleAudio.volume = 0.4;
+  battleAudio.currentTime = 0;
+  battleAudio.play().catch((error) => {
     console.error('Cannot play audio:', error);
   });
 
@@ -1018,7 +1072,9 @@ function decideFirstTurn() {
     showBattleActions(`<p class="hero">Hero starts the battle!</p>`);
   } else {
     showBattleActions(`<p class="monster">Monster starts the battle!</p>`);
-    monsterTurn();
+    setTimeout(() => {
+      monsterTurn();
+    }, 1000);
   }
 }
 
@@ -1033,8 +1089,6 @@ document.querySelectorAll('.attack').forEach((btn) => {
       console.error('Attack not found:', attackName);
       return;
     }
-
-    console.log('Selected attack:', selectedAttack);
 
     // Перевіряємо чи аудіо вже існує
     let audio = document.querySelector(`#audio-${attackName}`);
@@ -1075,6 +1129,13 @@ function levelUpModal() {
   if (currentLevelIndex === 3) {
     stoneImg.src = '../assets/items/stone-harmony-rainbow.jpg';
   }
+  if (currentLevelIndex === 4) {
+    stoneImg.src = './../assets/monsters/boss.jpg';
+    document.getElementById('levelUp_title').style.display = 'none';
+    document.getElementById('levelUp_text').textContent =
+      'The Shadow Lord is defeated!';
+    document.getElementById('levelUp_stats').style.display = 'none';
+  }
 
   let audio = document.createElement('audio');
   audio.src = `../assets/audio/levels/next-level.mp3`;
@@ -1089,13 +1150,27 @@ function levelUpModal() {
   audio.loop = false;
   document.body.appendChild(audio);
 
+  let storySoundtrack;
+  if (currentLevelIndex <= 3) {
+    storySoundtrack = `./../${levels[currentLevelIndex + 1].sound}`;
+  } else {
+    storySoundtrack = './../assets/audio/levels/win.mp3';
+  }
+
+  console.log(storySoundtrack);
+
+  const levelStoryAudio = new Audio(storySoundtrack);
+  levelStoryAudio.loop = true;
+
   const startGameBtn = document.getElementById('closeBtn');
   startGameBtn.replaceWith(startGameBtn.cloneNode(true));
   const newStartGameBtn = document.getElementById('closeBtn');
   newStartGameBtn.addEventListener('click', () => {
+    closeButtonAudio.play();
+    levelStoryAudio.play();
     modal.classList.add('modalHidden');
     if (currentLevelIndex <= 3) {
-      nextLevelStoryModal();
+      nextLevelStoryModal(levelStoryAudio);
     } else {
       endOfGameModal();
     }
@@ -1107,7 +1182,7 @@ const endOfGameModal = () => {
   modal.classList.remove('endOfGameModalClosed');
 };
 
-const nextLevelStoryModal = () => {
+const nextLevelStoryModal = (levelStoryAudio) => {
   const modal = document.getElementById('battleStoryModal');
   modal.classList.remove('storyModalClosed');
   const place = document.getElementById('place');
@@ -1119,15 +1194,18 @@ const nextLevelStoryModal = () => {
 
   const closeStoryModal = () => {
     modal.classList.add('storyModalClosed');
+    levelStoryAudio.pause();
     if (!isLevelLoading) {
       nextLevel();
     }
   };
 
   const closeModal = document.getElementById('closeModal');
+  closeModal.addEventListener('click', () => closeButtonAudio.play());
   closeModal.addEventListener('click', closeStoryModal);
 };
 
+nextLevelButton.addEventListener('click', () => battleAudio.pause());
 nextLevelButton.addEventListener(
   'click',
   currentLevelIndex <= 3 ? levelUpModal : endOfGameModal
@@ -1141,6 +1219,7 @@ buttonsContainer.append(startLevelButton, nextLevelButton);
 battlefieldContainer.appendChild(buttonsContainer);
 
 startLevelButton.addEventListener('click', () => {
+  closeButtonAudio.play();
   decideFirstTurn();
 
   document.getElementById('start-battle-btn').disabled = true;

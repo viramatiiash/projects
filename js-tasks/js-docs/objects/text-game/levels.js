@@ -5,6 +5,8 @@ export const levels = [
     name: 'The Enchanted Dark Forest',
     description:
       'The hero begins his/her journey in the Dark Forest, where stars are obscured by a veil of magical fog. This place is teeming with ghosts and enchanted trees that come alive to guard the secrets of the Forest’s Heart - the first Stone of Harmony.',
+    sound: './assets/audio/levels/level-1/story.mp3',
+
     monster: {
       name: 'Wraithwood',
       image: './assets/monsters/wraithwood.jpg',
@@ -39,10 +41,6 @@ export const levels = [
         {
           name: 'Death',
           url: './assets/audio/levels/level-1/monster-death-1.mp3',
-        },
-        {
-          name: 'LevelStory',
-          url: './assets/audio/levels/level-1/story.mp3',
         },
       ],
     },
@@ -85,10 +83,10 @@ export const levels = [
           name: 'Death',
           url: './assets/audio/levels/level-2/phantom-death.mp3',
         },
-        {
-          name: 'LevelStory',
-          url: './assets/audio/levels/level-2/frogs-choir.mp3',
-        },
+        // {
+        //   name: 'LevelStory',
+        //   url: './assets/audio/levels/level-2/frogs-choir.mp3',
+        // },
       ],
     },
   },
@@ -98,6 +96,7 @@ export const levels = [
     name: 'The Fiery Volcano',
     description:
       'The path leads to an active volcano, where the third Stone is hidden. The heroes face rivers of lava, underground demons, and scorching winds.',
+    sound: './assets/audio/levels/level-3/steps.mp3',
     monster: {
       name: 'Ifritis',
       image: './assets/monsters/ifritis.jpg',
@@ -132,7 +131,6 @@ export const levels = [
           name: 'Death',
           url: './assets/audio/levels/level-3/ifritis-pain.mp3',
         },
-        { name: 'LevelStory', url: './assets/audio/levels/level-3/steps.mp3' },
       ],
     },
   },
@@ -142,6 +140,7 @@ export const levels = [
     name: 'The Enchanted Dark Castle',
     description:
       'A battlefield where the Shadow Lord’s army clashes with the heroes. The castle is protected by an army of the undead, and the skies are filled with shadow dragons and nightmares.',
+    sound: './assets/audio/levels/level-4/nightmare.mp3',
     monster: {
       name: 'Nightmare',
       image: './assets/monsters/nightmare.jpg',
@@ -178,10 +177,6 @@ export const levels = [
           name: 'Death',
           url: './assets/audio/levels/level-4/monster-death.mp3',
         },
-        {
-          name: 'LevelStory',
-          url: './assets/audio/levels/level-4/nightmare.mp3',
-        },
       ],
     },
   },
@@ -191,6 +186,7 @@ export const levels = [
     name: 'The Dark Castle Throne Hall',
     description:
       'In the throne room of the Shadow Lord, the heroes confront his terrifying power.',
+    sound: './assets/audio/levels/level-5/battle-music.mp3',
     monster: {
       name: 'Dark Lord',
       image: './assets/monsters/boss.jpg',
@@ -219,10 +215,6 @@ export const levels = [
           url: './assets/audio/levels/level-5/boss-victory.mp3',
         },
         { name: 'Death', url: './assets/audio/levels/level-5/boss-dying.wav' },
-        {
-          name: 'LevelStory',
-          url: './assets/audio/levels/level-5/battle-music.mp3',
-        },
         {
           name: 'Battle',
           url: './assets/audio/levels/level-5/battle-music-boss.mp3',

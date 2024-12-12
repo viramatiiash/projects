@@ -38,6 +38,7 @@
 */
 
 import { characters } from './characters.js';
+const closeButtonAudio = new Audio('./assets/audio/levels/button.mp3');
 
 const container = document.getElementById('choose-character');
 
@@ -47,6 +48,7 @@ function showStartModal() {
 
   const startGameBtn = document.getElementById('start-game-btn');
   startGameBtn.addEventListener('click', () => {
+    closeButtonAudio.play();
     modal.classList.add('closed');
     showStoryModal();
   });
@@ -111,11 +113,8 @@ characters.forEach((character) => {
     </div>
   `;
 
-  // Додаємо обробник події кліку
   card.addEventListener('click', () => {
-    // Зберігаємо обраного персонажа в localStorage
     localStorage.setItem('selectedCharacter', JSON.stringify(character));
-    // Перехід на сторінку battlefield.html
     const basePath = window.location.pathname.split('/').slice(0, -1).join('/');
     window.location.href = `${basePath}/battlefield/battlefield.html`;
   });
