@@ -83,10 +83,6 @@ export const levels = [
           name: 'Death',
           url: './assets/audio/levels/level-2/phantom-death.mp3',
         },
-        // {
-        //   name: 'LevelStory',
-        //   url: './assets/audio/levels/level-2/frogs-choir.mp3',
-        // },
       ],
     },
   },

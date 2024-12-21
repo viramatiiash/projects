@@ -1,0 +1,176 @@
+// ! 1600px
+@include screenBig {
+  .background {
+    #choose-character {
+      width: 97%;
+      height: 650px;
+
+      .character-card {
+        font-size: 14px;
+        box-shadow: 0px 5px 40px 10px $c-light-blue-tran;
+      }
+    }
+  }
+}
+
+@include screen {
+  .background {
+    display: block;
+    #choose-character {
+      margin: 0 auto;
+      width: 80%;
+      height: 1300px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: end;
+      gap: 35px;
+      margin-top: 100px;
+
+      .character-card {
+        max-width: 330px;
+        height: 50%;
+
+        font-size: 14px;
+      }
+    }
+  }
+  .battlefield {
+    #character-details {
+      .img-container {
+        max-width: 150px;
+        height: 150px;
+      }
+    }
+
+    #monster-container {
+      .img-container {
+        max-width: 150px;
+        height: 150px;
+      }
+    }
+  }
+}
+
+@include desktopBig {
+  .battlefield {
+    font-size: 14px;
+    gap: 10px;
+
+    .character-chars {
+      column-gap: 20px;
+    }
+
+    #central-container {
+      justify-content: center;
+      max-width: 120px;
+      #battle-swords {
+        max-width: 100px;
+        height: 100px;
+      }
+
+      #battle-actions {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@include desktop {
+  .background {
+    display: block;
+    #choose-character {
+      margin: 0 auto;
+      width: 90%;
+      height: 1200px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: end;
+      gap: 35px;
+      margin-top: 100px;
+
+      .character-card {
+        max-width: 270px;
+        height: 50%;
+
+        font-size: 12px;
+      }
+    }
+  }
+
+  .battlefield {
+    font-size: 12px;
+
+    #character-details {
+      .img-container {
+        max-width: 100px;
+        height: 100px;
+        border-width: 4px;
+      }
+    }
+
+    #monster-container {
+      .img-container {
+        max-width: 100px;
+        height: 100px;
+        border-width: 4px;
+      }
+    }
+
+    .stats {
+      max-width: 100px;
+    }
+
+    .stat-value {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+
+    .character-attacks {
+      gap: 3px;
+
+      & .attack {
+        padding: 7px;
+      }
+    }
+
+    .effect-element {
+      width: 30px;
+      height: 30px;
+    }
+
+    #central-container {
+      #battle-swords {
+        max-width: 70px;
+        height: 70px;
+      }
+    }
+  }
+
+  #battle-actions-mobile {
+    height: 100px;
+    font-size: 12px;
+  }
+}
+
+@include tablet {
+  .background {
+    display: block;
+    #choose-character {
+      margin: 0 auto;
+      width: 90%;
+      height: 1200px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: end;
+      gap: 35px;
+      margin-top: 100px;
+
+      .character-card {
+        max-width: 270px;
+        height: 50%;
+        font-size: 12px;
+      }
+    }
+  }
+}

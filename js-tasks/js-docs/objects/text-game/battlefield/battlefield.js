@@ -113,21 +113,22 @@ function heroTurn(selectedAttack) {
     staminaStat.value -= selectedAttack.staminaCost;
     updateCharacterStats();
   }
+  if (selectedAttack.name !== 'Healing') {
+    const magicStat = selectedCharacter.characteristics.find(
+      (stat) => stat.name === 'Magic'
+    );
 
-  const magicStat = selectedCharacter.characteristics.find(
-    (stat) => stat.name === 'Magic'
-  );
+    if (selectedAttack.magicCost) {
+      if (!magicStat || magicStat.value < selectedAttack.magicCost) {
+        showBattleActions(
+          `<p class="error">- Not enough magic for this attack</p>`
+        );
+        return;
+      }
 
-  if (selectedAttack.magicCost) {
-    if (!magicStat || magicStat.value < selectedAttack.magicCost) {
-      showBattleActions(
-        `<p class="error">- Not enough magic for this attack</p>`
-      );
-      return;
+      magicStat.value -= selectedAttack.magicCost;
+      updateCharacterStats();
     }
-
-    magicStat.value -= selectedAttack.magicCost;
-    updateCharacterStats();
   }
 
   // ! Berserker Rage
@@ -147,7 +148,7 @@ function heroTurn(selectedAttack) {
 
   // ! Healing
   if (selectedAttack.name === 'Healing') {
-    handleHealing();
+    handleHealing(selectedAttack);
   }
   console.log(updatedDamage);
   if (selectedAttack.name === 'Basic Attack') {
@@ -306,11 +307,14 @@ const handleNightSlash = () => {
 };
 
 // Handle Healing
-const handleHealing = () => {
-  console.log(`Using Healing, Magic Cost: ${selectedAttack.magicCost}`);
+const handleHealing = (selectedAttack) => {
+  console.log(selectedAttack);
+
   const magicStat = selectedCharacter.characteristics.find(
     (stat) => stat.name === 'Magic'
   );
+
+  console.log(magicStat);
 
   if (selectedAttack.magicCost) {
     if (!magicStat || magicStat.value < selectedAttack.magicCost) {
@@ -329,7 +333,10 @@ const handleHealing = () => {
       healthStat.value += healingAmount;
 
       // Логіка для обмеження здоров'я (якщо потрібно, наприклад, maxHealth)
-      const maxHealth = selectedCharacter.getCharacteristic('MaxHealth')?.value;
+      const maxHealth = selectedCharacter.characteristics.find(
+        (char) => char.name === 'Health'
+      ).defaultValue;
+
       if (maxHealth && healthStat.value > maxHealth) {
         healthStat.value = maxHealth; // Обмеження до максимального здоров'я
       }
@@ -346,6 +353,8 @@ const handleHealing = () => {
   } else {
     showBattleActions(`<p class="error">- Not enough magic for Healing</p>`);
   }
+  updateCharacterStats();
+  updateHealthBars();
   saveCharacterState();
   endTurn();
   return;
@@ -751,7 +760,7 @@ function checkGameOver() {
     (sound) => sound.name === 'Death'
   );
   const monsterVictorySound = levelData.monster.sounds.find(
-    (sound) => sound.name === 'Virctory'
+    (sound) => sound.name === 'Victory'
   );
 
   if (heroHealth <= 0) {
@@ -762,7 +771,7 @@ function checkGameOver() {
       audio.autoplay = true;
       audio.loop = false;
       document.body.appendChild(audio);
-    }, 500);
+    }, 1200);
 
     showBattleActions(`<p class="error">Game Over! The monster has won.</p>`);
 
@@ -804,7 +813,6 @@ function checkGameOver() {
     return true;
   }
   if (monsterHealth <= 0) {
-
     showBattleActions(`<p class="hero">Victory! You defeated the monster.</p>`);
     showNextLevelButton();
 
@@ -817,13 +825,13 @@ function checkGameOver() {
       document.body.appendChild(audio);
     }, 1000);
 
-    // setTimeout(() => {
-    //   audio = document.createElement('audio');
-    //   audio.src = `../${heroVictorySound.url}`;
-    //   audio.autoplay = true;
-    //   audio.loop = false;
-    //   document.body.appendChild(audio);
-    // }, 1000);
+    setTimeout(() => {
+      audio = document.createElement('audio');
+      audio.src = `../${heroVictorySound.url}`;
+      audio.autoplay = true;
+      audio.loop = false;
+      document.body.appendChild(audio);
+    }, 1500);
     return true;
   }
   return false;
@@ -1060,7 +1068,30 @@ function showNextLevelButton() {
 
 const showBattleActions = (code) => {
   const battleActionsContainer = document.getElementById('battle-actions');
-  battleActionsContainer.insertAdjacentHTML('beforeend', code);
+  const battleActionsMobileContainer = document.getElementById(
+    'battle-actions-mobile'
+  );
+
+  const updateContainers = () => {
+    if (window.innerWidth < 1200) {
+      battleActionsMobileContainer.style.display = 'block';
+      // Якщо екран менший за 1200px, додаємо в мобільний контейнер і видаляємо верхній
+      battleActionsMobileContainer.insertAdjacentHTML('beforeend', code);
+      battleActionsContainer.innerHTML = ''; // Очищаємо верхній контейнер
+    } else {
+      battleActionsContainer.style.display = 'block';
+
+      // Якщо екран більше або рівний 1200px, додаємо в звичайний контейнер
+      battleActionsContainer.insertAdjacentHTML('beforeend', code);
+      battleActionsMobileContainer.innerHTML = ''; // Очищаємо мобільний контейнер
+    }
+  };
+
+  // Виконуємо функцію при завантаженні сторінки
+  updateContainers();
+
+  // Виконуємо функцію при зміні розміру екрану
+  window.addEventListener('resize', updateContainers);
 };
 
 function decideFirstTurn() {

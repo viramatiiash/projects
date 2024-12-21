@@ -52,12 +52,12 @@ const vaelith = new Character(
   1,
   'Vaelith',
   './assets/characters/dark-elf.jpg',
-  'A master of shadow magic and swordplay. A shadow in the darkness, Vaelith is both a protector and an avenger. His people are cursed by the Ancient Lord, and Kael seeks to lift this curse.',
+  'A master of shadow magic and swordplay. His people are cursed by the Ancient Lord, and Kael seeks to lift this curse.',
   [
-    { name: 'Health', value: 1, defaultValue: 100 },
-    { name: 'Damage', value: 2, defaultValue: 100 },
+    { name: 'Health', value: 1, defaultValue: 1 },
+    { name: 'Damage', value: 20, defaultValue: 100 },
     { name: 'Stamina', value: 7, defaultValue: 100 },
-    { name: 'Defense', value: 3, defaultValue: 100 },
+    { name: 'Defense', value: 3, defaultValue: 1 },
     { name: 'Magic', value: 3, defaultValue: 100 },
   ],
   [
@@ -65,7 +65,7 @@ const vaelith = new Character(
       name: 'Basic Attack',
       type: 'damage',
       description:
-        'A swift slash with his blade, dealing minimal but reliable damage. Can be deflected.',
+        'A swift slash with his blade, dealing minimal but reliable damage.',
       staminaCost: 0,
       damage: 2,
       sound: './assets/audio/heroes/vaelith/blade.mp3',
@@ -102,6 +102,10 @@ const vaelith = new Character(
       name: 'Death',
       url: './assets/audio/heroes/vaelith/male-death-sound.mp3',
     },
+    {
+      name: 'Victory',
+      url: './assets/audio/heroes/vaelith/victory.mp3',
+    },
   ]
 );
 
@@ -122,7 +126,7 @@ const astralis = new Character(
     {
       name: 'Basic Attack',
       type: 'damage',
-      description: 'Staff damage +3, can be deflected.',
+      description: 'Basic Attack',
       damage: 3,
       sound: './assets/audio/heroes/astralis/fire-magic-2.mp3',
     },
@@ -148,7 +152,11 @@ const astralis = new Character(
     { name: 'Damage', url: './assets/audio/heroes/astralis/woman-pain-6.mp3' },
     {
       name: 'Death',
-      url: './assets/audio/heroes/astralis/death.wav',
+      url: './assets/audio/heroes/astralis/death.mp3',
+    },
+    {
+      name: 'Victory',
+      url: './assets/audio/heroes/astralis/victory.mp3',
     },
   ]
 );
@@ -205,6 +213,10 @@ const lorien = new Character(
       name: 'Death',
       url: './assets/audio/heroes/lorien/death.wav',
     },
+    {
+      name: 'Victory',
+      url: './assets/audio/heroes/lorien/victory.mp3',
+    },
   ]
 );
 
@@ -238,7 +250,7 @@ const tharok = new Character(
       sound: './assets/audio/heroes/tharok/skullcrusher.mp3',
     },
     {
-      name: "Berserker Rage",
+      name: 'Berserker Rage',
       type: 'special',
       description: 'Temporarily increases attack power.',
       staminaCost: 5,
@@ -258,6 +270,10 @@ const tharok = new Character(
     {
       name: 'Death',
       url: './assets/audio/heroes/tharok/man-death.mp3',
+    },
+    {
+      name: 'Victory',
+      url: './assets/audio/heroes/tharok/victory.mp3',
     },
   ]
 );

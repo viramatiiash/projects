@@ -36,9 +36,9 @@
 [+] Реалізуй систему інвентаря, де гравець може зберігати та використовувати знайдені предмети.
 
 */
-
 import { characters } from './characters.js';
 const closeButtonAudio = new Audio('./assets/audio/levels/button.mp3');
+
 
 const container = document.getElementById('choose-character');
 
@@ -71,7 +71,6 @@ showStartModal();
 characters.forEach((character) => {
   const card = document.createElement('div');
   card.classList.add('character-card');
-
   card.innerHTML = `
     <div class="character-info">
       <h2 class="character-race">${character.race}</h2>
@@ -91,7 +90,7 @@ characters.forEach((character) => {
             (char) => `
               <li class="characteristic">
                 <div class="characteristic-number">${char.value}</div>
-                <div class="characteristic-name">${char.name}</div>
+                <div class="characteristic-name">${char.name}:</div>
               </li>
             `
           )

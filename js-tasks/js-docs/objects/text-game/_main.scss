@@ -25,7 +25,9 @@ img {
 }
 
 .background {
-  position: fixed;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -33,6 +35,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: -1;
 
   #bg-video {
     position: fixed;
@@ -44,10 +47,14 @@ img {
   }
 
   #choose-character {
+    margin: 0 auto;
     background-color: $c-bg;
-    width: 90%;
-    height: 78%;
+    width: 78%;
+    height: 700px;
+    flex-wrap: nowrap;
+    height: 700px;
     display: flex;
+    // margin-top: 100px;
     justify-content: space-between;
     padding: 40px;
     border-radius: 20px;
@@ -56,23 +63,20 @@ img {
     .character-card {
       width: 100%;
       max-width: 22%;
+      height: 100%;
       background-color: $c-blue;
       padding: 20px 30px 20px 30px;
       border-radius: 20px;
       box-shadow: 0px 5px 40px 15px $c-light-blue-tran;
       transform-style: preserve-3d;
-      transition: transform 0.5s;
       cursor: pointer;
-      transition: $t-normal;
 
       .characteristics-container {
-        transform: rotateY(180deg);
+        transition: 0.5s ease-in-out;
         display: none;
       }
 
       &:hover {
-        transform: rotateY(180deg);
-
         .characteristics-container {
           display: block;
         }
@@ -81,10 +85,6 @@ img {
         .character-name,
         .character-description {
           display: none;
-        }
-
-        .character-race {
-          transform: rotateY(180deg);
         }
       }
 
@@ -148,14 +148,16 @@ img {
 
 .character-characteristics {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 40px;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  margin-bottom: 10px;
 
   .characteristic {
+    width: fit-content;
     display: flex;
+    align-items: center;
     flex-direction: row-reverse;
-    justify-content: start;
+    justify-content: center;
     gap: 10px;
   }
 
@@ -181,6 +183,10 @@ img {
 // ! Battlefield
 
 #battlefield-container {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   width: 100%;
   height: 100vh;
   background-position: center;
@@ -215,7 +221,8 @@ img {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 25px 10px rgba(208, 255, 255, 0.7);
   }
   50% {
@@ -508,7 +515,9 @@ img {
   margin-bottom: 50px;
 }
 
-#battle-actions {
+#battle-actions,
+#battle-actions-mobile {
+  display: none;
   width: 100%;
   max-width: 250px;
   height: 250px;
@@ -545,6 +554,12 @@ img {
   }
 }
 
+#battle-actions-mobile {
+  max-width: 80%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
 .selectedAttackName {
   color: $c-white;
 }
@@ -573,7 +588,7 @@ img {
   bottom: 0;
   left: 0;
   background-color: $c-body;
-  z-index: 100;
+  z-index: 99;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -581,17 +596,32 @@ img {
   transition: $t-normal;
 }
 
+#storyModal {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $c-body;
+  transition: $t-normal;
+}
+
 #battleStoryModal {
   width: 100%;
   height: 100vh;
   opacity: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: $c-body;
-  z-index: 99;
+  z-index: 98;
   display: flex;
   align-items: center;
   justify-content: center;

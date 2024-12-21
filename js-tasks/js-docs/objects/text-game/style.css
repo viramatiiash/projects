@@ -341,7 +341,9 @@ img {
 }
 
 .background {
-  position: fixed;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -355,6 +357,7 @@ img {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  z-index: -1;
 }
 .background #bg-video {
   position: fixed;
@@ -367,9 +370,13 @@ img {
   z-index: -1;
 }
 .background #choose-character {
+  margin: 0 auto;
   background-color: rgba(19, 19, 19, 0.7);
-  width: 90%;
-  height: 78%;
+  width: 78%;
+  height: 700px;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  height: 700px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -384,6 +391,7 @@ img {
 .background #choose-character .character-card {
   width: 100%;
   max-width: 22%;
+  height: 100%;
   background-color: rgba(18, 34, 41, 0.822);
   padding: 20px 30px 20px 30px;
   border-radius: 20px;
@@ -391,22 +399,12 @@ img {
           box-shadow: 0px 5px 40px 15px rgb(22, 34, 43);
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform 0.5s;
-  transition: -webkit-transform 0.5s;
-  transition: transform 0.5s;
-  transition: transform 0.5s, -webkit-transform 0.5s;
   cursor: pointer;
-  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .background #choose-character .character-card .characteristics-container {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   display: none;
-}
-.background #choose-character .character-card:hover {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
 }
 .background #choose-character .character-card:hover .characteristics-container {
   display: block;
@@ -415,10 +413,6 @@ img {
 .background #choose-character .character-card:hover .character-name,
 .background #choose-character .character-card:hover .character-description {
   display: none;
-}
-.background #choose-character .character-card:hover .character-race {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
 }
 .background #choose-character .character-card .character-info {
   position: relative;
@@ -474,24 +468,30 @@ img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 10px;
-  margin-bottom: 40px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-column-gap: 10px;
+     -moz-column-gap: 10px;
+          column-gap: 10px;
+  margin-bottom: 10px;
 }
 .character-characteristics .characteristic {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 10px;
 }
 .character-characteristics .characteristic-number {
@@ -516,6 +516,10 @@ img {
 }
 
 #battlefield-container {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   width: 100%;
   height: 100vh;
   background-position: center;
@@ -993,7 +997,9 @@ img {
   margin-bottom: 50px;
 }
 
-#battle-actions {
+#battle-actions,
+#battle-actions-mobile {
+  display: none;
   width: 100%;
   max-width: 250px;
   height: 250px;
@@ -1009,23 +1015,33 @@ img {
   /* Стиль для повзунка (смуги) скролу */
   /* Стиль при наведенні на смугу */
 }
-#battle-actions::-webkit-scrollbar {
+#battle-actions::-webkit-scrollbar,
+#battle-actions-mobile::-webkit-scrollbar {
   width: 8px; /* Ширина вертикального скролу */
 }
-#battle-actions::-webkit-scrollbar-track {
+#battle-actions::-webkit-scrollbar-track,
+#battle-actions-mobile::-webkit-scrollbar-track {
   background: rgba(34, 34, 34, 0.9019607843); /* Колір доріжки */
   border-radius: 10px; /* Закруглені краї */
   cursor: pointer;
 }
-#battle-actions::-webkit-scrollbar-thumb {
+#battle-actions::-webkit-scrollbar-thumb,
+#battle-actions-mobile::-webkit-scrollbar-thumb {
   background: rgb(215, 180, 110); /* Колір смуги */
   border-radius: 10px; /* Закруглені краї */
   cursor: pointer;
   -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-#battle-actions::-webkit-scrollbar-thumb:hover {
+#battle-actions::-webkit-scrollbar-thumb:hover,
+#battle-actions-mobile::-webkit-scrollbar-thumb:hover {
   background: #d1aa5a; /* Зміна кольору при наведенні */
+}
+
+#battle-actions-mobile {
+  max-width: 80%;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .selectedAttackName {
@@ -1055,7 +1071,7 @@ img {
   bottom: 0;
   left: 0;
   background-color: rgba(5, 5, 5, 0.9);
-  z-index: 100;
+  z-index: 99;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1073,17 +1089,39 @@ img {
   transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+#storyModal {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(5, 5, 5, 0.9);
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 #battleStoryModal {
   width: 100%;
   height: 100vh;
   opacity: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(5, 5, 5, 0.9);
-  z-index: 99;
+  z-index: 98;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1416,4 +1454,188 @@ img {
 }
 .bloodModal .restartButton:hover {
   background-color: rgba(98, 98, 98, 0.9019607843);
+}
+
+.swiper {
+  width: 100%;
+  height: 1000px; /* Встановіть бажану висоту */
+}
+
+.swiper-slide {
+  width: 100%;
+  max-width: 300px;
+  height: 600px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff; /* Змінити колір кнопок */
+  background-color: rgba(0, 0, 0, 0.5); /* Фоновий колір */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px; /* Розмір стрілок */
+}
+
+@media (max-width: 1600px) {
+  .background #choose-character {
+    width: 97%;
+    height: 650px;
+  }
+  .background #choose-character .character-card {
+    font-size: 14px;
+    -webkit-box-shadow: 0px 5px 40px 10px rgb(22, 34, 43);
+            box-shadow: 0px 5px 40px 10px rgb(22, 34, 43);
+  }
+}
+@media (max-width: 1400px) {
+  .background {
+    display: block;
+  }
+  .background #choose-character {
+    margin: 0 auto;
+    width: 80%;
+    height: 1300px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: end;
+    gap: 35px;
+    margin-top: 100px;
+  }
+  .background #choose-character .character-card {
+    max-width: 330px;
+    height: 50%;
+    font-size: 14px;
+  }
+  .battlefield #character-details .img-container {
+    max-width: 150px;
+    height: 150px;
+  }
+  .battlefield #monster-container .img-container {
+    max-width: 150px;
+    height: 150px;
+  }
+}
+@media (max-width: 1200px) {
+  .battlefield {
+    font-size: 14px;
+    gap: 10px;
+  }
+  .battlefield .character-chars {
+    -webkit-column-gap: 20px;
+       -moz-column-gap: 20px;
+            column-gap: 20px;
+  }
+  .battlefield #central-container {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    max-width: 120px;
+  }
+  .battlefield #central-container #battle-swords {
+    max-width: 100px;
+    height: 100px;
+  }
+  .battlefield #central-container #battle-actions {
+    max-width: 100%;
+  }
+}
+@media (max-width: 1024px) {
+  .background {
+    display: block;
+  }
+  .background #choose-character {
+    margin: 0 auto;
+    width: 90%;
+    height: 1200px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: end;
+    gap: 35px;
+    margin-top: 100px;
+  }
+  .background #choose-character .character-card {
+    max-width: 270px;
+    height: 50%;
+    font-size: 12px;
+  }
+  .battlefield {
+    font-size: 12px;
+  }
+  .battlefield #character-details .img-container {
+    max-width: 100px;
+    height: 100px;
+    border-width: 4px;
+  }
+  .battlefield #monster-container .img-container {
+    max-width: 100px;
+    height: 100px;
+    border-width: 4px;
+  }
+  .battlefield .stats {
+    max-width: 100px;
+  }
+  .battlefield .stat-value {
+    width: 30px;
+    height: 30px;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+  }
+  .battlefield .character-attacks {
+    gap: 3px;
+  }
+  .battlefield .character-attacks .attack {
+    padding: 7px;
+  }
+  .battlefield .effect-element {
+    width: 30px;
+    height: 30px;
+  }
+  .battlefield #central-container #battle-swords {
+    max-width: 70px;
+    height: 70px;
+  }
+  #battle-actions-mobile {
+    height: 100px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .background {
+    display: block;
+  }
+  .background #choose-character {
+    margin: 0 auto;
+    width: 90%;
+    height: 1200px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: end;
+    gap: 35px;
+    margin-top: 100px;
+  }
+  .background #choose-character .character-card {
+    max-width: 270px;
+    height: 50%;
+    font-size: 12px;
+  }
 }
