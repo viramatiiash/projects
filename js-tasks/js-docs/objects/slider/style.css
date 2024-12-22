@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+/* Font Families */
+/* Font Sizes */
+/* Colors */
+/* Box Shadows */
+/* Font Weights */
+/* Line heights */
+/* Transition */
+/* Media Queries: Breakpoints */
+/* Letter Spacing */
+/* Border Radius */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  max-width: 1920px;
+  font-family: "Noto Sans", serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-image: url("./assets/bg.webp");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: repeat;
+  margin: 0 auto;
+  background-color: #080503;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container {
+  max-width: 1380px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 700;
+  padding: 10px;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #fe461c;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+li {
+  list-style-type: none;
+}
+
+.slider-container {
+  position: relative;
+  height: 600px;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(161deg, rgba(162, 107, 219, 0.7411764706) 8.84%, rgba(50, 71, 212, 0.7019607843) 86.04%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.slider-container #btn-prev,
+.slider-container #btn-next {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 50px;
+  height: 80px;
+  cursor: pointer;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slider-container #btn-prev svg,
+.slider-container #btn-next svg {
+  fill: #fff;
+}
+.slider-container #btn-prev:hover,
+.slider-container #btn-next:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.slider-container #btn-prev {
+  left: 0;
+  -webkit-transform: rotate(180deg) translateY(50%);
+          transform: rotate(180deg) translateY(50%);
+}
+.slider-container #btn-next {
+  right: 0;
+}
+.slider-container #slider {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 100px;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slider-container #slider .slide {
+  background-color: rgba(55, 25, 13, 0.5);
+  height: 480px;
+  width: 100%;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  padding-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+}
+.slider-container #slider .slide .imgContainer {
+  width: 100%;
+  height: 300px;
+}
+.slider-container #slider .slide .imgContainer img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.slider-container #slider .title {
+  font-weight: 900;
+  color: rgb(249, 232, 249);
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.slider-container #slider .description {
+  font-size: 14px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

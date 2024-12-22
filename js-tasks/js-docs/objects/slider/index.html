@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Custom Slider</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="slider-container">
+      <div id="slider"></div>
+      <div id="btn-prev" class="slider__button slider_button--prev">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#00000"
+        >
+          <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
+        </svg>
+      </div>
+      <div id="btn-next" class="slider__button slider_button--next">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#00000"
+        >
+          <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
+        </svg>
+      </div>
+      <div id="pagination" class="slider__pagination"></div>
+    </div>
+    <script type="module" src="./info.js"></script>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
