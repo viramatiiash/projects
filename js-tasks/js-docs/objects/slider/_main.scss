@@ -23,26 +23,6 @@ body {
   justify-content: center;
 }
 
-.container {
-  max-width: 1380px;
-  padding-left: 30px;
-  padding-right: 30px;
-  margin: 0 auto;
-}
-
-a {
-  text-decoration: none;
-  color: $c-white;
-  transition: $t-normal;
-  font-weight: $fw-bold;
-  padding: 10px;
-  cursor: pointer;
-}
-
-a:hover {
-  color: $c-link-hover;
-}
-
 svg {
   display: block;
   width: 100%;
@@ -52,10 +32,6 @@ svg {
 img {
   width: 100%;
   height: 100%;
-}
-
-li {
-  list-style-type: none;
 }
 
 .slider-container {
@@ -97,12 +73,37 @@ li {
     right: 0;
   }
 
+  #pagination {
+    position: absolute;
+    width: 130px;
+    height: 20px;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .paginationDot {
+      width: 20px;
+      height: 10px;
+      border-radius: 5px;
+      background-color: $c-pagination-bg;
+      transition: $t-normal;
+      cursor: pointer;
+    }
+
+    .dotActive {
+      background-color: $c-pagination-active;
+    }
+  }
+
   #slider {
     width: 40%;
     display: flex;
     align-items: center;
     gap: 100px;
-
     transition: $t-normal;
 
     .slide {
@@ -128,6 +129,7 @@ li {
     }
 
     .title {
+      text-align: center;
       font-weight: $fw-black;
       color: $c-title;
       padding-left: 15px;
@@ -139,9 +141,7 @@ li {
       padding-left: 15px;
       padding-right: 15px;
       text-align: center;
-    }
-
-    .image {
+      margin-bottom: 10px;
     }
   }
 }

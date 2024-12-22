@@ -1,6 +1,5 @@
 /* Font Families */
-$ff-main: "Noto Sans", serif;
-
+$ff-main: 'Noto Sans', serif;
 
 /* Font Sizes */
 $fs-text-mobile: 14px;
@@ -14,18 +13,16 @@ $fs-newsletter: 55px;
 $fs-title: 64px;
 
 /* Colors */
-$c-link-hover: #fe461c;
-$c-logo: #ffb400;
-$c-bg: #080503;
 $c-card-bg: rgba(55, 25, 13, 0.5);
+$c-bg: black;
 $c-white: #fff;
 $c-title: rgb(249, 232, 249);
 $c-slider-btn: rgba(0, 0, 0, 0.4);
 $c-btn-hover: rgba(0, 0, 0, 0.6);
+$c-pagination-bg: rgba(255, 255, 255, 0.2);
+$c-pagination-active: rgba(255, 255, 255, 0.8);
 
 /* Box Shadows */
-$bs: 0px 0px 24px rgba(15, 16, 24, 0.42);
-$bs-light: 0px 0px 24px rgba(179, 181, 191, 0.42);
 
 /* Font Weights */
 $fw-light: 300;

@@ -35,6 +35,23 @@ const btnNext = document.getElementById('btn-next');
 const pagination = document.getElementById('pagination');
 
 let currentIndex = 0;
+const gap = 100;
+let slideWidth = 0;
+
+for (let i = 0; i < sliderInfos.length; i++) {
+  const paginationDot = document.createElement('div');
+  paginationDot.classList.add('paginationDot');
+
+  pagination.appendChild(paginationDot);
+}
+
+const updateSlideWidth = () => {
+  const slides = document.querySelectorAll('.slide');
+  slideWidth = slides[0]?.offsetWidth || 0;
+  if (slideWidth === 0) {
+    console.error('Slide width is invalid. Check your DOM or CSS.');
+  }
+};
 
 const loadSlide = () => {
   sliderInfos.forEach((slide) => {
@@ -62,8 +79,6 @@ const loadSlide = () => {
   });
 };
 
-loadSlide();
-
 const handlePrev = () => {
   if (currentIndex > 0) {
     currentIndex -= 1;
@@ -83,8 +98,45 @@ const handleNext = () => {
 };
 
 const updateSliderPosition = () => {
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  if (slideWidth > 0) {
+    const offset = -(currentIndex * (slideWidth + gap)); // Розрахунок зміщення
+
+    slider.style.transform = `translateX(${offset}px)`; // Зміщення слайдеру
+  } else {
+    console.error('Slide width is invalid. Check your DOM or CSS.');
+  }
 };
+
+const updatePaginationActiveDot = () => {
+  const paginationDots = document.querySelectorAll('.paginationDot');
+  paginationDots.forEach((dot, index) => {
+    dot.classList.remove('dotActive');
+    if (index === currentIndex) {
+      dot.classList.add('dotActive');
+    }
+  });
+};
+
+const handlePaginationClick = (event) => {
+  const clickedDot = event.target;
+  if (clickedDot.classList.contains('paginationDot')) {
+    currentIndex = Array.from(clickedDot.parentNode.children).indexOf(
+      clickedDot
+    );
+    updateSliderPosition();
+    updatePaginationActiveDot();
+  }
+};
+
+loadSlide();
+updateSlideWidth();
 
 btnPrev.addEventListener('click', handlePrev);
 btnNext.addEventListener('click', handleNext);
+pagination.addEventListener('click', handlePaginationClick);
+
+
+
+// setInterval(() => {
+//   handleNext();
+// }, 5000);

@@ -1,6 +1,50 @@
+@include desktopBig {
+  .slider-container {
+    #slider {
+      width: 60%;
+
+      .title {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@include desktop {
+  .slider-container {
+    #slider {
+      width: 70%;
+    }
+  }
+}
+
+@include tablet {
+  .slider-container {
+    #slider {
+      margin: 0 auto;
+      width: 80%;
+    }
+
+    #btn-prev,
+    #btn-next {
+      width: 40px;
+      height: 60px;
+    }
+  }
+}
+
 @include phone {
-  .container {
-    padding-left: 15px;
-    padding-right: 15px;
+  .slider-container {
+    height: 600px;
+    #slider {
+      width: 90%;
+
+      .slide {
+        height: 500px;
+        .imgContainer {
+          height: 250px;
+        }
+      }
+    }
   }
 }
