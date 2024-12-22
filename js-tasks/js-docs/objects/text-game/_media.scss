@@ -16,6 +16,7 @@
 @include screen {
   .background {
     display: block;
+
     #choose-character {
       margin: 0 auto;
       width: 80%;
@@ -25,11 +26,11 @@
       align-items: end;
       gap: 35px;
       margin-top: 100px;
+      padding-bottom: 100px;
 
       .character-card {
         max-width: 330px;
         height: 50%;
-
         font-size: 14px;
       }
     }
@@ -46,6 +47,17 @@
       .img-container {
         max-width: 150px;
         height: 150px;
+      }
+    }
+  }
+
+  #storyModal {
+    .storyContainer {
+      max-width: 65%;
+      flex-direction: row;
+
+      .imageContainer {
+        width: 340px;
       }
     }
   }
@@ -73,6 +85,21 @@
       }
     }
   }
+
+  #storyModal {
+    .storyContainer {
+      max-width: 80%;
+    }
+    .imageContainer {
+      max-width: 300px;
+    }
+
+    .textContainer {
+      & #closeModal {
+        margin-top: 30px;
+      }
+    }
+  }
 }
 
 @include desktop {
@@ -89,9 +116,8 @@
       margin-top: 100px;
 
       .character-card {
-        max-width: 270px;
+        max-width: 290px;
         height: 50%;
-
         font-size: 12px;
       }
     }
@@ -151,6 +177,24 @@
     height: 100px;
     font-size: 12px;
   }
+
+  #storyModal {
+    font-size: 14px;
+
+    .storyContainer {
+      justify-content: end;
+
+      .imageContainer {
+        max-width: 250px;
+      }
+    }
+
+    .textContainer {
+      & #closeModal {
+        margin-top: 0;
+      }
+    }
+  }
 }
 
 @include tablet {
@@ -167,10 +211,50 @@
       margin-top: 100px;
 
       .character-card {
-        max-width: 270px;
+        max-width: 290px;
         height: 50%;
         font-size: 12px;
       }
+    }
+  }
+
+  #startModal {
+    #mainTitle {
+      font-size: 52px;
+    }
+  }
+
+  .stones {
+    padding: 15px;
+    flex-wrap: wrap;
+  }
+
+  #storyModal {
+    .storyContainer {
+      flex-direction: column;
+      padding: 15px;
+    }
+  }
+}
+
+@include phone {
+  .stones {
+    .stone-container {
+      max-width: 130px;
+      height: 130px;
+    }
+  }
+
+  #startModal {
+    #mainTitle {
+      font-size: 36px;
+    }
+  }
+
+  .background {
+    #choose-character {
+      width: 100%;
+      padding: 15px;
     }
   }
 }

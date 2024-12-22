@@ -8,6 +8,8 @@ body {
   color: $c-text;
   font-family: $ff-secondary;
   line-height: 22px;
+  height: 100%;
+  margin: 0;
 }
 
 h1,
@@ -49,7 +51,7 @@ img {
   #choose-character {
     margin: 0 auto;
     background-color: $c-bg;
-    width: 78%;
+    width: 85%;
     height: 700px;
     flex-wrap: nowrap;
     height: 700px;
@@ -188,7 +190,8 @@ img {
   padding-left: 30px;
   padding-right: 30px;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  // height: 100%;
   background-position: center;
   background-size: cover;
   display: flex;
@@ -579,10 +582,10 @@ img {
 // ! Start Modal
 #startModal {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: block;
   opacity: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -598,17 +601,33 @@ img {
 
 #storyModal {
   width: 100%;
-  height: 100vh;
-  position: absolute;
+  height: 100%;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: $c-body;
+  transition: $t-normal;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $c-body;
-  transition: $t-normal;
+
+  .headingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 #battleStoryModal {

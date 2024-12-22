@@ -324,6 +324,8 @@ body {
   color: rgb(215, 180, 110);
   font-family: "Aref Ruqaa Ink", serif;
   line-height: 22px;
+  height: 100%;
+  margin: 0;
 }
 
 h1,
@@ -372,7 +374,7 @@ img {
 .background #choose-character {
   margin: 0 auto;
   background-color: rgba(19, 19, 19, 0.7);
-  width: 78%;
+  width: 85%;
   height: 700px;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
@@ -521,7 +523,7 @@ img {
   padding-left: 30px;
   padding-right: 30px;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-position: center;
   background-size: cover;
   display: -webkit-box;
@@ -1062,10 +1064,10 @@ img {
 
 #startModal {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: block;
   opacity: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -1091,12 +1093,15 @@ img {
 
 #storyModal {
   width: 100%;
-  height: 100vh;
-  position: absolute;
+  height: 100%;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: rgba(5, 5, 5, 0.9);
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1106,9 +1111,38 @@ img {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: rgba(5, 5, 5, 0.9);
-  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#storyModal .headingContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+}
+#storyModal .textContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 #battleStoryModal {
@@ -1510,6 +1544,7 @@ img {
             align-items: end;
     gap: 35px;
     margin-top: 100px;
+    padding-bottom: 100px;
   }
   .background #choose-character .character-card {
     max-width: 330px;
@@ -1523,6 +1558,16 @@ img {
   .battlefield #monster-container .img-container {
     max-width: 150px;
     height: 150px;
+  }
+  #storyModal .storyContainer {
+    max-width: 65%;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  #storyModal .storyContainer .imageContainer {
+    width: 340px;
   }
 }
 @media (max-width: 1200px) {
@@ -1548,6 +1593,15 @@ img {
   .battlefield #central-container #battle-actions {
     max-width: 100%;
   }
+  #storyModal .storyContainer {
+    max-width: 80%;
+  }
+  #storyModal .imageContainer {
+    max-width: 300px;
+  }
+  #storyModal .textContainer #closeModal {
+    margin-top: 30px;
+  }
 }
 @media (max-width: 1024px) {
   .background {
@@ -1569,7 +1623,7 @@ img {
     margin-top: 100px;
   }
   .background #choose-character .character-card {
-    max-width: 270px;
+    max-width: 290px;
     height: 50%;
     font-size: 12px;
   }
@@ -1613,6 +1667,20 @@ img {
     height: 100px;
     font-size: 12px;
   }
+  #storyModal {
+    font-size: 14px;
+  }
+  #storyModal .storyContainer {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: end;
+  }
+  #storyModal .storyContainer .imageContainer {
+    max-width: 250px;
+  }
+  #storyModal .textContainer #closeModal {
+    margin-top: 0;
+  }
 }
 @media (max-width: 768px) {
   .background {
@@ -1634,8 +1702,36 @@ img {
     margin-top: 100px;
   }
   .background #choose-character .character-card {
-    max-width: 270px;
+    max-width: 290px;
     height: 50%;
     font-size: 12px;
+  }
+  #startModal #mainTitle {
+    font-size: 52px;
+  }
+  .stones {
+    padding: 15px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  #storyModal .storyContainer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .stones .stone-container {
+    max-width: 130px;
+    height: 130px;
+  }
+  #startModal #mainTitle {
+    font-size: 36px;
+  }
+  .background #choose-character {
+    width: 100%;
+    padding: 15px;
   }
 }
