@@ -201,6 +201,6 @@ slider.addEventListener('touchend', () => {
   diffX = 0;
 });
 
-// setInterval(() => {
-//   handleNext();
-// }, 5000);
+setInterval(() => {
+  handleNext();
+}, 5000);
