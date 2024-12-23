@@ -1,28 +1,29 @@
 /*
-! Завдання 6: Створення Веб-Слайдера на JavaScript
+! Завдання: Створення Веб-Слайдера на JavaScript
 Опис Завдання
 Створи інтерактивний веб-слайдер для показу зображень або текстових блоків, який може бути інтегрований у будь-який веб-сайт. Слайдер має дозволяти користувачам переглядати слайди вручну та автоматично через заданий інтервал часу.
 
 ? Основні Технічні Вимоги
 
-[] Підтримка Нескінченного Циклу: Слайди повинні повторюватись безперервно.
-[] Адаптивність: Слайдер має адаптуватися до розміру вікна перегляду.
-[] Анімація Переходів: Плавні анімації переходу між слайдами.
-[] Управління: Кнопки для перегляду наступного і попереднього слайду, а також навігація для швидкого переходу до конкретного слайду.
+[+] Підтримка Нескінченного Циклу: Слайди повинні повторюватись безперервно.
+[+] Адаптивність: Слайдер має адаптуватися до розміру вікна перегляду.
+[+] Анімація Переходів: Плавні анімації переходу між слайдами.
+[+] Управління: Кнопки для перегляду наступного і попереднього слайду, а також навігація для швидкого переходу до конкретного слайду.
 
 ? Завдання
-[] Створення HTML та CSS Шаблону: Розробіть базовий HTML-шаблон та стилі для слайдера.
+[+] Створення HTML та CSS Шаблону: Розробіть базовий HTML-шаблон та стилі для слайдера.
 
 Логіка JavaScript:
-[] Ініціалізація Слайдера: Визначення початкових налаштувань слайдера, включаючи встановлення таймера для автоматичної зміни слайдів.
-[] Функції Навігації: Реалізація кнопок для переміщення між слайдами і точок навігації.
-[] Адаптивність: Автоматичне коригування розмірів слайдера відповідно до зміни розміру вікна браузера.
-[] Анімація Переходів: Додавання анімації для плавного переходу між слайдами.
+[+] Ініціалізація Слайдера: Визначення початкових налаштувань слайдера, включаючи встановлення таймера для автоматичної зміни слайдів.
+[+] Функції Навігації: Реалізація кнопок для переміщення між слайдами і точок навігації.
+[+] Адаптивність: Автоматичне коригування розмірів слайдера відповідно до зміни розміру вікна браузера.
+[+] Анімація Переходів: Додавання анімації для плавного переходу між слайдами.
 [] Тестування та Оптимізація: Перевірка слайдера на різних пристроях та веб-браузерах для забезпечення стабільної роботи та відповідності вимогам.
+
 Додаткові Можливості
-[] Ліниве Завантаження (Lazy Loading): Реалізація лінивого завантаження зображень для покращення швидкості завантаження сторінки.
+[+] Ліниве Завантаження (Lazy Loading): Реалізація лінивого завантаження зображень для покращення швидкості завантаження сторінки.
 [] Інтеграція з API: Можливість інтеграції з зовнішніми джерелами для автоматичного завантаження зображень чи тексту через API.
-[] Підтримка Свайпів на Мобільних Пристроях: Додавання підтримки жестів свайпу для навігації між слайдами на мобільних пристроях.
+[+] Підтримка Свайпів на Мобільних Пристроях: Додавання підтримки жестів свайпу для навігації між слайдами на мобільних пристроях.
 
 Це завдання допоможе розробити навички у різних аспектах веб-розробки, включаючи анімацію, адаптивний дизайн і роботу з подіями в JavaScript.
 */
@@ -38,10 +39,17 @@ let currentIndex = 0;
 const gap = 100;
 let slideWidth = 0;
 
+// Swipe
+let startX = 0;
+let currentX = 0;
+let diffX = 0;
+
 for (let i = 0; i < sliderInfos.length; i++) {
   const paginationDot = document.createElement('div');
   paginationDot.classList.add('paginationDot');
-
+  if (i === 0) {
+    paginationDot.classList.add('dotActive');
+  }
   pagination.appendChild(paginationDot);
 }
 
@@ -70,7 +78,7 @@ const loadSlide = () => {
     imgContainer.classList.add('imgContainer');
     const img = document.createElement('img');
     img.classList.add('image');
-    img.src = slide.imgUrl;
+    img.setAttribute('data-src', slide.imgUrl);
     img.alt = slide.title;
     imgContainer.appendChild(img);
 
@@ -78,6 +86,29 @@ const loadSlide = () => {
     slider.appendChild(card);
   });
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  const lazyImages = document.querySelectorAll('.image');
+
+  const loadImage = (image) => {
+    const src = image.getAttribute('data-src');
+    if (src) {
+      image.src = src;
+      image.removeAttribute('data-src');
+    }
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        loadImage(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+
+  lazyImages.forEach((image) => observer.observe(image));
+});
 
 const handlePrev = () => {
   if (currentIndex > 0) {
@@ -114,11 +145,13 @@ const updatePaginationActiveDot = () => {
     if (index === currentIndex) {
       dot.classList.add('dotActive');
     }
+    console.log(dot, index);
   });
 };
 
 const handlePaginationClick = (event) => {
   const clickedDot = event.target;
+
   if (clickedDot.classList.contains('paginationDot')) {
     currentIndex = Array.from(clickedDot.parentNode.children).indexOf(
       clickedDot
@@ -131,11 +164,42 @@ const handlePaginationClick = (event) => {
 loadSlide();
 updateSlideWidth();
 
-btnPrev.addEventListener('click', handlePrev);
-btnNext.addEventListener('click', handleNext);
+btnPrev.addEventListener('click', () => {
+  handlePrev();
+  updatePaginationActiveDot();
+});
+btnNext.addEventListener('click', () => {
+  handleNext();
+  updatePaginationActiveDot();
+});
 pagination.addEventListener('click', handlePaginationClick);
 
+slider.addEventListener('touchstart', (event) => {
+  startX = event.touches[0].clientX;
+});
 
+slider.addEventListener(
+  'touchmove',
+  (event) => {
+    event.preventDefault();
+    currentX = event.touches[0].clientX;
+    diffX = currentX - startX;
+  },
+  { passive: false }
+);
+
+slider.addEventListener('touchend', () => {
+  if (Math.abs(diffX) > 50) {
+    if (diffX > 0) {
+      handlePrev();
+    } else {
+      handleNext();
+    }
+  }
+  startX = 0;
+  currentX = 0;
+  diffX = 0;
+});
 
 // setInterval(() => {
 //   handleNext();

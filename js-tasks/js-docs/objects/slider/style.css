@@ -185,6 +185,16 @@ img {
   margin-bottom: 10px;
 }
 
+.image {
+  opacity: 0.3;
+  -webkit-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image[src] {
+  opacity: 1;
+}
+
 @media (max-width: 1200px) {
   .slider-container #slider {
     width: 60%;

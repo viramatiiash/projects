@@ -145,3 +145,12 @@ img {
     }
   }
 }
+
+.image {
+  opacity: 0.3;
+  transition: $t-normal;
+}
+
+.image[src] {
+  opacity: 1;
+}
