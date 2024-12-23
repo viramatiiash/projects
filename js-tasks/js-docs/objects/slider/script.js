@@ -203,4 +203,5 @@ slider.addEventListener('touchend', () => {
 
 setInterval(() => {
   handleNext();
+  updatePaginationActiveDot();
 }, 5000);
