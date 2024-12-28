@@ -1,0 +1,67 @@
+/* Font Families */
+$ff-main: 'Noto Sans', serif;
+
+/* Font Sizes */
+$fs-text-mobile: 14px;
+$fs-main: 16px;
+$fs-newsletter-text: 18px;
+$fs-card-title: 20px;
+$fs-testimonials-title: 24px;
+$fs-title-mobile: 30px;
+$fs-block-title: 36px;
+$fs-newsletter: 55px;
+$fs-title: 64px;
+
+/* Colors */
+$c-bg: rgba(0, 0, 0, 0.2);
+$c-text: rgb(32, 47, 52);
+$c-shadow: rgba(27, 47, 53, 0.7);
+$c-white: #fff;
+$c-primary: rgba(66, 200, 223, 0.6);
+$c-category-hover: rgb(100, 216, 255);
+$c-secondary: rgba(107, 167, 176, 0.6);
+$c-card-gradient: linear-gradient($c-primary, $c-secondary);
+
+/* Box Shadows */
+$box-shadow: 2px 2px 10px $c-shadow;
+
+/* Font Weights */
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+$fw-black: 900;
+
+/* Line heights */
+$line-height-giant: 72px;
+$line-height-very-big: 48px;
+$line-height-big: 30px;
+$line-height-medium: 26px;
+$line-height-small: 20px;
+$line-height-very-small: 15px;
+$line-height-tiny: 12px;
+
+/* Transition */
+$t-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Media Queries: Breakpoints */
+$small: 320px;
+$phone: 480px;
+$phoneBig: 650px;
+$tablet: 768px;
+$desktop: 1024px;
+$desktop-big: 1200px;
+$screen: 1400px;
+$screen-big: 1600px;
+$large: 1920px;
+
+/* Letter Spacing */
+$ls: 3px;
+
+/* Border Radius */
+$br: 4px;
+$br-card: 8px;
+$br-circle: 100%;
+$br-circle-small: 50px;
+$br-input: 80px;

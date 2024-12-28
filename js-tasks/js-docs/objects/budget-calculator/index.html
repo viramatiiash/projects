@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget Calculator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <button id="newBtn">Add New</button>
+    <div id="balanceContainer" class="balance-container">
+      Balance for <span id="categoryName"></span>: <span id="balance"></span>
+    </div>
+    <div class="calculator-container">
+      <h1 class="title">Budget Calculator</h1>
+      <form id="form" action="">
+        <h2 class="form-title">Add New Entry</h2>
+        <label>
+          Amount
+          <input type="text" name="amount" placeholder="100$" id="amount" />
+        </label>
+        <label>
+          Category
+          <input type="text" name="category" placeholder="Food" id="category" />
+        </label>
+        <label class="radio-labels">
+          Type
+          <label class="radio-label" for="income">
+            <input type="radio" name="type" id="income" value="income" />income
+          </label>
+          <label class="radio-label" for="expense"
+            ><input
+              type="radio"
+              name="type"
+              id="expense"
+              value="expense"
+            />expense</label
+          >
+        </label>
+        <div class="buttons">
+          <button id="addBtn" type="button">Add New</button>
+          <button id="closeBtn" type="button">Close</button>
+        </div>
+      </form>
+      <div id="cardsContainer">
+        <div class="tabs">
+          <button type="text" id="allBtn">All entries</button>
+          <div id="filterBtnContainer">
+            <button type="text" id="filterBtn">Filter</button>
+            <div id="categories"></div>
+          </div>
+        </div>
+        <div id="cards"></div>
+      </div>
+    </div>
+    <script type="module" src="./script.js"></script>
+    <script type="module" src="./object.js"></script>
+  </body>
+</html>

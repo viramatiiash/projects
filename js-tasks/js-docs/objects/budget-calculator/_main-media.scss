@@ -1,0 +1,107 @@
+@include desktopBig {
+  .calculator-container {
+    #cards {
+      & .card {
+        max-width: 45%;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .calculator-container {
+    padding: 20px;
+
+    .title {
+      font-size: 26px;
+    }
+
+    #cards {
+      .card {
+        max-width: 48%;
+      }
+    }
+  }
+
+  .balance-container {
+    font-size: 14px;
+  }
+}
+
+@include phoneBig {
+  .calculator-container {
+    padding: 20px;
+
+    #cards {
+      .card {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@include phone {
+  .calculator-container {
+    padding: 10px;
+
+    #form {
+      & .form-title {
+        font-size: 18px;
+      }
+
+      & label {
+        font-size: 14px;
+      }
+
+      .buttons {
+        #addBtn, #closeBtn {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .title {
+      font-size: 22px;
+    }
+
+    #cards {
+      .card {
+        max-width: 100%;
+        font-size: 14px;
+
+        &:hover {
+          .deleteBtn {
+            padding: 8px 16px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .tabs {
+      #categories {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+      }
+    }
+  }
+
+  .balance-container {
+    bottom: 15px;
+    left: 15px;
+    max-width: 200px;
+  }
+
+  #newBtn {
+    padding: 10px;
+    font-size: 14px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .active {
+    padding: 15px !important;
+    height: 420px !important;
+  }
+}
