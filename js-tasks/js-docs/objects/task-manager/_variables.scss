@@ -1,0 +1,75 @@
+/* Font Families */
+$ff-main: 'Noto Sans', serif;
+$ff-secondary: "Ysabeau SC", serif;
+$ff-test: "Bebas Neue", serif;
+
+/* Font Sizes */
+$fs-text-mobile: 14px;
+$fs-main: 16px;
+$fs-newsletter-text: 18px;
+$fs-card-title: 20px;
+$fs-testimonials-title: 24px;
+$fs-title-mobile: 30px;
+$fs-block-title: 36px;
+$fs-newsletter: 55px;
+$fs-title: 64px;
+
+/* Colors */
+$c-bg: rgba(0, 0, 0, 0.7);
+$c-white: #fff;
+$c-green:rgba(108, 223, 66, 0.6);
+$c-green-secondary:rgba(162, 255, 129, 0.6);
+$c-red: rgba(255, 96, 47, 0.6);
+$c-red-secondary: rgba(255, 137, 100, 0.6);
+$c-yellow: rgba(255, 235, 9, 0.6);
+$c-yellow-secondary: rgba(255, 242, 100, 0.6);
+$c-delete: rgba(255, 54, 54, 0.8);
+$c-gray: rgba(51, 51, 51, 0.539);
+$c-gray-secondary: rgba(169, 169, 169, 0.539);
+$c-card-gradient-green: linear-gradient($c-green, $c-green-secondary);
+$c-card-gradient-red: linear-gradient($c-red, $c-red-secondary);
+$c-card-gradient-yellow: linear-gradient($c-yellow, $c-yellow-secondary);
+
+/* Box Shadows */
+$box-shadow: 2px 2px 10px $c-bg;
+
+/* Font Weights */
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+$fw-black: 900;
+
+/* Line heights */
+$line-height-giant: 72px;
+$line-height-very-big: 48px;
+$line-height-big: 30px;
+$line-height-medium: 26px;
+$line-height-small: 20px;
+$line-height-very-small: 15px;
+$line-height-tiny: 12px;
+
+/* Transition */
+$t-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Media Queries: Breakpoints */
+$small: 320px;
+$phone: 480px;
+$phoneBig: 650px;
+$tablet: 768px;
+$desktop: 1024px;
+$desktop-big: 1200px;
+$screen: 1400px;
+$screen-big: 1600px;
+$large: 1920px;
+
+/* Letter Spacing */
+$ls: 3px;
+
+/* Border Radius */
+$br: 4px;
+$br-card: 8px;
+$br-circle: 100%;
+$br-circle-small: 50px;
+$br-input: 80px;
